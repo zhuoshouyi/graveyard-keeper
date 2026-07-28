@@ -266,6 +266,7 @@
     <a onclick="switchSubTab('quests',9)" class="sub">🗼 灯塔看守人</a>
     <a onclick="switchSubTab('quests',10)" class="sub">👴 迪格</a>
     <a onclick="switchSubTab('quests',11)" class="sub">💰 商人</a>
+    <a onclick="switchSubTab('quests',12)" class="sub">⚔️ 审判官</a>
   </nav>
   <!-- Sidebar: NPCs -->
   <nav class="sidebar" id="sidebar-npcs">
@@ -465,7 +466,9 @@ function renderCrafting(){
   const obstacleItems = [
     {name:"清理道路（太平间）", materials:[{name:"木楔",count:10},{name:"木梁",count:1},{name:"简单的铁件",count:4}]},
     {name:"清理道路(蜂场左侧)", materials:[{name:"木楔",count:10},{name:"木板",count:2},{name:"简单的铁件",count:4}], stamina:50},
-    {name:"修理桥梁(石桥)", materials:[{name:"木板",count:1},{name:"粗板",count:4},{name:"钉子",count:8}], stamina:20}
+    {name:"修理桥梁(石桥)", materials:[{name:"木板",count:1},{name:"粗板",count:4},{name:"钉子",count:8}], stamina:20},
+    {name:"清理道路(炼金右侧)", materials:[{name:"木屑",count:10},{name:"木梁",count:1},{name:"简单的铁件",count:4}], stamina:30},
+    {name:"清理道路(炼金下侧)", materials:[{name:"木屑",count:10},{name:"木梁",count:1},{name:"简单的铁件",count:4}], stamina:30}
   ];
   // 院子蓝图 — v1.12 用户亲自验证版
   const yardItems = [

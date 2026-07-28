@@ -2431,6 +2431,40 @@
           }
         }
       ]
+    },
+    "npc_inquisitor": {
+      "name": "审判官（Inquisitor）任务线",
+      "description": "你肯定不想与他为敌",
+      "icon": "⚔️",
+      "quests": [
+        {
+          "id": "inquisitor_01",
+          "name": "准备柴火和传单",
+          "order": 1,
+          "npc": "审判官",
+          "prerequisites": [],
+          "objectives": [
+            {
+              "description": "带上20根柴火和10张传单，供下次焚烧使用",
+              "items": [
+                {
+                  "name": "柴火",
+                  "count": 20
+                },
+                {
+                  "name": "传单",
+                  "count": 10
+                }
+              ]
+            }
+          ],
+          "rewards": {
+            "faith": 0,
+            "money": 0,
+            "items": []
+          }
+        }
+      ]
     }
   },
   "dlc_content": {
