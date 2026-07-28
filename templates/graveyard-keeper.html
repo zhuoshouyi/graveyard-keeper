@@ -463,7 +463,8 @@ function renderOverview(){
 function renderCrafting(){
   // 障碍物蓝图 — 最上方显示（用户要求）
   const obstacleItems = [
-    {name:"清理道路（太平间）", materials:[{name:"木楔",count:10},{name:"木梁",count:1},{name:"简单的铁件",count:4}]}
+    {name:"清理道路（太平间）", materials:[{name:"木楔",count:10},{name:"木梁",count:1},{name:"简单的铁件",count:4}]},
+    {name:"清理道路(蜂场左侧)", materials:[{name:"木楔",count:10},{name:"木板",count:2},{name:"简单的铁件",count:4}], stamina:50}
   ];
   // 院子蓝图 — v1.12 用户亲自验证版
   const yardItems = [
@@ -603,7 +604,8 @@ function renderCrafting(){
     <div class="blueprint-section folded"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🚧 障碍物（${obstacleItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
   obstacleItems.forEach(r=>{
     const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
-    p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">清理</span></div><div class="recipe-body">${m}</div></div>`;
+    const st= r.stamina ? `<span class="stamina-badge">⚡${r.stamina}</span>` : '';
+    p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span>${st}<span class="r-type">清理</span></div><div class="recipe-body">${m}</div></div>`;
   });
   p0+=`</div></div><div class="blueprint-section folded" style="margin-top:12px;"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🏡 院子（${yardItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
   yardItems.forEach(r=>{
