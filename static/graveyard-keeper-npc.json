@@ -1,0 +1,36 @@
+{
+  "npc_shops": [
+    {
+      "name": "占星师",
+      "icon": "🔭",
+      "area": "塔楼",
+      "levels": [
+        {
+          "label": "等级1",
+          "items": [
+            {"name": "钢笔和墨水", "price": "2银50铜", "limit": 2},
+            {"name": "平装封面", "price": "2银", "limit": 2},
+            {"name": "墨水", "price": "1银50铜", "limit": 2},
+            {"name": "空白纸", "price": "1银", "limit": 2},
+            {"name": "羽毛", "price": "20铜", "limit": 10}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "灯塔看守人",
+      "icon": "🗼",
+      "area": "灯塔",
+      "levels": [
+        {
+          "label": "等级1",
+          "items": [
+            {"name": "优质鱼片", "star": "copper", "price": "70铜", "limit": 5},
+            {"name": "白色鱼片", "price": "10铜", "limit": 5},
+            {"name": "简易钓鱼竿", "price": "2银", "limit": 1}
+          ]
+        }
+      ]
+    }
+  ]
+}

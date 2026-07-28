@@ -1,0 +1,3438 @@
+{
+  "game_info": {
+    "title": "Graveyard Keeper (守墓人/墓场物语)",
+    "version": "v1.4+",
+    "dlc_packs": [
+      "Stranger Sins (陌客之罪)",
+      "Game of Crone (老妪的游戏)",
+      "Better Save Soul (拯救灵魂)"
+    ]
+  },
+  "crafting_recipes": {
+    "description": "全物品制造配方，按游戏内大致解锁顺序排列（从早期到后期）",
+    "section_1_early_game": {
+      "description": "早期游戏：第一天到第一周，基础工作台和石匠台",
+      "recipes": [
+        {
+          "id": "simple_workbench",
+          "name": "简单工作台",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 8
+            },
+            {
+              "name": "铁钉",
+              "count": 6
+            },
+            {
+              "name": "铁锭",
+              "count": 2
+            }
+          ],
+          "unlock": "初始解锁",
+          "workbench": "无（徒手建造）"
+        },
+        {
+          "id": "stone_cutter",
+          "name": "石匠工作台",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "简单工作台",
+              "count": 1
+            },
+            {
+              "name": "石块",
+              "count": 10
+            },
+            {
+              "name": "木材",
+              "count": 8
+            },
+            {
+              "name": "铁锭",
+              "count": 4
+            }
+          ],
+          "unlock": "初始解锁",
+          "workbench": "无（徒手建造）"
+        },
+        {
+          "id": "stone_axe",
+          "name": "石斧",
+          "type": "工具",
+          "materials": [
+            {
+              "name": "石块",
+              "count": 2
+            },
+            {
+              "name": "木材",
+              "count": 2
+            },
+            {
+              "name": "植物纤维",
+              "count": 2
+            }
+          ],
+          "unlock": "初始解锁",
+          "workbench": "简单工作台"
+        },
+        {
+          "id": "stone_pickaxe",
+          "name": "石镐",
+          "type": "工具",
+          "materials": [
+            {
+              "name": "石块",
+              "count": 2
+            },
+            {
+              "name": "木材",
+              "count": 2
+            },
+            {
+              "name": "植物纤维",
+              "count": 2
+            }
+          ],
+          "unlock": "初始解锁",
+          "workbench": "简单工作台"
+        },
+        {
+          "id": "stone_shovel",
+          "name": "石锹",
+          "type": "工具",
+          "materials": [
+            {
+              "name": "石块",
+              "count": 2
+            },
+            {
+              "name": "木材",
+              "count": 2
+            },
+            {
+              "name": "植物纤维",
+              "count": 2
+            }
+          ],
+          "unlock": "初始解锁",
+          "workbench": "简单工作台"
+        },
+        {
+          "id": "stone_cutter_basic",
+          "name": "石切割机（基础）",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 6
+            },
+            {
+              "name": "石块",
+              "count": 6
+            }
+          ],
+          "unlock": "初始解锁",
+          "workbench": "石匠工作台"
+        },
+        {
+          "id": "stone_note",
+          "name": "石制墓碑",
+          "type": "墓地装饰",
+          "materials": [
+            {
+              "name": "石块",
+              "count": 4
+            }
+          ],
+          "unlock": "初始解锁",
+          "workbench": "石匠工作台"
+        },
+        {
+          "id": "stone_fence",
+          "name": "石制围栏",
+          "type": "墓地装饰",
+          "materials": [
+            {
+              "name": "石块",
+              "count": 4
+            }
+          ],
+          "unlock": "初始解锁",
+          "workbench": "石匠工作台"
+        },
+        {
+          "id": "simple_fishing_rod",
+          "name": "简易钓竿",
+          "type": "工具",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 4
+            },
+            {
+              "name": "植物纤维",
+              "count": 4
+            }
+          ],
+          "unlock": "初始解锁",
+          "workbench": "简单工作台"
+        },
+        {
+          "id": "torch",
+          "name": "火把",
+          "type": "消耗品/光源",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 2
+            },
+            {
+              "name": "植物纤维",
+              "count": 1
+            }
+          ],
+          "unlock": "初始解锁",
+          "workbench": "简单工作台"
+        },
+        {
+          "id": "candle",
+          "name": "蜡烛",
+          "type": "消耗品/光源",
+          "materials": [
+            {
+              "name": "脂肪",
+              "count": 2
+            }
+          ],
+          "unlock": "初始解锁",
+          "workbench": "简单工作台"
+        },
+        {
+          "id": "simple_sword",
+          "name": "简易剑",
+          "type": "武器",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 4
+            },
+            {
+              "name": "石块",
+              "count": 2
+            }
+          ],
+          "unlock": "初始解锁",
+          "workbench": "简单工作台"
+        },
+        {
+          "id": "campfire",
+          "name": "篝火",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 6
+            },
+            {
+              "name": "石块",
+              "count": 4
+            }
+          ],
+          "unlock": "初始解锁",
+          "workbench": "无（徒手建造）"
+        },
+        {
+          "id": "furnace",
+          "name": "熔炉",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "石块",
+              "count": 10
+            },
+            {
+              "name": "木材",
+              "count": 6
+            }
+          ],
+          "unlock": "科技：锻造（红色科技点x5）",
+          "workbench": "无（徒手建造）"
+        },
+        {
+          "id": "iron_ingot",
+          "name": "铁锭",
+          "type": "材料",
+          "materials": [
+            {
+              "name": "铁矿石",
+              "count": 2
+            },
+            {
+              "name": "木炭",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：锻造",
+          "workbench": "熔炉"
+        },
+        {
+          "id": "simple_anvil",
+          "name": "简单铁砧",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 4
+            },
+            {
+              "name": "木材",
+              "count": 6
+            }
+          ],
+          "unlock": "科技：锻造",
+          "workbench": "无（徒手建造）"
+        },
+        {
+          "id": "iron_axe",
+          "name": "铁斧",
+          "type": "工具",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 2
+            },
+            {
+              "name": "木材",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：锻造",
+          "workbench": "简单铁砧"
+        },
+        {
+          "id": "iron_pickaxe",
+          "name": "铁镐",
+          "type": "工具",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 2
+            },
+            {
+              "name": "木材",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：锻造",
+          "workbench": "简单铁砧"
+        },
+        {
+          "id": "iron_shovel",
+          "name": "铁锹",
+          "type": "工具",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 2
+            },
+            {
+              "name": "木材",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：锻造",
+          "workbench": "简单铁砧"
+        },
+        {
+          "id": "iron_sword",
+          "name": "铁剑",
+          "type": "武器",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 3
+            },
+            {
+              "name": "木材",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：锻造",
+          "workbench": "简单铁砧"
+        },
+        {
+          "id": "iron_nails",
+          "name": "铁钉",
+          "type": "材料",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：锻造",
+          "workbench": "简单铁砧"
+        },
+        {
+          "id": "stone_anvil",
+          "name": "石铁砧（升级铁砧）",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 6
+            },
+            {
+              "name": "石块",
+              "count": 8
+            }
+          ],
+          "unlock": "科技：锻造II",
+          "workbench": "简单铁砧"
+        },
+        {
+          "id": "complex_workbench",
+          "name": "复杂工作台",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "简单工作台",
+              "count": 1
+            },
+            {
+              "name": "铁锭",
+              "count": 6
+            },
+            {
+              "name": "木材",
+              "count": 10
+            }
+          ],
+          "unlock": "科技：复杂工作台（红色科技点x10）",
+          "workbench": "无（徒手建造）"
+        },
+        {
+          "id": "anvil_upgrade",
+          "name": "高级铁砧",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "石铁砧",
+              "count": 1
+            },
+            {
+              "name": "铁锭",
+              "count": 8
+            },
+            {
+              "name": "硬木",
+              "count": 6
+            }
+          ],
+          "unlock": "科技：锻造III",
+          "workbench": "石铁砧"
+        },
+        {
+          "id": "steel_ingot",
+          "name": "钢锭",
+          "type": "材料",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 2
+            },
+            {
+              "name": "煤",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：钢铁锻造",
+          "workbench": "熔炉（需升级）"
+        },
+        {
+          "id": "steel_sword",
+          "name": "钢剑",
+          "type": "武器",
+          "materials": [
+            {
+              "name": "钢锭",
+              "count": 3
+            },
+            {
+              "name": "硬木",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：钢铁锻造",
+          "workbench": "高级铁砧"
+        },
+        {
+          "id": "steel_axe",
+          "name": "钢斧",
+          "type": "工具",
+          "materials": [
+            {
+              "name": "钢锭",
+              "count": 2
+            },
+            {
+              "name": "硬木",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：钢铁锻造",
+          "workbench": "高级铁砧"
+        },
+        {
+          "id": "steel_pickaxe",
+          "name": "钢镐",
+          "type": "工具",
+          "materials": [
+            {
+              "name": "钢锭",
+              "count": 2
+            },
+            {
+              "name": "硬木",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：钢铁锻造",
+          "workbench": "高级铁砧"
+        },
+        {
+          "id": "steel_shovel",
+          "name": "钢锹",
+          "type": "工具",
+          "materials": [
+            {
+              "name": "钢锭",
+              "count": 2
+            },
+            {
+              "name": "硬木",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：钢铁锻造",
+          "workbench": "高级铁砧"
+        },
+        {
+          "id": "silver_sword",
+          "name": "银剑",
+          "type": "武器",
+          "materials": [
+            {
+              "name": "银锭",
+              "count": 3
+            },
+            {
+              "name": "硬木",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：银器锻造",
+          "workbench": "高级铁砧"
+        }
+      ]
+    },
+    "section_2_church_faith": {
+      "description": "教堂相关：解锁教堂后，信仰值和纸张相关的制造",
+      "recipes": [
+        {
+          "id": "simple_chair",
+          "name": "简易长椅",
+          "type": "教堂装饰",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 6
+            },
+            {
+              "name": "铁钉",
+              "count": 4
+            }
+          ],
+          "unlock": "修复教堂后解锁",
+          "workbench": "复杂工作台"
+        },
+        {
+          "id": "confession_booth",
+          "name": "告解室",
+          "type": "教堂装饰",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 8
+            },
+            {
+              "name": "铁锭",
+              "count": 4
+            }
+          ],
+          "unlock": "科技：教堂装饰",
+          "workbench": "复杂工作台"
+        },
+        {
+          "id": "pulpit",
+          "name": "讲台",
+          "type": "教堂装饰",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 6
+            },
+            {
+              "name": "铁锭",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：教堂装饰",
+          "workbench": "复杂工作台"
+        },
+        {
+          "id": "candle_church",
+          "name": "教堂蜡烛",
+          "type": "教堂装饰",
+          "materials": [
+            {
+              "name": "脂肪",
+              "count": 4
+            }
+          ],
+          "unlock": "修复教堂",
+          "workbench": "复杂工作台"
+        },
+        {
+          "id": "flower_vase",
+          "name": "花瓶",
+          "type": "教堂装饰",
+          "materials": [
+            {
+              "name": "粘土",
+              "count": 4
+            }
+          ],
+          "unlock": "科技：陶艺",
+          "workbench": "石匠工作台"
+        },
+        {
+          "id": "writing_desk",
+          "name": "写字台",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 8
+            },
+            {
+              "name": "铁钉",
+              "count": 6
+            }
+          ],
+          "unlock": "科技：造纸（蓝色科技点x10）",
+          "workbench": "复杂工作台"
+        },
+        {
+          "id": "paper",
+          "name": "纸张",
+          "type": "材料",
+          "materials": [
+            {
+              "name": "木板",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：造纸",
+          "workbench": "写字台"
+        },
+        {
+          "id": "story_sketch",
+          "name": "故事草图",
+          "type": "任务物品",
+          "materials": [
+            {
+              "name": "纸张",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：故事写作",
+          "workbench": "写字台"
+        },
+        {
+          "id": "chapter",
+          "name": "章节",
+          "type": "任务物品",
+          "materials": [
+            {
+              "name": "纸张",
+              "count": 5
+            }
+          ],
+          "unlock": "科技：故事写作",
+          "workbench": "写字台"
+        },
+        {
+          "id": "faith",
+          "name": "信仰（布道获得）",
+          "type": "资源",
+          "materials": [
+            {
+              "name": "周日布道",
+              "count": 1
+            }
+          ],
+          "unlock": "修复教堂后每周日",
+          "workbench": "教堂"
+        },
+        {
+          "id": "prayer_scroll",
+          "name": "祈祷卷轴",
+          "type": "消耗品",
+          "materials": [
+            {
+              "name": "纸张",
+              "count": 3
+            }
+          ],
+          "unlock": "科技：高级布道",
+          "workbench": "写字台"
+        },
+        {
+          "id": "study_table",
+          "name": "研究台",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 8
+            },
+            {
+              "name": "铁锭",
+              "count": 4
+            }
+          ],
+          "unlock": "科技：研究（蓝色科技点x15）",
+          "workbench": "复杂工作台"
+        },
+        {
+          "id": "research_note",
+          "name": "研究笔记",
+          "type": "消耗品",
+          "materials": [
+            {
+              "name": "纸张",
+              "count": 3
+            }
+          ],
+          "unlock": "科技：研究",
+          "workbench": "研究台"
+        }
+      ]
+    },
+    "section_3_alchemy": {
+      "description": "炼金系统：解锁沼泽女巫区域后的炼金配方",
+      "recipes": [
+        {
+          "id": "alchemy_workbench",
+          "name": "炼金工作台",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "复杂工作台",
+              "count": 1
+            },
+            {
+              "name": "铁锭",
+              "count": 6
+            },
+            {
+              "name": "木材",
+              "count": 8
+            }
+          ],
+          "unlock": "科技：基础炼金（蓝色科技点x15，绿色科技点x10）",
+          "workbench": "复杂工作台"
+        },
+        {
+          "id": "mortar",
+          "name": "研钵",
+          "type": "建筑/炼金工具",
+          "materials": [
+            {
+              "name": "石块",
+              "count": 6
+            }
+          ],
+          "unlock": "科技：基础炼金",
+          "workbench": "石匠工作台"
+        },
+        {
+          "id": "hand_scale",
+          "name": "手摇天平",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 4
+            },
+            {
+              "name": "木材",
+              "count": 4
+            }
+          ],
+          "unlock": "科技：基础炼金",
+          "workbench": "炼金工作台"
+        },
+        {
+          "id": "distillation_flask",
+          "name": "蒸馏烧瓶",
+          "type": "建筑/炼金工具",
+          "materials": [
+            {
+              "name": "粘土",
+              "count": 6
+            }
+          ],
+          "unlock": "科技：基础炼金",
+          "workbench": "炼金工作台"
+        },
+        {
+          "id": "alchemy_cupboard",
+          "name": "炼金柜",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 4
+            },
+            {
+              "name": "木材",
+              "count": 6
+            }
+          ],
+          "unlock": "科技：炼金升级",
+          "workbench": "炼金工作台"
+        },
+        {
+          "id": "lye",
+          "name": "碱液",
+          "type": "炼金材料",
+          "materials": [
+            {
+              "name": "灰烬",
+              "count": 1
+            },
+            {
+              "name": "水",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：基础炼金",
+          "workbench": "手摇天平"
+        },
+        {
+          "id": "glycerin",
+          "name": "甘油",
+          "type": "炼金材料",
+          "materials": [
+            {
+              "name": "脂肪",
+              "count": 1
+            },
+            {
+              "name": "水",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：基础炼金",
+          "workbench": "手摇天平"
+        },
+        {
+          "id": "royal_glue",
+          "name": "皇家胶",
+          "type": "炼金材料",
+          "materials": [
+            {
+              "name": "碱液",
+              "count": 1
+            },
+            {
+              "name": "甘油",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：基础炼金",
+          "workbench": "蒸馏烧瓶"
+        },
+        {
+          "id": "acid",
+          "name": "酸",
+          "type": "炼金材料",
+          "materials": [
+            {
+              "name": "酒",
+              "count": 1
+            },
+            {
+              "name": "水",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：基础炼金",
+          "workbench": "蒸馏烧瓶"
+        },
+        {
+          "id": "oil",
+          "name": "油",
+          "type": "炼金材料",
+          "materials": [
+            {
+              "name": "脂肪",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：基础炼金",
+          "workbench": "蒸馏烧瓶"
+        },
+        {
+          "id": "speed_potion",
+          "name": "速度药水",
+          "type": "消耗品",
+          "materials": [
+            {
+              "name": "碱液",
+              "count": 1
+            },
+            {
+              "name": "加速粉末",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：基础炼金",
+          "workbench": "炼金工作台"
+        },
+        {
+          "id": "energy_potion",
+          "name": "能量药水",
+          "type": "消耗品",
+          "materials": [
+            {
+              "name": "甘油",
+              "count": 1
+            },
+            {
+              "name": "能量粉末",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：基础炼金",
+          "workbench": "炼金工作台"
+        },
+        {
+          "id": "embalming_fluid_white",
+          "name": "白色防腐剂",
+          "type": "消耗品",
+          "materials": [
+            {
+              "name": "碱液",
+              "count": 1
+            },
+            {
+              "name": "水",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：基础防腐",
+          "workbench": "炼金工作台"
+        },
+        {
+          "id": "embalming_fluid_dark",
+          "name": "深色防腐剂",
+          "type": "消耗品",
+          "materials": [
+            {
+              "name": "甘油",
+              "count": 1
+            },
+            {
+              "name": "灰烬",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：基础防腐",
+          "workbench": "炼金工作台"
+        },
+        {
+          "id": "embalming_fluid_gold",
+          "name": "金色防腐剂",
+          "type": "消耗品",
+          "materials": [
+            {
+              "name": "皇家胶",
+              "count": 1
+            },
+            {
+              "name": "金粉",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：高级防腐",
+          "workbench": "炼金工作台"
+        },
+        {
+          "id": "embalming_fluid_silver",
+          "name": "银色防腐剂",
+          "type": "消耗品",
+          "materials": [
+            {
+              "name": "碱液",
+              "count": 1
+            },
+            {
+              "name": "银粉",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：高级防腐",
+          "workbench": "炼金工作台"
+        },
+        {
+          "id": "preservative",
+          "name": "防腐剂",
+          "type": "消耗品",
+          "materials": [
+            {
+              "name": "碱液",
+              "count": 1
+            },
+            {
+              "name": "酸",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：基础防腐",
+          "workbench": "炼金工作台"
+        },
+        {
+          "id": "silver_powder",
+          "name": "银粉",
+          "type": "炼金材料",
+          "materials": [
+            {
+              "name": "银锭",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：高级炼金",
+          "workbench": "研钵"
+        },
+        {
+          "id": "gold_powder",
+          "name": "金粉",
+          "type": "炼金材料",
+          "materials": [
+            {
+              "name": "金锭",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：高级炼金",
+          "workbench": "研钵"
+        },
+        {
+          "id": "faith_potion",
+          "name": "信仰药水",
+          "type": "消耗品",
+          "materials": [
+            {
+              "name": "碱液",
+              "count": 1
+            },
+            {
+              "name": "信仰粉末",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：高级炼金",
+          "workbench": "炼金工作台"
+        }
+      ]
+    },
+    "section_4_farming_cooking": {
+      "description": "农业与烹饪配方",
+      "recipes": [
+        {
+          "id": "garden_bed",
+          "name": "耕地",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 4
+            },
+            {
+              "name": "植物纤维",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：基础农业（绿色科技点x5）",
+          "workbench": "无（徒手建造）"
+        },
+        {
+          "id": "carrot_seed",
+          "name": "胡萝卜种子",
+          "type": "种子",
+          "materials": [
+            {
+              "name": "胡萝卜",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：基础农业",
+          "workbench": "耕地"
+        },
+        {
+          "id": "wheat_seed",
+          "name": "小麦种子",
+          "type": "种子",
+          "materials": [
+            {
+              "name": "小麦",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：基础农业",
+          "workbench": "耕地"
+        },
+        {
+          "id": "pumpkin_seed",
+          "name": "南瓜种子",
+          "type": "种子",
+          "materials": [
+            {
+              "name": "南瓜",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：中级农业",
+          "workbench": "耕地"
+        },
+        {
+          "id": "hop_seed",
+          "name": "啤酒花种子",
+          "type": "种子",
+          "materials": [
+            {
+              "name": "啤酒花",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：中级农业",
+          "workbench": "耕地"
+        },
+        {
+          "id": "grape_seed",
+          "name": "葡萄种子",
+          "type": "种子",
+          "materials": [
+            {
+              "name": "葡萄",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：高级农业",
+          "workbench": "耕地"
+        },
+        {
+          "id": "simple_kitchen",
+          "name": "简单厨房",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 6
+            },
+            {
+              "name": "石块",
+              "count": 4
+            },
+            {
+              "name": "铁锭",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：基础烹饪（绿色科技点x5）",
+          "workbench": "复杂工作台"
+        },
+        {
+          "id": "baked_carrot",
+          "name": "烤胡萝卜",
+          "type": "食物",
+          "materials": [
+            {
+              "name": "胡萝卜",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：基础烹饪",
+          "workbench": "篝火"
+        },
+        {
+          "id": "bread",
+          "name": "面包",
+          "type": "食物",
+          "materials": [
+            {
+              "name": "小麦",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：基础烹饪",
+          "workbench": "篝火"
+        },
+        {
+          "id": "cake",
+          "name": "蛋糕",
+          "type": "食物",
+          "materials": [
+            {
+              "name": "小麦",
+              "count": 3
+            },
+            {
+              "name": "蜂蜜",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：中级烹饪",
+          "workbench": "烤箱"
+        },
+        {
+          "id": "oven",
+          "name": "烤箱",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "石块",
+              "count": 8
+            },
+            {
+              "name": "铁锭",
+              "count": 4
+            }
+          ],
+          "unlock": "科技：中级烹饪",
+          "workbench": "无（徒手建造）"
+        },
+        {
+          "id": "pie",
+          "name": "派",
+          "type": "食物",
+          "materials": [
+            {
+              "name": "小麦",
+              "count": 2
+            },
+            {
+              "name": "浆果",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：中级烹饪",
+          "workbench": "烤箱"
+        },
+        {
+          "id": "fish_soup",
+          "name": "鱼汤",
+          "type": "食物",
+          "materials": [
+            {
+              "name": "鱼",
+              "count": 1
+            },
+            {
+              "name": "水",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：基础烹饪",
+          "workbench": "篝火"
+        },
+        {
+          "id": "roasted_fish",
+          "name": "烤鱼",
+          "type": "食物",
+          "materials": [
+            {
+              "name": "鱼",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：基础烹饪",
+          "workbench": "篝火"
+        },
+        {
+          "id": "pumpkin_soup",
+          "name": "南瓜汤",
+          "type": "食物",
+          "materials": [
+            {
+              "name": "南瓜",
+              "count": 1
+            },
+            {
+              "name": "水",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：中级烹饪",
+          "workbench": "简单厨房"
+        },
+        {
+          "id": "sandwich",
+          "name": "三明治",
+          "type": "食物",
+          "materials": [
+            {
+              "name": "面包",
+              "count": 1
+            },
+            {
+              "name": "鱼",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：中级烹饪",
+          "workbench": "简单厨房"
+        }
+      ]
+    },
+    "section_5_brewing": {
+      "description": "酿酒系统",
+      "recipes": [
+        {
+          "id": "fermentation_barrel",
+          "name": "发酵桶",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 8
+            },
+            {
+              "name": "铁锭",
+              "count": 4
+            }
+          ],
+          "unlock": "科技：酿酒（绿色科技点x10）",
+          "workbench": "复杂工作台"
+        },
+        {
+          "id": "beer",
+          "name": "啤酒",
+          "type": "消耗品/酒类",
+          "materials": [
+            {
+              "name": "小麦",
+              "count": 3
+            },
+            {
+              "name": "啤酒花",
+              "count": 2
+            },
+            {
+              "name": "水",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：酿酒",
+          "workbench": "发酵桶"
+        },
+        {
+          "id": "wine",
+          "name": "葡萄酒",
+          "type": "消耗品/酒类",
+          "materials": [
+            {
+              "name": "葡萄",
+              "count": 4
+            },
+            {
+              "name": "水",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：酿酒",
+          "workbench": "发酵桶"
+        },
+        {
+          "id": "mead",
+          "name": "蜂蜜酒",
+          "type": "消耗品/酒类",
+          "materials": [
+            {
+              "name": "蜂蜜",
+              "count": 3
+            },
+            {
+              "name": "水",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：酿酒",
+          "workbench": "发酵桶"
+        },
+        {
+          "id": "vodka",
+          "name": "伏特加",
+          "type": "消耗品/酒类",
+          "materials": [
+            {
+              "name": "土豆",
+              "count": 4
+            },
+            {
+              "name": "水",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：高级酿酒",
+          "workbench": "发酵桶（升级版）"
+        },
+        {
+          "id": "quality_wine",
+          "name": "优质葡萄酒",
+          "type": "消耗品/酒类",
+          "materials": [
+            {
+              "name": "葡萄酒",
+              "count": 1
+            },
+            {
+              "name": "酵母",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：高级酿酒",
+          "workbench": "发酵桶（升级版）"
+        }
+      ]
+    },
+    "section_6_body_preparation": {
+      "description": "尸体处理与手术",
+      "recipes": [
+        {
+          "id": "dissection_table",
+          "name": "解剖台",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 6
+            },
+            {
+              "name": "铁锭",
+              "count": 4
+            }
+          ],
+          "unlock": "初始任务解锁",
+          "workbench": "无（徒手建造）"
+        },
+        {
+          "id": "body_plaster",
+          "name": "石膏",
+          "type": "消耗品",
+          "materials": [
+            {
+              "name": "石灰石",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：基础解剖",
+          "workbench": "石匠工作台"
+        },
+        {
+          "id": "shroud",
+          "name": "裹尸布",
+          "type": "消耗品",
+          "materials": [
+            {
+              "name": "植物纤维",
+              "count": 4
+            }
+          ],
+          "unlock": "科技：基础解剖",
+          "workbench": "简单工作台"
+        },
+        {
+          "id": "silk_shroud",
+          "name": "丝绸裹尸布",
+          "type": "消耗品",
+          "materials": [
+            {
+              "name": "丝绸",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：高级解剖",
+          "workbench": "复杂工作台"
+        },
+        {
+          "id": "surgical_needle",
+          "name": "手术针",
+          "type": "工具",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 1
+            }
+          ],
+          "unlock": "科技：基础解剖",
+          "workbench": "简单铁砧"
+        },
+        {
+          "id": "scalpel",
+          "name": "手术刀",
+          "type": "工具",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 1
+            }
+          ],
+          "unlock": "初始有赠品/简单铁砧",
+          "workbench": "简单铁砧"
+        }
+      ]
+    },
+    "section_7_buildings": {
+      "description": "大型建筑与基础设施",
+      "recipes": [
+        {
+          "id": "stone_quarry",
+          "name": "采石场",
+          "type": "建筑（资源点）",
+          "materials": [
+            {
+              "name": "石块",
+              "count": 12
+            },
+            {
+              "name": "木材",
+              "count": 8
+            }
+          ],
+          "unlock": "科技：石材开采（红色科技点x8）",
+          "workbench": "石匠工作台"
+        },
+        {
+          "id": "lumber_mill",
+          "name": "伐木场",
+          "type": "建筑（资源点）",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 10
+            },
+            {
+              "name": "铁锭",
+              "count": 4
+            }
+          ],
+          "unlock": "科技：木材加工（红色科技点x8）",
+          "workbench": "复杂工作台"
+        },
+        {
+          "id": "coal_mine",
+          "name": "煤矿",
+          "type": "建筑（资源点）",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 8
+            },
+            {
+              "name": "石块",
+              "count": 10
+            }
+          ],
+          "unlock": "科技：采矿",
+          "workbench": "石匠工作台"
+        },
+        {
+          "id": "marble_quarry",
+          "name": "大理石采石场",
+          "type": "建筑（资源点）",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 10
+            },
+            {
+              "name": "石块",
+              "count": 8
+            },
+            {
+              "name": "铁锭",
+              "count": 6
+            }
+          ],
+          "unlock": "科技：高级石材",
+          "workbench": "石匠工作台"
+        },
+        {
+          "id": "zombie_portal",
+          "name": "僵尸传送门",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "简单工作台",
+              "count": 1
+            },
+            {
+              "name": "铁锭",
+              "count": 8
+            },
+            {
+              "name": "石块",
+              "count": 10
+            },
+            {
+              "name": "暗黑器官",
+              "count": 5
+            }
+          ],
+          "unlock": "蛇任务线",
+          "workbench": "无（徒手建造）"
+        },
+        {
+          "id": "zombie_workbench",
+          "name": "僵尸工作台",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 10
+            },
+            {
+              "name": "铁锭",
+              "count": 6
+            },
+            {
+              "name": "暗黑器官",
+              "count": 3
+            }
+          ],
+          "unlock": "科技：僵尸劳工",
+          "workbench": "复杂工作台"
+        },
+        {
+          "id": "zombie_quarry",
+          "name": "僵尸采石场",
+          "type": "建筑（资源点）",
+          "materials": [
+            {
+              "name": "采石场",
+              "count": 1
+            },
+            {
+              "name": "暗黑器官",
+              "count": 3
+            }
+          ],
+          "unlock": "科技：僵尸劳工",
+          "workbench": "僵尸工作台"
+        },
+        {
+          "id": "zombie_lumber",
+          "name": "僵尸伐木场",
+          "type": "建筑（资源点）",
+          "materials": [
+            {
+              "name": "伐木场",
+              "count": 1
+            },
+            {
+              "name": "暗黑器官",
+              "count": 3
+            }
+          ],
+          "unlock": "科技：僵尸劳工",
+          "workbench": "僵尸工作台"
+        },
+        {
+          "id": "bridge_repair",
+          "name": "桥梁修复（通往沼泽）",
+          "type": "建筑/任务",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 20
+            },
+            {
+              "name": "铁钉",
+              "count": 10
+            }
+          ],
+          "unlock": "酒馆老板任务/科技：桥梁建造",
+          "workbench": "无（徒手建造）"
+        },
+        {
+          "id": "graveyard_gate",
+          "name": "墓地大门（升级）",
+          "type": "建筑",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 6
+            },
+            {
+              "name": "木材",
+              "count": 8
+            }
+          ],
+          "unlock": "科技：墓地升级",
+          "workbench": "复杂工作台"
+        },
+        {
+          "id": "snake_altar",
+          "name": "蛇的祭坛",
+          "type": "建筑/任务",
+          "materials": [
+            {
+              "name": "石块",
+              "count": 15
+            },
+            {
+              "name": "暗黑器官",
+              "count": 5
+            },
+            {
+              "name": "铁锭",
+              "count": 6
+            }
+          ],
+          "unlock": "蛇任务线中期",
+          "workbench": "无（徒手建造）"
+        }
+      ]
+    },
+    "section_8_advanced_tools": {
+      "description": "后期高级工具与武器",
+      "recipes": [
+        {
+          "id": "golden_sword",
+          "name": "金剑",
+          "type": "武器",
+          "materials": [
+            {
+              "name": "金锭",
+              "count": 3
+            },
+            {
+              "name": "硬木",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：高级锻造",
+          "workbench": "高级铁砧"
+        },
+        {
+          "id": "exhumed_sword",
+          "name": "掘尸剑",
+          "type": "武器",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 4
+            },
+            {
+              "name": "暗黑器官",
+              "count": 3
+            }
+          ],
+          "unlock": "地下墓穴/蛇任务线",
+          "workbench": "高级铁砧"
+        },
+        {
+          "id": "marble_tombstone",
+          "name": "大理石墓碑",
+          "type": "墓地装饰",
+          "materials": [
+            {
+              "name": "大理石",
+              "count": 4
+            }
+          ],
+          "unlock": "科技：高级石材",
+          "workbench": "石匠工作台（升级版）"
+        },
+        {
+          "id": "marble_fence",
+          "name": "大理石围栏",
+          "type": "墓地装饰",
+          "materials": [
+            {
+              "name": "大理石",
+              "count": 4
+            }
+          ],
+          "unlock": "科技：高级石材",
+          "workbench": "石匠工作台（升级版）"
+        },
+        {
+          "id": "golden_tombstone",
+          "name": "金色墓碑（最高级）",
+          "type": "墓地装饰",
+          "materials": [
+            {
+              "name": "大理石",
+              "count": 2
+            },
+            {
+              "name": "金锭",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：大师级石材",
+          "workbench": "石匠工作台（升级版）"
+        },
+        {
+          "id": "golden_fence",
+          "name": "金色围栏（最高级）",
+          "type": "墓地装饰",
+          "materials": [
+            {
+              "name": "大理石",
+              "count": 2
+            },
+            {
+              "name": "金锭",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：大师级石材",
+          "workbench": "石匠工作台（升级版）"
+        },
+        {
+          "id": "teleport_stone",
+          "name": "传送石",
+          "type": "消耗品",
+          "materials": [
+            {
+              "name": "信仰",
+              "count": 5
+            }
+          ],
+          "unlock": "可在教堂购买配方",
+          "workbench": "教堂（购买）"
+        },
+        {
+          "id": "reputation_guide",
+          "name": "声望指南",
+          "type": "书籍",
+          "materials": [
+            {
+              "name": "纸张",
+              "count": 5
+            },
+            {
+              "name": "研究笔记",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：写作III",
+          "workbench": "写字台"
+        },
+        {
+          "id": "precision_tool",
+          "name": "精密工具套件",
+          "type": "工具",
+          "materials": [
+            {
+              "name": "钢锭",
+              "count": 2
+            },
+            {
+              "name": "铁锭",
+              "count": 2
+            }
+          ],
+          "unlock": "科技：精密工具",
+          "workbench": "高级铁砧"
+        }
+      ]
+    },
+    "section_9_graveyard_decorations": {
+      "description": "墓地装饰品（提升评分）",
+      "recipes": [
+        {
+          "id": "wooden_cross",
+          "name": "木制十字架",
+          "type": "墓地装饰",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 3
+            }
+          ],
+          "unlock": "初始解锁",
+          "workbench": "简单工作台"
+        },
+        {
+          "id": "stone_cross",
+          "name": "石制十字架",
+          "type": "墓地装饰",
+          "materials": [
+            {
+              "name": "石块",
+              "count": 4
+            }
+          ],
+          "unlock": "科技：简单石材",
+          "workbench": "石匠工作台"
+        },
+        {
+          "id": "grave_flower",
+          "name": "墓花",
+          "type": "墓地装饰",
+          "materials": [
+            {
+              "name": "花",
+              "count": 2
+            },
+            {
+              "name": "植物纤维",
+              "count": 2
+            }
+          ],
+          "unlock": "初始解锁",
+          "workbench": "简单工作台"
+        },
+        {
+          "id": "iron_cross",
+          "name": "铁制十字架",
+          "type": "墓地装饰",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 3
+            }
+          ],
+          "unlock": "科技：锻造",
+          "workbench": "简单铁砧"
+        },
+        {
+          "id": "marble_cross",
+          "name": "大理石十字架",
+          "type": "墓地装饰",
+          "materials": [
+            {
+              "name": "大理石",
+              "count": 3
+            }
+          ],
+          "unlock": "科技：高级石材",
+          "workbench": "石匠工作台（升级版）"
+        },
+        {
+          "id": "angel_statue",
+          "name": "天使雕像",
+          "type": "墓地装饰",
+          "materials": [
+            {
+              "name": "大理石",
+              "count": 5
+            }
+          ],
+          "unlock": "科技：大师级石材",
+          "workbench": "石匠工作台（升级版）"
+        },
+        {
+          "id": "colossus_statue",
+          "name": "巨像雕像",
+          "type": "墓地装饰",
+          "materials": [
+            {
+              "name": "大理石",
+              "count": 8
+            }
+          ],
+          "unlock": "科技：大师级石材",
+          "workbench": "石匠工作台（升级版）"
+        }
+      ]
+    }
+  },
+  "quests": {
+    "description": "全任务物品需求，按NPC任务线和时间顺序排列",
+    "npc_bishop": {
+      "name": "主教（Bishop）任务线",
+      "description": "祈祷、布道、像中了彩票一样的生活",
+      "icon": "⛪",
+      "quests": [
+        {
+          "id": "bishop_01",
+          "name": "墓地达到5点装饰度",
+          "order": 1,
+          "npc": "主教",
+          "prerequisites": [
+            "游戏初期"
+          ],
+          "objectives": [
+            {
+              "description": "提升墓地装饰度至5点",
+              "items": []
+            }
+          ],
+          "rewards": {
+            "faith": 0,
+            "money": 0,
+            "items": []
+          }
+        }
+      ]
+    },
+    "npc_gerry": {
+      "name": "格里（Gerry）任务线",
+      "description": "一个会说话的骷髅头，有健忘症，在酒馆出没",
+      "icon": "💀",
+      "quests": [
+        {
+          "id": "gerry_01",
+          "name": "去酒馆喝瓶啤酒",
+          "order": 1,
+          "npc": "格里",
+          "prerequisites": [],
+          "objectives": [
+            {
+              "description": "去酒馆喝瓶啤酒",
+              "items": [
+                {
+                  "name": "啤酒",
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "rewards": {
+            "faith": 0,
+            "money": 0,
+            "items": []
+          }
+        },
+        {
+          "id": "gerry_02",
+          "name": "喝瓶葡萄酒",
+          "order": 2,
+          "npc": "格里",
+          "prerequisites": [
+            "完成任务：去酒馆喝瓶啤酒"
+          ],
+          "objectives": [
+            {
+              "description": "喝瓶葡萄酒",
+              "items": [
+                {
+                  "name": "葡萄酒",
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "rewards": {
+            "faith": 0,
+            "money": 0,
+            "items": []
+          }
+        }
+      ]
+    },
+    "npc_horadric": {
+      "name": "赫拉迪克（Horadric）任务线",
+      "description": "酒馆老板兼村长，收购埋葬证明",
+      "icon": "🍺",
+      "quests": [
+        {
+          "id": "horadric_01",
+          "name": "送信给铁匠",
+          "order": 1,
+          "npc": "赫拉迪克",
+          "prerequisites": [
+            "游戏初期"
+          ],
+          "objectives": [
+            {
+              "description": "将信件交给铁匠克雷兹沃尔德，然后回来",
+              "items": []
+            }
+          ],
+          "rewards": {
+            "faith": 0,
+            "money": 0,
+            "items": []
+          }
+        },
+        {
+          "id": "horadric_02",
+          "name": "印章与卖肉",
+          "order": 2,
+          "npc": "赫拉迪克",
+          "prerequisites": [
+            "完成任务：送信给铁匠"
+          ],
+          "objectives": [
+            {
+              "description": "找到一个印章，然后将肉卖给赫拉迪克",
+              "items": []
+            }
+          ],
+          "rewards": {
+            "faith": 0,
+            "money": 0,
+            "items": []
+          }
+        }
+      ]
+    },
+    "npc_woodcutter": {
+      "name": "樵夫（Woodcutter）任务线",
+      "description": "森林里的伐木工",
+      "icon": "🪓",
+      "quests": [
+        {
+          "id": "woodcutter_01",
+          "name": "带来一把铁斧",
+          "order": 1,
+          "npc": "樵夫",
+          "prerequisites": [
+            "游戏初期"
+          ],
+          "objectives": [
+            {
+              "description": "拿一把铁斧给樵夫",
+              "items": []
+            }
+          ],
+          "rewards": {
+            "faith": 0,
+            "money": 50,
+            "items": []
+          }
+        }
+      ]
+    },
+    "npc_krezvold": {
+      "name": "克雷兹沃尔德（Krezvold）任务线",
+      "description": "体格健壮，留着性感小胡子的铁匠",
+      "icon": "⚒️",
+      "quests": [
+        {
+          "id": "krezvold_01",
+          "name": "消灭史莱姆",
+          "order": 1,
+          "npc": "克雷兹沃尔德",
+          "prerequisites": [
+            "游戏初期"
+          ],
+          "objectives": [
+            {
+              "description": "拿一把老剑，杀死铁匠铺后面的两个史莱姆",
+              "items": []
+            }
+          ],
+          "rewards": {
+            "faith": 0,
+            "money": 80,
+            "items": [
+              "简单的铁件×5"
+            ]
+          }
+        }
+      ]
+    },
+    "npc_lady_chame": {
+      "name": "查美女士（Lady Chame）任务线",
+      "description": "这个女人有些让人无法理解的地方",
+      "icon": "👩",
+      "quests": [
+        {
+          "id": "chame_01",
+          "name": "证明你的价值",
+          "order": 1,
+          "npc": "查美女士",
+          "prerequisites": [
+            "游戏中期"
+          ],
+          "objectives": [
+            {
+              "description": "证明你是值得交谈的对象",
+              "items": []
+            }
+          ],
+          "rewards": {
+            "faith": 0,
+            "money": 0,
+            "items": []
+          }
+        }
+      ]
+    },
+    "npc_wagner": {
+      "name": "瓦格纳（Wagner）任务线",
+      "description": "一个帅气的年轻人，自称为诗人",
+      "icon": "📜",
+      "quests": [
+        {
+          "id": "wagner_01",
+          "name": "诗人的材料",
+          "order": 1,
+          "npc": "瓦格纳",
+          "prerequisites": [
+            "游戏中期"
+          ],
+          "objectives": [
+            {
+              "description": "找到10张纸和1瓶墨水",
+              "items": []
+            }
+          ],
+          "rewards": {
+            "faith": 0,
+            "money": 50,
+            "items": []
+          }
+        }
+      ]
+    },
+    "npc_yorick": {
+      "name": "尤里克（Yorick）任务线",
+      "description": "一个对生活有着复杂看法的人",
+      "icon": "💀",
+      "quests": [
+        {
+          "id": "yorick_01",
+          "name": "处理尸体",
+          "order": 1,
+          "npc": "尤里克",
+          "prerequisites": [],
+          "objectives": [
+            {
+              "description": "把墓地右下角的那一个尸体挖出来丢到河里去",
+              "items": []
+            }
+          ],
+          "rewards": {
+            "faith": 0,
+            "money": 0,
+            "items": []
+          }
+        }
+      ]
+    },
+    "npc_astrologer": {
+      "name": "占星家（Astrologer）任务线",
+      "description": "他很睿智，但厌倦了一切，甚至是生活",
+      "icon": "🔭",
+      "quests": [
+        {
+          "id": "astrologer_01",
+          "name": "取骷髅头",
+          "order": 1,
+          "npc": "占星家",
+          "prerequisites": [],
+          "objectives": [
+            {
+              "description": "从死尸上取下骷髅头",
+              "items": [
+                {
+                  "name": "骷髅头",
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "rewards": {
+            "faith": 0,
+            "money": 0,
+            "items": []
+          }
+        },
+        {
+          "id": "astrologer_02",
+          "name": "收集老看守人的日记",
+          "order": 2,
+          "npc": "占星家",
+          "prerequisites": ["astrologer_01"],
+          "objectives": [
+            {
+              "description": "从教堂地窖收集老看守人的日记",
+              "items": []
+            }
+          ],
+          "rewards": {
+            "faith": 0,
+            "money": 0,
+            "items": []
+          }
+        }
+      ]
+    },
+    "npc_lighthouse": {
+      "name": "灯塔看守人任务线",
+      "description": "买卖鱼和渔具",
+      "icon": "🗼",
+      "quests": [
+        {
+          "id": "lighthouse_01",
+          "name": "收集飞蛾",
+          "order": 1,
+          "npc": "灯塔看守人",
+          "prerequisites": [],
+          "objectives": [
+            {
+              "description": "带来6只飞蛾",
+              "items": [
+                {
+                  "name": "飞蛾",
+                  "count": 6
+                }
+              ]
+            }
+          ],
+          "rewards": {
+            "faith": 0,
+            "money": 0,
+            "items": []
+          }
+        }
+      ]
+    },
+    "npc_dig": {
+      "name": "迪格（Dig）任务线",
+      "description": "一个长着红眼睛的古怪老头，经常胡言乱语",
+      "icon": "👴",
+      "quests": [
+        {
+          "id": "dig_01",
+          "name": "收集蜜罐",
+          "order": 1,
+          "npc": "迪格",
+          "prerequisites": [],
+          "objectives": [
+            {
+              "description": "带来5个蜜罐",
+              "items": [
+                {
+                  "name": "蜜罐",
+                  "count": 5
+                }
+              ]
+            }
+          ],
+          "rewards": {
+            "faith": 0,
+            "money": 0,
+            "items": []
+          }
+        }
+      ]
+    },
+    "npc_merchant": {
+      "name": "商人（Merchant）任务线",
+      "description": "他总是对做生意乐此不疲，除了晚宴时间",
+      "icon": "💰",
+      "quests": [
+        {
+          "id": "merchant_01",
+          "name": "试验材料",
+          "order": 1,
+          "npc": "商人",
+          "prerequisites": [],
+          "objectives": [
+            {
+              "description": "给商人12根胡萝卜、12头卷心菜和12颗甜菜做试验",
+              "items": [
+                {
+                  "name": "胡萝卜",
+                  "count": 12
+                },
+                {
+                  "name": "卷心菜",
+                  "count": 12
+                },
+                {
+                  "name": "甜菜",
+                  "count": 12
+                }
+              ]
+            }
+          ],
+          "rewards": {
+            "faith": 0,
+            "money": 0,
+            "items": []
+          }
+        },
+        {
+          "id": "merchant_02",
+          "name": "止嗝草",
+          "order": 2,
+          "npc": "商人",
+          "prerequisites": [
+            "完成任务：试验材料"
+          ],
+          "objectives": [
+            {
+              "description": "拿点止嗝草给商人",
+              "items": [
+                {
+                  "name": "止嗝草",
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "rewards": {
+            "faith": 0,
+            "money": 0,
+            "items": []
+          }
+        }
+      ]
+    }
+  },
+  "dlc_content": {
+    "description": "三大DLC的完整新增内容",
+    "stranger_sins": {
+      "name": "Stranger Sins（陌客之罪）",
+      "description": "新增酒馆经营系统，玩家可在村庄经营酒馆，解锁任务线和酿造配方",
+      "unlock_trigger": "完成任务「修复桥梁」后解锁酒馆区域",
+      "new_buildings": [
+        {
+          "name": "酒馆大门",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 12
+            },
+            {
+              "name": "铁钉",
+              "count": 8
+            }
+          ],
+          "unlock": "DLC初始解锁"
+        },
+        {
+          "name": "吧台",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 8
+            },
+            {
+              "name": "铁锭",
+              "count": 4
+            }
+          ],
+          "unlock": "DLC初始解锁"
+        },
+        {
+          "name": "酒馆桌椅",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 6
+            },
+            {
+              "name": "铁钉",
+              "count": 4
+            }
+          ],
+          "unlock": "DLC初始解锁"
+        },
+        {
+          "name": "酒馆厨房",
+          "materials": [
+            {
+              "name": "简单厨房",
+              "count": 1
+            },
+            {
+              "name": "铁锭",
+              "count": 4
+            }
+          ],
+          "unlock": "DLC中期"
+        },
+        {
+          "name": "酒窖",
+          "materials": [
+            {
+              "name": "石块",
+              "count": 10
+            },
+            {
+              "name": "木材",
+              "count": 8
+            }
+          ],
+          "unlock": "DLC中期"
+        },
+        {
+          "name": "大型发酵桶",
+          "materials": [
+            {
+              "name": "发酵桶",
+              "count": 1
+            },
+            {
+              "name": "铁锭",
+              "count": 6
+            }
+          ],
+          "unlock": "DLC科技解锁"
+        }
+      ],
+      "new_recipes": [
+        {
+          "id": "dlc_ss_golden_beer",
+          "name": "金色啤酒",
+          "type": "消耗品/酒类",
+          "materials": [
+            {
+              "name": "啤酒",
+              "count": 1
+            },
+            {
+              "name": "金粉",
+              "count": 1
+            }
+          ],
+          "unlock": "DLC中期"
+        },
+        {
+          "id": "dlc_ss_wine_cellar",
+          "name": "陈酿葡萄酒",
+          "type": "消耗品/酒类",
+          "materials": [
+            {
+              "name": "葡萄酒",
+              "count": 1
+            },
+            {
+              "name": "酵母",
+              "count": 1
+            }
+          ],
+          "unlock": "DLC中期"
+        },
+        {
+          "id": "dlc_ss_tavern_snack",
+          "name": "酒馆小吃",
+          "type": "食物",
+          "materials": [
+            {
+              "name": "面包",
+              "count": 1
+            },
+            {
+              "name": "奶酪",
+              "count": 1
+            }
+          ],
+          "unlock": "DLC初始解锁"
+        },
+        {
+          "id": "dlc_ss_roast_meat",
+          "name": "烤肉",
+          "type": "食物",
+          "materials": [
+            {
+              "name": "肉",
+              "count": 2
+            },
+            {
+              "name": "香料",
+              "count": 1
+            }
+          ],
+          "unlock": "DLC早期"
+        },
+        {
+          "id": "dlc_ss_fruit_punch",
+          "name": "水果潘趣酒",
+          "type": "消耗品",
+          "materials": [
+            {
+              "name": "浆果",
+              "count": 3
+            },
+            {
+              "name": "水",
+              "count": 1
+            }
+          ],
+          "unlock": "DLC早期"
+        },
+        {
+          "id": "dlc_ss_strong_vodka",
+          "name": "烈性伏特加",
+          "type": "消耗品/酒类",
+          "materials": [
+            {
+              "name": "伏特加",
+              "count": 1
+            },
+            {
+              "name": "毒蘑菇",
+              "count": 1
+            }
+          ],
+          "unlock": "DLC后期"
+        }
+      ],
+      "new_quests": [
+        {
+          "name": "酒馆老板的过去",
+          "npc": "酒馆老板",
+          "order": 1,
+          "prerequisites": [
+            "修复酒馆"
+          ],
+          "objectives": [
+            {
+              "description": "修复酒馆，开始营业",
+              "items": [
+                {
+                  "name": "木材",
+                  "count": 15
+                },
+                {
+                  "name": "铁钉",
+                  "count": 8
+                }
+              ]
+            }
+          ],
+          "rewards": "解锁酒馆经营功能"
+        },
+        {
+          "name": "寻找食谱",
+          "npc": "酒馆老板",
+          "order": 2,
+          "prerequisites": [
+            "完成任务：酒馆老板的过去"
+          ],
+          "objectives": [
+            {
+              "description": "找到失传的食谱",
+              "items": [
+                {
+                  "name": "稀有蘑菇",
+                  "count": 5
+                },
+                {
+                  "name": "蜂蜜",
+                  "count": 5
+                }
+              ]
+            }
+          ],
+          "rewards": "金色食谱"
+        },
+        {
+          "name": "酒馆扩建",
+          "npc": "酒馆老板",
+          "order": 3,
+          "prerequisites": [
+            "完成任务：寻找食谱"
+          ],
+          "objectives": [
+            {
+              "description": "扩建酒馆，增加容量",
+              "items": [
+                {
+                  "name": "木材",
+                  "count": 20
+                },
+                {
+                  "name": "铁锭",
+                  "count": 10
+                },
+                {
+                  "name": "硬木",
+                  "count": 8
+                }
+              ]
+            }
+          ],
+          "rewards": "酒馆收入提升"
+        },
+        {
+          "name": "葡萄酒节",
+          "npc": "酒馆老板",
+          "order": 4,
+          "prerequisites": [
+            "完成任务：酒馆扩建"
+          ],
+          "objectives": [
+            {
+              "description": "准备葡萄酒节",
+              "items": [
+                {
+                  "name": "葡萄酒",
+                  "count": 10
+                },
+                {
+                  "name": "优质葡萄酒",
+                  "count": 5
+                }
+              ]
+            }
+          ],
+          "rewards": "大量金钱和声望"
+        },
+        {
+          "name": "陌客的真相",
+          "npc": "酒馆老板",
+          "order": 5,
+          "prerequisites": [
+            "完成任务：葡萄酒节"
+          ],
+          "objectives": [
+            {
+              "description": "揭开酒馆老板的秘密",
+              "items": [
+                {
+                  "name": "研究笔记",
+                  "count": 3
+                },
+                {
+                  "name": "暗黑器官",
+                  "count": 3
+                }
+              ]
+            }
+          ],
+          "rewards": "DLC主线完成，特殊道具"
+        }
+      ]
+    },
+    "game_of_crone": {
+      "name": "Game of Crone（老妪的游戏）",
+      "description": "新增难民村区域，帮助难民建立定居点，解锁新科技和物品",
+      "unlock_trigger": "墓地评分达到15分后解锁通往难民村的道路",
+      "new_buildings": [
+        {
+          "name": "难民小屋",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 10
+            },
+            {
+              "name": "铁钉",
+              "count": 6
+            }
+          ],
+          "unlock": "DLC初始解锁"
+        },
+        {
+          "name": "难民农场",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 8
+            },
+            {
+              "name": "耕地",
+              "count": 1
+            }
+          ],
+          "unlock": "DLC早期"
+        },
+        {
+          "name": "难民工坊",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 10
+            },
+            {
+              "name": "铁锭",
+              "count": 4
+            }
+          ],
+          "unlock": "DLC中期"
+        },
+        {
+          "name": "瞭望塔",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 12
+            },
+            {
+              "name": "铁钉",
+              "count": 8
+            }
+          ],
+          "unlock": "DLC中期"
+        },
+        {
+          "name": "难民防御墙",
+          "materials": [
+            {
+              "name": "石块",
+              "count": 15
+            },
+            {
+              "name": "木材",
+              "count": 10
+            }
+          ],
+          "unlock": "DLC后期"
+        },
+        {
+          "name": "社区大厅",
+          "materials": [
+            {
+              "name": "硬木",
+              "count": 10
+            },
+            {
+              "name": "铁锭",
+              "count": 8
+            },
+            {
+              "name": "石块",
+              "count": 12
+            }
+          ],
+          "unlock": "DLC后期"
+        }
+      ],
+      "new_recipes": [
+        {
+          "id": "dlc_goc_refugee_bread",
+          "name": "难民面包",
+          "type": "食物",
+          "materials": [
+            {
+              "name": "小麦",
+              "count": 2
+            }
+          ],
+          "unlock": "DLC初始解锁"
+        },
+        {
+          "id": "dlc_goc_stew",
+          "name": "难民炖菜",
+          "type": "食物",
+          "materials": [
+            {
+              "name": "胡萝卜",
+              "count": 2
+            },
+            {
+              "name": "肉",
+              "count": 1
+            }
+          ],
+          "unlock": "DLC早期"
+        },
+        {
+          "id": "dlc_goc_crude_tool",
+          "name": "粗制工具",
+          "type": "工具",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 1
+            },
+            {
+              "name": "木材",
+              "count": 2
+            }
+          ],
+          "unlock": "DLC早期"
+        },
+        {
+          "id": "dlc_goc_herb_medicine",
+          "name": "草药",
+          "type": "消耗品",
+          "materials": [
+            {
+              "name": "稀有蘑菇",
+              "count": 1
+            },
+            {
+              "name": "蜂蜜",
+              "count": 1
+            }
+          ],
+          "unlock": "DLC中期"
+        },
+        {
+          "id": "dlc_goc_fabric",
+          "name": "粗糙布料",
+          "type": "材料",
+          "materials": [
+            {
+              "name": "植物纤维",
+              "count": 4
+            }
+          ],
+          "unlock": "DLC中期"
+        },
+        {
+          "id": "dlc_goc_refugee_sword",
+          "name": "难民剑",
+          "type": "武器",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 3
+            },
+            {
+              "name": "硬木",
+              "count": 2
+            }
+          ],
+          "unlock": "DLC中期"
+        }
+      ],
+      "new_quests": [
+        {
+          "name": "难民的到来",
+          "npc": "老妪（Crone）",
+          "order": 1,
+          "prerequisites": [
+            "墓地评分达到15"
+          ],
+          "objectives": [
+            {
+              "description": "前往难民村，与老妪对话",
+              "items": []
+            }
+          ],
+          "rewards": "解锁难民村区域"
+        },
+        {
+          "name": "提供住所",
+          "npc": "老妪",
+          "order": 2,
+          "prerequisites": [
+            "完成任务：难民的到来"
+          ],
+          "objectives": [
+            {
+              "description": "为难民建造住所",
+              "items": [
+                {
+                  "name": "木材",
+                  "count": 20
+                },
+                {
+                  "name": "铁钉",
+                  "count": 12
+                }
+              ]
+            }
+          ],
+          "rewards": "难民好感度提升"
+        },
+        {
+          "name": "食物供应",
+          "npc": "老妪",
+          "order": 3,
+          "prerequisites": [
+            "完成任务：提供住所"
+          ],
+          "objectives": [
+            {
+              "description": "为难民提供食物",
+              "items": [
+                {
+                  "name": "面包",
+                  "count": 10
+                },
+                {
+                  "name": "胡萝卜",
+                  "count": 10
+                },
+                {
+                  "name": "烤鱼",
+                  "count": 5
+                }
+              ]
+            }
+          ],
+          "rewards": "解锁难民农场"
+        },
+        {
+          "name": "保护难民",
+          "npc": "老妪",
+          "order": 4,
+          "prerequisites": [
+            "完成任务：食物供应"
+          ],
+          "objectives": [
+            {
+              "description": "保护难民免受怪物侵袭",
+              "items": [
+                {
+                  "name": "铁剑",
+                  "count": 1
+                },
+                {
+                  "name": "火把",
+                  "count": 5
+                }
+              ]
+            }
+          ],
+          "rewards": "解锁防御建筑"
+        },
+        {
+          "name": "难民自立",
+          "npc": "老妪",
+          "order": 5,
+          "prerequisites": [
+            "完成任务：保护难民"
+          ],
+          "objectives": [
+            {
+              "description": "帮助难民建立工坊",
+              "items": [
+                {
+                  "name": "木材",
+                  "count": 15
+                },
+                {
+                  "name": "铁锭",
+                  "count": 8
+                },
+                {
+                  "name": "工具",
+                  "count": 3
+                }
+              ]
+            }
+          ],
+          "rewards": "难民工坊解锁"
+        },
+        {
+          "name": "社区的荣耀",
+          "npc": "老妪",
+          "order": 6,
+          "prerequisites": [
+            "完成任务：难民自立"
+          ],
+          "objectives": [
+            {
+              "description": "建造社区大厅",
+              "items": [
+                {
+                  "name": "硬木",
+                  "count": 10
+                },
+                {
+                  "name": "铁锭",
+                  "count": 8
+                },
+                {
+                  "name": "石块",
+                  "count": 12
+                }
+              ]
+            }
+          ],
+          "rewards": "DLC主线完成，难民社区完全建立"
+        }
+      ],
+      "new_techs": [
+        {
+          "name": "难民营建",
+          "type": "绿色科技点x10",
+          "unlock": "DLC初始"
+        },
+        {
+          "name": "难民农业",
+          "type": "绿色科技点x15",
+          "unlock": "DLC早期"
+        },
+        {
+          "name": "难民防御",
+          "type": "红色科技点x10",
+          "unlock": "DLC中期"
+        },
+        {
+          "name": "社区建设",
+          "type": "绿色科技点x20 + 蓝色科技点x10",
+          "unlock": "DLC后期"
+        }
+      ]
+    },
+    "better_save_soul": {
+      "name": "Better Save Soul（拯救灵魂）",
+      "description": "新增灵魂净化系统，帮助亡灵获得救赎，解锁新建筑和机制",
+      "unlock_trigger": "完成第一次布道后解锁灵魂世界入口",
+      "new_buildings": [
+        {
+          "name": "灵魂之门",
+          "materials": [
+            {
+              "name": "信仰",
+              "count": 10
+            },
+            {
+              "name": "木材",
+              "count": 8
+            }
+          ],
+          "unlock": "DLC初始解锁"
+        },
+        {
+          "name": "净化祭坛",
+          "materials": [
+            {
+              "name": "石块",
+              "count": 10
+            },
+            {
+              "name": "铁锭",
+              "count": 4
+            },
+            {
+              "name": "信仰",
+              "count": 5
+            }
+          ],
+          "unlock": "DLC早期"
+        },
+        {
+          "name": "灵魂牢笼",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 6
+            },
+            {
+              "name": "暗黑器官",
+              "count": 3
+            }
+          ],
+          "unlock": "DLC中期"
+        },
+        {
+          "name": "救赎教堂",
+          "materials": [
+            {
+              "name": "木材",
+              "count": 15
+            },
+            {
+              "name": "石块",
+              "count": 10
+            },
+            {
+              "name": "信仰",
+              "count": 20
+            }
+          ],
+          "unlock": "DLC中期"
+        },
+        {
+          "name": "灵魂熔炉",
+          "materials": [
+            {
+              "name": "熔炉",
+              "count": 1
+            },
+            {
+              "name": "暗黑碎片",
+              "count": 5
+            }
+          ],
+          "unlock": "DLC后期"
+        },
+        {
+          "name": "净化圣殿",
+          "materials": [
+            {
+              "name": "大理石",
+              "count": 10
+            },
+            {
+              "name": "金锭",
+              "count": 5
+            },
+            {
+              "name": "信仰",
+              "count": 30
+            }
+          ],
+          "unlock": "DLC后期"
+        }
+      ],
+      "new_recipes": [
+        {
+          "id": "dlc_bss_soul_capture",
+          "name": "灵魂捕捉瓶",
+          "type": "工具",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 2
+            },
+            {
+              "name": "信仰",
+              "count": 2
+            }
+          ],
+          "unlock": "DLC早期"
+        },
+        {
+          "id": "dlc_bss_purification_potion",
+          "name": "净化药水",
+          "type": "消耗品",
+          "materials": [
+            {
+              "name": "碱液",
+              "count": 1
+            },
+            {
+              "name": "信仰",
+              "count": 1
+            }
+          ],
+          "unlock": "DLC早期"
+        },
+        {
+          "id": "dlc_bss_soul_essence",
+          "name": "灵魂精华",
+          "type": "材料",
+          "materials": [
+            {
+              "name": "捕捉的灵魂",
+              "count": 1
+            }
+          ],
+          "unlock": "DLC中期"
+        },
+        {
+          "id": "dlc_bss_pure_faith",
+          "name": "纯净信仰",
+          "type": "材料",
+          "materials": [
+            {
+              "name": "信仰",
+              "count": 5
+            },
+            {
+              "name": "灵魂精华",
+              "count": 1
+            }
+          ],
+          "unlock": "DLC中期"
+        },
+        {
+          "id": "dlc_bss_soul_weapon",
+          "name": "灵魂之剑",
+          "type": "武器",
+          "materials": [
+            {
+              "name": "银剑",
+              "count": 1
+            },
+            {
+              "name": "灵魂精华",
+              "count": 3
+            }
+          ],
+          "unlock": "DLC后期"
+        },
+        {
+          "id": "dlc_bss_redemption_candle",
+          "name": "救赎蜡烛",
+          "type": "消耗品",
+          "materials": [
+            {
+              "name": "蜡烛",
+              "count": 1
+            },
+            {
+              "name": "纯净信仰",
+              "count": 1
+            }
+          ],
+          "unlock": "DLC后期"
+        },
+        {
+          "id": "dlc_bss_soul_armor",
+          "name": "灵魂护甲",
+          "type": "装备",
+          "materials": [
+            {
+              "name": "铁锭",
+              "count": 5
+            },
+            {
+              "name": "灵魂精华",
+              "count": 5
+            }
+          ],
+          "unlock": "DLC后期"
+        }
+      ],
+      "new_quests": [
+        {
+          "name": "迷失的灵魂",
+          "npc": "灵魂向导",
+          "order": 1,
+          "prerequisites": [
+            "完成第一次布道"
+          ],
+          "objectives": [
+            {
+              "description": "进入灵魂世界，找到第一个迷失灵魂",
+              "items": []
+            }
+          ],
+          "rewards": "解锁灵魂净化系统"
+        },
+        {
+          "name": "灵魂的请求",
+          "npc": "灵魂向导",
+          "order": 2,
+          "prerequisites": [
+            "完成任务：迷失的灵魂"
+          ],
+          "objectives": [
+            {
+              "description": "帮助灵魂完成未了的心愿",
+              "items": [
+                {
+                  "name": "研究笔记",
+                  "count": 2
+                },
+                {
+                  "name": "纸张",
+                  "count": 3
+                }
+              ]
+            }
+          ],
+          "rewards": "解锁净化祭坛"
+        },
+        {
+          "name": "收集灵魂",
+          "npc": "灵魂向导",
+          "order": 3,
+          "prerequisites": [
+            "完成任务：灵魂的请求"
+          ],
+          "objectives": [
+            {
+              "description": "捕捉5个流浪灵魂",
+              "items": [
+                {
+                  "name": "灵魂捕捉瓶",
+                  "count": 5
+                }
+              ]
+            }
+          ],
+          "rewards": "解锁灵魂精华配方"
+        },
+        {
+          "name": "大规模净化",
+          "npc": "灵魂向导",
+          "order": 4,
+          "prerequisites": [
+            "完成任务：收集灵魂"
+          ],
+          "objectives": [
+            {
+              "description": "进行大规模灵魂净化仪式",
+              "items": [
+                {
+                  "name": "净化药水",
+                  "count": 5
+                },
+                {
+                  "name": "救赎蜡烛",
+                  "count": 5
+                }
+              ]
+            }
+          ],
+          "rewards": "解锁救赎教堂"
+        },
+        {
+          "name": "灵魂的救赎",
+          "npc": "灵魂向导",
+          "order": 5,
+          "prerequisites": [
+            "完成任务：大规模净化"
+          ],
+          "objectives": [
+            {
+              "description": "建造灵魂熔炉，完成最终净化",
+              "items": [
+                {
+                  "name": "熔炉",
+                  "count": 1
+                },
+                {
+                  "name": "暗黑碎片",
+                  "count": 5
+                },
+                {
+                  "name": "灵魂精华",
+                  "count": 10
+                }
+              ]
+            }
+          ],
+          "rewards": "DLC主线完成，所有灵魂获得救赎"
+        }
+      ],
+      "new_techs": [
+        {
+          "name": "灵魂学入门",
+          "type": "蓝色科技点x10 + 信仰x5",
+          "unlock": "DLC初始"
+        },
+        {
+          "name": "灵魂捕捉",
+          "type": "蓝色科技点x15",
+          "unlock": "DLC早期"
+        },
+        {
+          "name": "灵魂净化",
+          "type": "蓝色科技点x20 + 绿色科技点x10",
+          "unlock": "DLC中期"
+        },
+        {
+          "name": "灵魂锻造",
+          "type": "红色科技点x15 + 蓝色科技点x15",
+          "unlock": "DLC后期"
+        },
+        {
+          "name": "终极救赎",
+          "type": "蓝色科技点x30 + 信仰x20",
+          "unlock": "DLC最终"
+        }
+      ]
+    }
+  }
+}

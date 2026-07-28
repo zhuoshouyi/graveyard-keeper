@@ -1,0 +1,196 @@
+{
+  "blueprint": "院子",
+  "version": "v1.12 (用户验证)",
+  "items": [
+    {
+      "name": "箱子",
+      "materials": [
+        {
+          "name": "粗板",
+          "count": 4
+        },
+        {
+          "name": "钉子",
+          "count": 4
+        },
+        {
+          "name": "简单的铁件",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "name": "铁矿石储备",
+      "materials": [
+        {
+          "name": "粗板",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "name": "熔炉",
+      "materials": [
+        {
+          "name": "粗板",
+          "count": 4
+        },
+        {
+          "name": "一块石头",
+          "count": 14
+        },
+        {
+          "name": "简单的铁件",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "name": "木砧",
+      "materials": [
+        {
+          "name": "木墩",
+          "count": 2
+        },
+        {
+          "name": "简单的铁件",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "name": "砧",
+      "materials": [
+        {
+          "name": "铁锭",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "name": "熔炉II",
+      "materials": [
+        {
+          "name": "一块石头",
+          "count": 20
+        },
+        {
+          "name": "复杂的铁件",
+          "count": 8
+        },
+        {
+          "name": "猪皮纸",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "name": "木材储备",
+      "materials": [
+        {
+          "name": "木棍",
+          "count": 10
+        },
+        {
+          "name": "粗板",
+          "count": 4
+        },
+        {
+          "name": "木梁",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "name": "锯木架",
+      "materials": [
+        {
+          "name": "木棍",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "name": "砍木点",
+      "materials": [
+        {
+          "name": "木墩",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "name": "制木工作台",
+      "materials": [
+        {
+          "name": "粗板",
+          "count": 5
+        },
+        {
+          "name": "简单的铁件",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "name": "圆锯",
+      "materials": [
+        {
+          "name": "复杂的铁件",
+          "count": 10
+        },
+        {
+          "name": "木板",
+          "count": 8
+        },
+        {
+          "name": "钉子",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "name": "石材储备",
+      "materials": [
+        {
+          "name": "粗板",
+          "count": 8
+        },
+        {
+          "name": "钉子",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "name": "石材切割机",
+      "materials": [
+        {
+          "name": "粗板",
+          "count": 4
+        },
+        {
+          "name": "钉子",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "name": "陶轮",
+      "materials": [
+        {
+          "name": "粗板",
+          "count": 4
+        },
+        {
+          "name": "一块石头",
+          "count": 2
+        },
+        {
+          "name": "钉子",
+          "count": 6
+        }
+      ]
+    }
+  ]
+}

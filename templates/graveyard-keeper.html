@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>守墓人 · Graveyard Keeper 攻略百科</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    :root {
+      --bg: #1a1a2e; --bg2: #16213e; --card: #0f3460;
+      --accent: #e94560; --gold: #f0c040; --green: #4ecca3; --blue: #58a6ff;
+      --text: #e8e8e8; --dim: #8899aa; --border: #2a2a4a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
+      background: var(--bg); color: var(--text); min-height: 100vh;
+      background-image: radial-gradient(ellipse at 20% 50%,rgba(233,69,96,0.08) 0%,transparent 50%),
+        radial-gradient(ellipse at 80% 20%,rgba(78,204,163,0.06) 0%,transparent 50%),
+        radial-gradient(ellipse at 50% 80%,rgba(240,192,64,0.05) 0%,transparent 50%);
+    }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    .hero {
+      background: linear-gradient(135deg,#0f0f23 0%,#1a1a3e 50%,#0f0f23 100%);
+      border-bottom: 2px solid var(--gold); padding: 18px 20px 12px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top:0; left:0; right:0; bottom:0;
+      background: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,0.02) 2px,rgba(255,255,255,0.02) 4px);
+      pointer-events: none;
+    }
+    .hero h1 { font-size: 24px; color: var(--gold); text-shadow: 0 0 20px rgba(240,192,64,0.3); letter-spacing: 2px; position: relative; }
+    .hero .sub { font-size: 11px; color: var(--dim); margin-top: 3px; letter-spacing: 3px; position: relative; }
+    .hero .pixel { font-family:'Press Start 2P',monospace; font-size:7px; color:var(--accent); margin-top:4px; opacity:0.5; letter-spacing:1px; }
+
+    /* Main Tabs */
+    .main-tabs {
+      display: flex; justify-content: center; gap: 1px;
+      background: var(--bg2); border-bottom: 2px solid var(--border);
+      position: sticky; top:0; z-index: 50; flex-wrap: wrap;
+    }
+    .main-tab {
+      padding: 8px 20px; font-size: 14px; font-weight: 600;
+      cursor: pointer; border: none; background: transparent;
+      color: var(--dim); transition: all 0.2s;
+      border-bottom: 3px solid transparent;
+      display: flex; align-items: center; gap: 5px; letter-spacing: 1px;
+    }
+    .main-tab:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+    .main-tab.active { color: var(--gold); border-bottom-color: var(--gold); background: rgba(240,192,64,0.06); }
+    .main-tab .badge { font-size: 9px; background: var(--card); color: var(--dim); padding: 1px 6px; border-radius: 6px; font-weight: normal; }
+    .main-tab.active .badge { background: rgba(240,192,64,0.2); color: var(--gold); }
+
+    .layout { display: flex; max-width: 1400px; margin: 0 auto; min-height: calc(100vh - 170px); }
+
+    /* Sidebar */
+    .sidebar {
+      width: 200px; flex-shrink: 0; background: var(--bg2);
+      border-right: 1px solid var(--border); padding: 8px 0;
+      position: sticky; top: 46px; height: calc(100vh - 170px); overflow-y: auto;
+      display: none;
+    }
+    .sidebar.active { display: block; }
+    .sidebar .sec-title {
+      font-size: 9px; text-transform: uppercase; letter-spacing: 2px;
+      color: var(--dim); padding: 8px 12px 3px; font-weight: 600;
+    }
+    .sidebar a {
+      display: block; padding: 5px 12px 5px 16px;
+      font-size: 11px; color: var(--dim); text-decoration: none;
+      border-left: 2px solid transparent; transition: all 0.15s; cursor: pointer;
+    }
+    .sidebar a:hover, .sidebar a.active-link { color: var(--gold); background: rgba(240,192,64,0.05); border-left-color: var(--gold); }
+    .sidebar a.sub { padding-left: 24px; font-size: 10px; }
+
+    /* Content */
+    .content { flex: 1; padding: 20px 24px 40px; max-width: 980px; }
+    .content-panel { display: none; }
+    .content-panel.active { display: block; }
+    .content section { margin-bottom: 28px; }
+    .content h2 { font-size: 18px; color: var(--gold); border-bottom: 1px solid var(--border); padding-bottom: 6px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .content h2 .icon { font-size: 22px; }
+    .content h3 { font-size: 14px; color: var(--green); margin: 14px 0 6px; display: flex; align-items: center; gap: 6px; }
+    .content h4 { font-size: 12px; color: var(--accent); margin: 8px 0 4px; }
+    .content p { line-height: 1.7; margin-bottom: 6px; color: #ccc; font-size: 12px; }
+    .content ul, .content ol { margin: 4px 0 8px 16px; }
+    .content li { line-height: 1.6; color: #ccc; font-size: 12px; margin-bottom: 2px; }
+
+    .card-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 6px; margin: 6px 0; }
+    .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; transition: border-color 0.2s; }
+    .card:hover { border-color: var(--gold); }
+    .card .card-title { font-size: 11px; font-weight: 600; color: var(--gold); margin-bottom: 2px; }
+    .card .card-desc { font-size: 10px; color: var(--dim); line-height: 1.4; }
+
+    .table-wrap { overflow-x: auto; margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 11px; background: var(--bg2); border-radius: 5px; overflow: hidden; }
+    th { background: var(--card); color: var(--gold); padding: 6px 8px; text-align: left; font-weight: 600; white-space: nowrap; }
+    td { padding: 5px 8px; border-top: 1px solid var(--border); color: #bbb; }
+    tr:hover td { background: rgba(15,52,96,0.3); }
+
+    .tip { background: rgba(78,204,163,0.1); border: 1px solid rgba(78,204,163,0.3); border-radius: 5px; padding: 8px 12px; margin: 6px 0; display: flex; align-items: flex-start; gap: 6px; }
+    .tip .tip-icon { font-size: 16px; flex-shrink: 0; }
+    .tip .tip-text { font-size: 11px; color: #b0e0d0; line-height: 1.4; }
+    .warning { background: rgba(233,69,96,0.1); border: 1px solid rgba(233,69,96,0.3); border-radius: 5px; padding: 8px 12px; margin: 6px 0; display: flex; align-items: flex-start; gap: 6px; }
+    .warning .w-icon { font-size: 16px; flex-shrink: 0; }
+    .warning .w-text { font-size: 11px; color: #f0b0b0; line-height: 1.4; }
+
+    .tag-dlc { display: inline-block; padding: 1px 7px; border-radius: 3px; font-size: 9px; font-weight: 600; margin: 0 2px; }
+    .tag-stranger { background: rgba(240,192,64,0.2); color: var(--gold); }
+    .tag-crone { background: rgba(78,204,163,0.2); color: var(--green); }
+    .tag-soul { background: rgba(233,69,96,0.2); color: var(--accent); }
+    .stat-point { display: inline-block; padding: 1px 5px; border-radius: 3px; font-size: 9px; font-weight: 600; margin: 0 2px; }
+    .stat-red { background: rgba(233,69,96,0.2); color:#f07070; }
+    .stat-green { background: rgba(78,204,163,0.2); color: var(--green); }
+    .stat-blue { background: rgba(88,166,255,0.2); color: var(--blue); }
+    .section-highlight { scroll-margin-top: 54px; }
+
+    .sub-tab-bar { display: flex; flex-wrap: wrap; gap: 2px; margin: 8px 0 12px; border-bottom: 1px solid var(--border); padding-bottom: 2px; }
+    .sub-tab-btn { padding: 4px 10px; border-radius: 4px 4px 0 0; font-size: 10px; cursor: pointer; border: 1px solid transparent; background: transparent; color: var(--dim); transition: all 0.15s; white-space: nowrap; }
+    .sub-tab-btn:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+    .sub-tab-btn.active { color: var(--gold); border-color: var(--border); border-bottom-color: var(--bg); background: var(--bg2); }
+    .sub-tab-panel { display: none; }
+    .sub-tab-panel.active { display: block; }
+
+    .recipe-card, .quest-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 5px; margin-bottom: 5px; overflow: hidden; }
+    .blueprint-section { background: rgba(15,52,96,0.4); border: 1px solid var(--border); border-radius: 8px; padding: 10px; }
+    .blueprint-section.folded .section-body { display: none; }
+    .blueprint-section .phase-badge { cursor: pointer; user-select: none; }
+    .blueprint-section .fold-arrow { display: inline-block; transition: transform 0.2s; margin-left: 6px; font-size: 9px; }
+    .blueprint-section:not(.folded) .fold-arrow { transform: rotate(90deg); }
+    .recipe-header, .quest-header { display: flex; align-items: center; gap: 6px; padding: 7px 10px; cursor: pointer; transition: background 0.15s; }
+    .recipe-header:hover, .quest-header:hover { background: rgba(255,255,255,0.03); }
+    .recipe-header .arrow, .quest-header .arrow { transition: transform 0.2s; font-size: 9px; color: var(--dim); }
+    .recipe-header.open .arrow, .quest-header.open .arrow { transform: rotate(90deg); }
+    .recipe-header .r-name, .quest-header .q-name { font-weight: 600; font-size: 11px; }
+    .recipe-header .r-type, .quest-header .q-npc { font-size: 9px; background: var(--card); color: var(--dim); padding: 1px 5px; border-radius: 3px; }
+    .recipe-header .deco-badge { font-size: 9px; background: var(--gold); color: #1a1a2e; padding: 1px 5px; border-radius: 3px; font-weight: 600; margin-left: auto; }
+    .recipe-header .stamina-badge { font-size: 9px; background: var(--green); color: #1a1a2e; padding: 1px 5px; border-radius: 3px; font-weight: 600; margin-left: auto; }
+    .recipe-header .fuel-badge { font-size: 9px; background: #e25822; color: #fff; padding: 1px 5px; border-radius: 3px; font-weight: 600; margin-left: auto; }
+    .item-desc { font-size: 10px; color: var(--dim); margin-top: 4px; padding-top: 4px; border-top: 1px solid var(--border); font-style: italic; }
+    .recipe-header .r-phase, .quest-header .r-phase { font-size: 9px; color: var(--blue); margin-left: auto; opacity: 0.6; }
+    .recipe-body, .quest-body { display: none; padding: 0 10px 8px; border-top: 1px solid var(--border); }
+    .recipe-body.open, .quest-body.open { display: block; }
+    .mat-row { display: flex; align-items: center; gap: 5px; padding: 2px 0; font-size: 11px; }
+    .mat-row .mat-icon { font-size: 13px; width: 18px; text-align: center; }
+    .mat-row .mat-name { color: #ccc; }
+    .mat-row .star-badge { font-size: 9px; padding: 0 4px; border-radius: 3px; font-weight: 600; margin-left: 2px; }
+    .mat-row .star-copper { color: #cd7f32; }
+    .mat-row .star-silver { color: #c0c0c0; }
+    .mat-row .star-gold { color: var(--gold); }
+    .mat-row .mat-count { color: var(--gold); font-weight: 600; margin-left: auto; }
+    .r-meta, .q-meta { margin-top: 5px; font-size: 9px; color: var(--dim); display: flex; gap: 12px; flex-wrap: wrap; }
+    .q-reward { margin-top: 4px; font-size: 10px; color: var(--green); }
+    .q-pre { margin-top: 4px; font-size: 10px; color: var(--accent); }
+    .phase-badge { display: flex; align-items: center; gap: 5px; margin: 8px 0 5px; padding: 4px 8px; background: rgba(88,166,255,0.08); border-left: 3px solid var(--blue); border-radius: 0 4px 4px 0; font-size: 11px; font-weight: 600; color: var(--blue); }
+    .wb-section { margin-bottom: 4px; }
+    .wb-section.folded .section-body { display: none; }
+    .wb-header { cursor: pointer; user-select: none; font-size: 11px; color: var(--gold); padding: 3px 6px; background: rgba(255,215,0,0.06); border-radius: 3px; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
+    .wb-section .fold-arrow { display: inline-block; transition: transform 0.2s; margin-left: auto; font-size: 9px; }
+    .wb-section:not(.folded) .fold-arrow { transform: rotate(90deg); }
+
+    /* NPC Shop Cards */
+    .npc-shop-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+    .npc-shop-header { display: flex; align-items: center; gap: 8px; padding: 8px 12px; cursor: pointer; transition: background 0.15s; }
+    .npc-shop-header:hover { background: rgba(255,255,255,0.03); }
+    .npc-shop-header .arrow { transition: transform 0.2s; font-size: 9px; color: var(--dim); }
+    .npc-shop-header.open .arrow { transform: rotate(90deg); }
+    .npc-shop-header .npc-icon { font-size: 18px; }
+    .npc-shop-header .npc-name { font-weight: 600; font-size: 13px; }
+    .npc-shop-header .npc-area { font-size: 10px; color: var(--dim); background: var(--card); padding: 1px 6px; border-radius: 3px; }
+    .npc-shop-body { display: none; padding: 0 12px 12px; border-top: 1px solid var(--border); }
+    .npc-shop-body.open { display: block; }
+    .npc-shop-body .loc-row { display: flex; align-items: flex-start; gap: 6px; margin: 6px 0; font-size: 11px; }
+    .npc-shop-body .loc-row .loc-icon { font-size: 14px; }
+    .npc-shop-body .loc-detail { color: #ccc; line-height: 1.5; }
+    .npc-shop-body .loc-note { color: var(--accent); font-size: 10px; margin-top: 2px; }
+    .npc-shop-body .phase-label { font-size: 11px; color: var(--green); font-weight: 600; margin: 8px 0 4px; display: flex; align-items: center; gap: 4px; }
+    .npc-shop-body .phase-cond { font-size: 10px; color: var(--dim); margin-bottom: 4px; }
+    .npc-shop-body .service-row { margin-top: 8px; padding-top: 6px; border-top: 1px solid var(--border); font-size: 11px; color: var(--gold); display: flex; align-items: flex-start; gap: 6px; }
+
+    /* Map */
+    .map-container {
+      background: #0a0a1a; border: 2px solid var(--border); border-radius: 10px;
+      padding: 12px; margin-bottom: 14px; position: relative; overflow: hidden;
+    }
+    .map-svg { width: 100%; height: auto; display: block; }
+    .map-legend { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 6px; }
+    .map-legend-item { display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--dim); }
+
+    #loading { text-align: center; padding: 40px 20px; color: var(--dim); }
+    #loading .spinner { display: inline-block; width: 24px; height: 24px; border: 3px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 8px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .menu-toggle { display: none; position: fixed; top: 45px; left: 5px; z-index: 100; background: var(--bg2); border: 1px solid var(--border); color: var(--text); padding: 5px 8px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+
+    @media (max-width: 860px) {
+      .menu-toggle { display: block; }
+      .main-tab { padding: 6px 10px; font-size: 12px; }
+      .main-tab .badge { display: none; }
+      .sidebar { display: none !important; }
+      .sidebar.open { display: block !important; position: fixed; top: 0; left: 0; z-index: 99; width: 260px; height: 100vh; background: var(--bg2); border-right: 1px solid var(--border); padding: 44px 0 20px; }
+      .content { padding: 14px 10px 30px; }
+      .hero h1 { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+<div class="hero">
+  <h1>⚰️ 守墓人</h1>
+  <div class="sub">Graveyard Keeper · 完整攻略百科</div>
+  <div class="pixel">GRAVEYARD KEEPER GUIDE</div>
+</div>
+
+<div class="main-tabs" id="mainTabs">
+  <button class="main-tab active" data-tab="overview" onclick="switchMainTab('overview')">📖 攻略总览</button>
+  <button class="main-tab" data-tab="crafting" onclick="switchMainTab('crafting')">🔨 制造配方 <span class="badge" id="recipeCount">-</span></button>
+  <button class="main-tab" data-tab="quests" onclick="switchMainTab('quests')">👥 NPC 任务 <span class="badge" id="questCount">-</span></button>
+  <button class="main-tab" data-tab="npcs" onclick="switchMainTab('npcs')">🗺️ NPC 位置与商店 <span class="badge" id="npcCount">-</span></button>
+</div>
+
+<div class="layout">
+  <!-- Sidebar: Overview -->
+  <nav class="sidebar active" id="sidebar-overview">
+    <div class="sec-title">📖 攻略总览</div>
+    <a onclick="scrollToSec('intro')">🎮 游戏介绍</a>
+    <a onclick="scrollToSec('newbie')" class="sub">🌱 新手入门</a>
+    <a onclick="scrollToSec('dlc')" class="sub">📦 DLC 一览</a>
+    <a onclick="scrollToSec('systems')">⚙️ 系统详解</a>
+    <a onclick="scrollToSec('grave')" class="sub">⚰️ 墓地系统</a>
+    <a onclick="scrollToSec('church')" class="sub">⛪ 教堂系统</a>
+    <a onclick="scrollToSec('tech')" class="sub">🔬 科技树</a>
+    <a onclick="scrollToSec('alchemy')" class="sub">🧪 炼金系统</a>
+    <a onclick="scrollToSec('brew')" class="sub">🍺 酿酒系统</a>
+    <a onclick="scrollToSec('farming')" class="sub">🌾 种地系统</a>
+    <a onclick="scrollToSec('autopsy')" class="sub">💀 尸体处理</a>
+    <a onclick="scrollToSec('stages')">📜 章节流程</a>
+    <a onclick="scrollToSec('dungeon')" class="sub">🏚️ 地下墓穴</a>
+    <a onclick="scrollToSec('tips')">💎 实用技巧</a>
+    <a onclick="scrollToSec('resources')">📦 资源获取表</a>
+  </nav>
+  <!-- Sidebar: Crafting -->
+  <nav class="sidebar" id="sidebar-crafting">
+    <div class="sec-title">🔨 制造配方</div>
+    <a onclick="switchSubTab('crafting',0)">📋 蓝图配方</a>
+    <a onclick="switchSubTab('crafting',1)">📦 物品配方</a>
+  </nav>
+  <!-- Sidebar: Quests -->
+  <nav class="sidebar" id="sidebar-quests">
+    <div class="sec-title">👥 NPC 任务</div>
+    <a onclick="switchSubTab('quests',0)">🙏 主教</a>
+    <a onclick="switchSubTab('quests',1)" class="sub">💀 格里</a>
+    <a onclick="switchSubTab('quests',2)" class="sub">🍺 赫拉迪克</a>
+    <a onclick="switchSubTab('quests',3)" class="sub">🪓 樵夫</a>
+    <a onclick="switchSubTab('quests',4)" class="sub">⚒️ 克雷兹沃尔德</a>
+    <a onclick="switchSubTab('quests',5)" class="sub">👩 查美女士</a>
+    <a onclick="switchSubTab('quests',6)" class="sub">📜 瓦格纳</a>
+    <a onclick="switchSubTab('quests',7)" class="sub">💀 尤里克</a>
+    <a onclick="switchSubTab('quests',8)" class="sub">🔭 占星家</a>
+    <a onclick="switchSubTab('quests',9)" class="sub">🗼 灯塔看守人</a>
+    <a onclick="switchSubTab('quests',10)" class="sub">👴 迪格</a>
+    <a onclick="switchSubTab('quests',11)" class="sub">💰 商人</a>
+  </nav>
+  <!-- Sidebar: NPCs -->
+  <nav class="sidebar" id="sidebar-npcs">
+    <div class="sec-title">🗺️ NPC 位置与商店</div>
+    <a onclick="switchSubTab('npcs',0)">⛪ 主教</a>
+    <a onclick="switchSubTab('npcs',1)" class="sub">👨‍💼 商人</a>
+    <a onclick="switchSubTab('npcs',2)" class="sub">🍺 格里</a>
+    <a onclick="switchSubTab('npcs',3)" class="sub">🐍 蛇</a>
+    <a onclick="switchSubTab('npcs',4)" class="sub">⚖️ 审判官</a>
+    <a onclick="switchSubTab('npcs',5)" class="sub">🧙 女巫</a>
+    <a onclick="switchSubTab('npcs',6)" class="sub">🔭 占星师</a>
+    <a onclick="switchSubTab('npcs',7)" class="sub">🔨 铁匠</a>
+    <a onclick="switchSubTab('npcs',8)" class="sub">🐴 驴子</a>
+    <a onclick="switchSubTab('npcs',9)" class="sub">🧳 流浪商人</a>
+  </nav>
+
+  <div class="content" id="content">
+    <div id="loading"><div class="spinner"></div><p>加载攻略数据中...</p></div>
+  </div>
+</div>
+
+<script>
+const MAT_EMOJI = {
+'木材':'🪵','硬木':'🪵','木板':'🪵','简单木板':'🪵','复杂木板':'🪵','粗板':'🪵','粗糙木板':'🪵','木炭':'🔥',
+'木墩':'🪵','木棍':'🥢','木梁':'🪵','木楔':'🔩','焊接木':'🪵','滚圆木':'🪵','木棒':'🥢',
+'铁钉':'🔩','钉子':'🔩','铁锭':'⛏️','铁块':'⛏️','铁矿石':'⛏️','铁板':'🔩','高级铁板':'🔩','钢件':'🔩',
+'简单铁件':'⚙️','简单的铁件':'⚙️','简单铁部件':'⚙️','复杂铁件':'⚙️','复杂的铁件':'⚙️','铁箍':'⛓️',
+'石块':'🪨','石头':'🪨','石灰石':'🪨','石砖':'🧱','砖块':'🧱','砖':'🧱','一块石头':'🪨','石料':'🪨',
+'大理石':'🏛️','大理石块':'🏛️','猪皮纸':'📄',
+'煤':'🪨','煤炭':'🪨','粘土':'🧱','沙子':'🏖️',
+'水':'💧','植物纤维':'🌿','绳索':'🪢','绳子':'🪢',
+'河沙':'🏖️','钢笔和墨水':'🖊️',
+'玻璃':'🔮','蜡烛':'🕯️','脂肪':'🧈','丝绸':'🧵','布料':'🧵','布':'🧵',
+'烧瓶':'🧪','高级烧瓶':'🧪','金块':'🪙','金饰':'🪙','宝石':'💎','硫磺':'🧪',
+'胡萝卜':'🥕','小麦':'🌾','面包':'🍞','南瓜':'🎃','葡萄':'🍇',
+'啤酒花':'🍺','啤酒':'🍺','葡萄酒':'🍷','蜂蜜':'🍯','蜂蜜酒':'🍯',
+'花':'🌸','红花':'🌺','红蘑菇':'🍄','昆虫':'🦋','灰烬':'🌫️','碱液':'🧪',
+'面粉':'🌾','大麦':'🌾','蛇':'🐍','羽毛':'🪶',
+'甘油':'🧴','防腐剂':'⚱️','药水':'🧪','骨头':'🦴','头骨':'💀',
+'纸':'📄','墨':'🖋️','墨水':'🖋️','空白纸':'📄','书':'📕','书籍':'📕','被毁的书籍':'📕','平装封面':'📔','故事':'📖','笔记':'📝','一沓纸':'📄','传单':'📄','祈祷词':'🙏',
+'颜料':'🎨','黑色颜料':'🎨','白色颜料':'🎨','铜':'🪙','银':'🥈','金锭':'🪙','剑':'⚔️','盾':'🛡️',
+'种子':'🌱','浆果树幼苗':'🌱','苹果树幼苗':'🌱','树苗':'🌱','幼苗':'🌱','肥料':'💩','腐叶土':'🌿','围栏':'🚧','雕像':'🗿','十字架':'✝️',
+'传送石':'🔮','传送门':'🌀','地图':'🗺️',
+'鱼':'🐟','白色鱼片':'🐟','优质鱼片':'🐟','钓鱼竿':'🎣','简易钓鱼竿':'🎣',
+'工作台':'🔧','熔炉':'🔥','发酵桶':'🛢️','蒸馏器':'⚗️','僵尸':'🧟',
+'尸体':'⚰️','裹尸布':'⚰️','石膏':'🏥','研究台':'📚','讲台':'🎤','长椅':'🪑',
+'信仰':'🙏','金钱':'💰','科技点':'🔬',
+'骨灰瓮':'🏺','陶制骨灰瓮':'🏺','一块磨光的石头':'🪨',
+'血液':'🩸','皮肤':'🥩','蝙蝠翅膀':'🦇','大麻':'🌿','蜂蜡':'🍯','酸液':'🧪','碱性注射液':'💉','酸性注射液':'💉',
+  '陶瓷水壶':'🏺','水':'💧','牛奶罐':'🥛','鸡蛋':'🥚','卷心菜':'🥬','盐':'🧂','肉馅饼':'🥟','诱饵':'🪱','肉体':'🥩','洋葱':'🧅','红苹果':'🍎','苹果':'🍎','浆果':'🫐','史莱姆粘液':'💚','浆果汁':'🧃','蘑菇':'🍄','种子':'🌱','甜菜':'🍠','骷髅头':'💀','飞蛾':'🦋','蜜罐':'🍯','止嗝草':'🌿',
+};
+function getMatEmoji(n){return MAT_EMOJI[n]||'📦'}
+
+let DATA = {}, NPC = {}, CURRENT = 'overview';
+
+async function loadData(){
+  try {
+    let [r1,r2]=await Promise.all([
+      fetch('/game/graveyard-keeper/data.json').then(r=>r.json()),
+      fetch('/static/graveyard-keeper-npc.json?_t='+Date.now()).then(r=>r.json())
+    ]);
+    DATA=r1; NPC=r2;
+    const cr=DATA.crafting_recipes||{};
+    const phases=Object.keys(cr).filter(k=>k.startsWith('section_'));
+    document.getElementById('recipeCount').textContent=phases.reduce((s,k)=>s+(cr[k].recipes?.length||0),0);
+    const qd=DATA.quests||{};
+    const nq=Object.keys(qd).filter(k=>k.startsWith('npc_'));
+    document.getElementById('questCount').textContent=nq.reduce((s,k)=>s+(qd[k].quests?.length||0),0);
+    document.getElementById('npcCount').textContent=(NPC.npc_shops||[]).length;
+    renderOverview();
+  } catch(e) {
+    document.getElementById('content').innerHTML=`<div class="warning"><span class="w-icon">⚠️</span><div class="w-text">加载失败：${e.message}</div></div>`;
+  }
+}
+
+function switchMainTab(tab){
+  if(tab===CURRENT) return;
+  CURRENT=tab;
+  document.querySelectorAll('.main-tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+  document.querySelectorAll('.content-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sidebar').forEach(s=>s.classList.remove('active'));
+  const sb=document.getElementById('sidebar-'+tab);
+  if(sb) sb.classList.add('active');
+  const p=document.getElementById('content-'+tab);
+  if(p) p.classList.add('active');
+  else if(tab==='overview') renderOverview();
+  else if(tab==='crafting') renderCrafting();
+  else if(tab==='quests') renderQuests();
+  else if(tab==='npcs') renderNPCs();
+}
+
+function switchSubTab(panel,idx){
+  const el=document.getElementById('content-'+panel);
+  if(!el) return;
+  el.querySelectorAll('.sub-tab-btn').forEach(b=>b.classList.remove('active'));
+  el.querySelectorAll('.sub-tab-panel').forEach(p=>p.classList.remove('active'));
+  const btns=el.querySelectorAll('.sub-tab-btn');
+  if(btns[idx]) btns[idx].classList.add('active');
+  const panels=el.querySelectorAll('.sub-tab-panel');
+  if(panels[idx]) panels[idx].classList.add('active');
+  document.querySelectorAll('#sidebar-'+panel+' a').forEach(a=>a.classList.remove('active-link'));
+  const sl=document.querySelectorAll('#sidebar-'+panel+' a');
+  if(sl[idx]) sl[idx].classList.add('active-link');
+}
+
+function scrollToSec(id){
+  if(CURRENT!=='overview') switchMainTab('overview');
+  setTimeout(()=>{const e=document.getElementById(id);if(e) e.scrollIntoView({behavior:'smooth'})},100);
+  document.getElementById('sidebar').classList.remove('open');
+}
+function toggleMenu(){document.getElementById('sidebar').classList.toggle('open');}
+
+// ════ OVERVIEW ════
+function renderOverview(){
+  const html=`<div class="content-panel active" id="content-overview">
+<section id="intro" class="section-highlight"><h2><span class="icon">🎮</span> 游戏介绍</h2>
+<p>《Graveyard Keeper》是一款暗黑幽默风格的经营模拟游戏。你被车撞死后被传送到中世纪世界，代替原守墓人工作——管理墓地、扩建教堂、炼金制药、发展科技。</p>
+<div class="tip"><span class="tip-icon">💡</span><div class="tip-text"><strong>核心循环</strong>：接尸体 → 解剖取器官 → 修复埋葬 → 提升墓地评分 → 周日布道获得信仰 → 研发科技 → 解锁新功能 → 推进剧情</div></div>
+<div class="card-row"><div class="card"><div class="card-title">🎯 目标</div><div class="card-desc">管理墓地、发展教堂、解开世界秘密</div></div><div class="card"><div class="card-title">⏱️ 时长</div><div class="card-desc">主线约30-50h，全收集80h+</div></div><div class="card"><div class="card-title">🎮 平台</div><div class="card-desc">PC/Switch/PS4/Xbox·简体中文</div></div></div>
+<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;">
+<span class="tag-dlc tag-stranger">🍺 Stranger Sins</span><span class="tag-dlc tag-crone">🏕️ Game of Crone</span><span class="tag-dlc tag-soul">👻 Better Save Soul</span></div></section>
+<section id="newbie" class="section-highlight"><h2><span class="icon">🌱</span> 新手入门</h2>
+<h3>📅 第一天</h3><ol><li>完成第一次尸体处理</li><li>砍树、捡石头、采胡萝卜</li><li>建造简单工作台和石匠台</li><li>探索家园找到传送点</li></ol>
+<h3>🎯 第一周目标</h3><ul><li>处理每具尸体</li><li>墓地评分提升到5+</li><li>为周日布道做准备</li><li>稳定食物来源</li><li>解锁基础科技</li></ul>
+<h3>📋 必做10事</h3>
+<div class="card-row">
+<div class="card"><div class="card-title">1 🔧</div><div class="card-desc">升级工具到铁质</div></div><div class="card"><div class="card-title">2 💀</div><div class="card-desc">别卖白骷髅物品</div></div>
+<div class="card"><div class="card-title">3 🧈</div><div class="card-desc">收集器官（脂肪做蜡烛）</div></div><div class="card"><div class="card-title">4 🌸</div><div class="card-desc">捡花/昆虫/蘑菇炼金</div></div>
+<div class="card"><div class="card-title">5 ⛏️</div><div class="card-desc">解锁采石场和伐木场</div></div><div class="card"><div class="card-title">6 🙏</div><div class="card-desc">每周日布道最重要</div></div>
+<div class="card"><div class="card-title">7 🔮</div><div class="card-desc">买传送石省跑路</div></div><div class="card"><div class="card-title">8 ⚡</div><div class="card-desc">注意体力别累晕</div></div>
+<div class="card"><div class="card-title">9 🎣</div><div class="card-desc">钓鱼是稳定食物来源</div></div><div class="card"><div class="card-title">10 📖</div><div class="card-desc">读任务提示别瞎跑</div></div></div></section>
+<section id="dlc" class="section-highlight"><h2><span class="icon">📦</span> DLC</h2>
+<div class="card-row">
+<div class="card"><div class="card-title"><span class="tag-dlc tag-stranger">🍺</span> Stranger Sins</div><div class="card-desc">酒馆经营+啤酒/葡萄酒酿造</div></div>
+<div class="card"><div class="card-title"><span class="tag-dlc tag-crone">🏕️</span> Game of Crone</div><div class="card-desc">难民村+新科技+箭术</div></div>
+<div class="card"><div class="card-title"><span class="tag-dlc tag-soul">👻</span> Better Save Soul</div><div class="card-desc">灵魂净化+新建筑+新剧情</div></div></div></section>
+<section id="systems" class="section-highlight"><h2><span class="icon">⚙️</span> 系统详解</h2></section>
+<section id="grave" class="section-highlight"><h3>⚰️ 墓地系统</h3><p>墓地评分=尸体质量+墓碑+围栏+装饰</p>
+<div class="table-wrap"><table><tr><th>项目</th><th>品质</th><th>加分</th><th>材料</th></tr>
+<tr><td rowspan="4">墓碑</td><td>木制</td><td>+1</td><td>木材×4</td></tr><tr><td>石制</td><td>+2</td><td>石块×4</td></tr><tr><td>大理石</td><td>+3</td><td>大理石×4</td></tr><tr><td>高级大理石</td><td>+5</td><td>大理石×6+金锭×1</td></tr>
+<tr><td rowspan="4">围栏</td><td>木制</td><td>+1</td><td>木材×4</td></tr><tr><td>石制</td><td>+2</td><td>石块×4</td></tr><tr><td>铁制</td><td>+3</td><td>铁锭×4</td></tr><tr><td>高级</td><td>+4</td><td>铁锭×6+金锭×1</td></tr></table></div>
+<div class="tip"><span class="tip-icon">💀</span><div class="tip-text">白骷髅=加分，红骷髅=减分。解剖摘除红骷髅器官提升尸体品质。</div></div></section>
+<section id="church" class="section-highlight"><h3>⛪ 教堂系统</h3><p>评分越高布道收益越多。长椅(+2)、讲台(+5~+15)、蜡烛(+1)、花束(+2)、装饰(+3~+8)</p>
+<div class="tip"><span class="tip-icon">🙏</span><div class="tip-text">每周日布道前确认评分已提升。信仰用于研究科技。</div></div></section>
+<section id="tech" class="section-highlight"><h3>🔬 科技树</h3><p><span class="stat-point stat-red">🔴红</span>解剖 <span class="stat-point stat-green">🟢绿</span>采集 <span class="stat-point stat-blue">🔵蓝</span>研究台</p>
+<h4>建议顺序</h4><ol><li>复杂工作台→铁工具</li><li>石匠升级→大理石</li><li>基础解剖</li><li>基础农业</li><li>研究台→蓝科技</li><li>炼金台</li><li>高级解剖→防腐</li><li>僵尸科技</li></ol></section>
+<section id="alchemy" class="section-highlight"><h3>🧪 炼金</h3><div class="table-wrap"><table><tr><th>产物</th><th>材料</th><th>用途</th></tr>
+<tr><td>🧪碱液</td><td>灰烬+水</td><td>炼金基础</td></tr><tr><td>🧴甘油</td><td>脂肪+水</td><td>防腐剂</td></tr>
+<tr><td>⚱️白防腐剂</td><td>碱液+甘油</td><td>消红骷髅</td></tr><tr><td>⚱️金防腐剂</td><td>碱液+金粉</td><td>增白骷髅</td></tr>
+<tr><td>💊治疗药水</td><td>红蘑菇+水</td><td>恢复生命</td></tr></table></div></section>
+<section id="brew" class="section-highlight"><h3>🍺 酿酒</h3><div class="table-wrap"><table><tr><th>酒</th><th>材料</th><th>售价</th></tr>
+<tr><td>🍺啤酒</td><td>小麦×3+啤酒花×2+水</td><td>中</td></tr><tr><td>🍷葡萄酒</td><td>葡萄×4+水</td><td>高</td></tr>
+<tr><td>🍯蜂蜜酒</td><td>蜂蜜×3+水</td><td>高</td></tr><tr><td>🥃烈酒</td><td>小麦→蒸馏</td><td>极高</td></tr></table></div>
+<div class="tip"><span class="tip-icon">💰</span><div class="tip-text">赚钱：早期胡萝卜→中期酿酒→后期烈酒+布道</div></div></section>
+<section id="farming" class="section-highlight"><h3>🌾 种地</h3><div class="table-wrap"><table><tr><th>作物</th><th>周期</th><th>用途</th></tr>
+<tr><td>🥕胡萝卜</td><td>2-3天</td><td>主食</td></tr><tr><td>🌾小麦</td><td>3-4天</td><td>面包/酿酒</td></tr>
+<tr><td>🎃南瓜</td><td>4-5天</td><td>高级食物</td></tr><tr><td>🍇葡萄</td><td>6-7天</td><td>葡萄酒</td></tr>
+<tr><td>🍺啤酒花</td><td>4-5天</td><td>啤酒</td></tr></table></div></section>
+<section id="autopsy" class="section-highlight"><h3>💀 尸体处理</h3><ol><li>接收</li><li>剥皮→取脂肪→放血</li><li>取内脏（摘红骷髅）</li><li>填充→缝合→防腐→埋葬</li></ol>
+<div class="tip"><span class="tip-icon">💀</span><div class="tip-text">摘除所有红骷髅再填充+金色防腐剂，每具可达10+分。</div></div></section>
+<section id="stages" class="section-highlight"><h2><span class="icon">📜</span> 章节流程</h2>
+<div class="card-row">
+<div class="card"><div class="card-title">📗 1-2周</div><div class="card-desc">墓地5+·铁工具·首次布道</div></div>
+<div class="card"><div class="card-title">📘 3-5周</div><div class="card-desc">墓地15+·炼金·蓝科技</div></div>
+<div class="card"><div class="card-title">📙 6-10周</div><div class="card-desc">墓地30-40·僵尸·赚钱</div></div>
+<div class="card"><div class="card-title">📕 11周+</div><div class="card-desc">墓地70+·通关传送门</div></div></div></section>
+<section id="dungeon" class="section-highlight"><h3>🏚️ 地下墓穴</h3><div class="table-wrap"><table><tr><th>层</th><th>敌人</th><th>掉落</th><th>推荐</th></tr>
+<tr><td>1</td><td>骷髅蜘蛛</td><td>骨头、丝绸</td><td>铁剑</td></tr><tr><td>2</td><td>僵尸蝙蝠</td><td>铁锭、宝石</td><td>铁剑+盾</td></tr>
+<tr><td>3</td><td>黑暗骷髅</td><td>金块、硫磺</td><td>银剑</td></tr><tr><td>4</td><td>暗影生物</td><td>高级宝石</td><td>银剑+钢甲</td></tr>
+<tr><td>5</td><td>Boss</td><td>传送门材料</td><td>金剑+钢甲</td></tr></table></div>
+<div class="warning"><span class="w-icon">⚔️</span><div class="w-text">带足蜡烛和食物！银剑对不死系有加成。</div></div></section>
+<section id="tips" class="section-highlight"><h2><span class="icon">💎</span> 实用技巧</h2>
+<div class="card-row">
+<div class="card"><div class="card-title">🕐 时间</div><div class="card-desc">周日布道>周四收尸>周六准备>晚上室内</div></div>
+<div class="card"><div class="card-title">💀 完美尸体</div><div class="card-desc">剥皮→取脂→放血→取内脏→填充→缝→防腐</div></div>
+<div class="card"><div class="card-title">💰 赚钱</div><div class="card-desc">胡萝卜→酿酒→烈酒+布道</div></div>
+<div class="card"><div class="card-title">📦 箱子</div><div class="card-desc">多造箱子，材料种类多空间永远不够</div></div>
+<div class="card"><div class="card-title">🗺️ 传送</div><div class="card-desc">尽早激活所有传送石碑</div></div>
+<div class="card"><div class="card-title">⏸️ 暂停</div><div class="card-desc">菜单/合成界面时间暂停，规划操作</div></div>
+<div class="card"><div class="card-title">🧪 炼金色系</div><div class="card-desc">同色系材料可互相替代</div></div>
+<div class="card"><div class="card-title">🧟 僵尸</div><div class="card-desc">中后期解锁后实现半自动化</div></div></div></section>
+<section id="resources" class="section-highlight"><h2><span class="icon">📦</span> 资源获取</h2>
+<div class="table-wrap"><table><tr><th>资源</th><th>获取</th><th>用途</th></tr>
+<tr><td>🪵木材</td><td>砍树</td><td>建造</td></tr><tr><td>🌳硬木</td><td>钢斧砍大树</td><td>高级建造</td></tr>
+<tr><td>🪨石块</td><td>开采</td><td>建造/墓碑</td></tr><tr><td>⛏️铁矿石</td><td>采矿</td><td>锻造</td></tr>
+<tr><td>🏛️大理石</td><td>采石场深层</td><td>高级墓碑</td></tr><tr><td>🧵丝绸</td><td>墓穴蜘蛛</td><td>高级布料</td></tr>
+<tr><td>💎宝石</td><td>墓穴/挖矿</td><td>任务</td></tr><tr><td>🙏信仰</td><td>周日布道</td><td>研究科技</td></tr>
+<tr><td>🔮传送石</td><td>教堂购买</td><td>快速旅行</td></tr></table></div></section></div>`;
+  document.getElementById('content').innerHTML=html;
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('#sidebar-overview a').forEach(a=>a.classList.remove('active-link'));const l=document.querySelector('#sidebar-overview a[onclick*="'+e.target.id+'"]');if(l)l.classList.add('active-link')}})},{rootMargin:'-80px 0px -60% 0px'});
+  document.querySelectorAll('#content-overview .section-highlight').forEach(s=>obs.observe(s));
+}
+
+// ════ CRAFTING ════
+function renderCrafting(){
+  // 障碍物蓝图 — 最上方显示（用户要求）
+  const obstacleItems = [
+    {name:"清理道路（太平间）", materials:[{name:"木楔",count:10},{name:"木梁",count:1},{name:"简单的铁件",count:4}]}
+  ];
+  // 院子蓝图 — v1.12 用户亲自验证版
+  const yardItems = [
+    {name:"箱子", materials:[{name:"粗板",count:4},{name:"钉子",count:4},{name:"简单的铁件",count:4}]},
+    {name:"铁矿石储备", materials:[{name:"粗板",count:4}]},
+    {name:"熔炉", materials:[{name:"粗板",count:4},{name:"一块石头",count:14},{name:"简单的铁件",count:4}]},
+    {name:"木砧", materials:[{name:"木墩",count:2},{name:"简单的铁件",count:2}]},
+    {name:"砧", materials:[{name:"铁锭",count:4}]},
+    {name:"熔炉II", materials:[{name:"一块石头",count:20},{name:"复杂的铁件",count:8},{name:"猪皮纸",count:2}]},
+    {name:"木材储备", materials:[{name:"木棍",count:10},{name:"粗板",count:4},{name:"木梁",count:4}]},
+    {name:"锯木架", materials:[{name:"木棍",count:10}]},
+    {name:"砍木点", materials:[{name:"木墩",count:5}]},
+    {name:"制木工作台", materials:[{name:"粗板",count:5},{name:"简单的铁件",count:2}]},
+    {name:"圆锯", materials:[{name:"复杂的铁件",count:10},{name:"木板",count:8},{name:"钉子",count:4}]},
+    {name:"石材储备", materials:[{name:"粗板",count:8},{name:"钉子",count:8}]},
+    {name:"石材切割机", materials:[{name:"粗板",count:4},{name:"钉子",count:4}]},
+    {name:"陶轮", materials:[{name:"粗板",count:4},{name:"一块石头",count:2},{name:"钉子",count:6}]}
+  ];
+  // 花园蓝图 — 用户手动录入
+  const gardenItems = [
+    {name:"浆果树区", materials:[{name:"浆果树幼苗",count:1},{name:"腐叶土",count:3},{name:"木棍",count:1}]},
+    {name:"苹果树区", materials:[{name:"苹果树幼苗",count:1},{name:"腐叶土",count:3},{name:"木棍",count:2}]}
+  ];
+  // 菜园蓝图 — 用户手动录入
+  const vegeItems = [
+    {name:"棚架园圃", materials:[{name:"木棍",count:5}]},
+    {name:"箱子", materials:[{name:"粗板",count:4},{name:"钉子",count:4},{name:"简单的铁件",count:2}]},
+    {name:"肥堆", materials:[{name:"木棍",count:10}]}
+  ];
+  // 太平间蓝图 — 用户手动录入
+  const morgueItems = [
+    {name:"准备区", materials:[{name:"粗板",count:12},{name:"复杂的铁件",count:4},{name:"钉子",count:8}]},
+    {name:"防腐台", materials:[{name:"木板",count:8},{name:"复杂的铁件",count:4},{name:"钉子",count:6}]},
+    {name:"托盘", materials:[{name:"粗板",count:6},{name:"钉子",count:4}]},
+    {name:"太平间架", materials:[{name:"粗板",count:8},{name:"钉子",count:6},{name:"木梁",count:2}]},
+    {name:"复合台", materials:[{name:"木板",count:4},{name:"复杂的铁件",count:4}]}
+  ];
+  // 古老的墓地蓝图 — 用户手动录入
+  const ancientGraveItems = [
+    {name:"箱子", materials:[{name:"粗板",count:4},{name:"钉子",count:4},{name:"简单的铁件",count:7}]},
+    {name:"石制骨灰瓮", materials:[{name:"木梁",count:4},{name:"一块磨光的石头",count:4},{name:"陶制骨灰瓮",count:12}]},
+    {name:"花坛", materials:[{name:"一块石头",count:2},{name:"腐叶土",count:1},{name:"红花",count:2}]}
+  ];
+  // 地窖蓝图 — 用户手动录入
+  const cellarItems = [
+    {name:"箱子", materials:[{name:"粗板",count:4},{name:"钉子",count:4},{name:"简单的铁件",count:3}]}
+  ];
+  // 教堂蓝图 — 用户手动录入
+  const churchItems = [
+    {name:"烛台I", materials:[{name:"简单的铁件",count:6}], type:"教堂装饰", deco:1},
+    {name:"烛台II", materials:[{name:"简单的铁件",count:4},{name:"复杂的铁件",count:4}], type:"教堂装饰", deco:2},
+    {name:"墙面烛台I", materials:[{name:"简单的铁件",count:6}], type:"教堂装饰", deco:1},
+    {name:"墙面烛台II", materials:[{name:"简单的铁件",count:4},{name:"复杂的铁件",count:4}], type:"教堂装饰", deco:2},
+    {name:"教堂长凳", materials:[{name:"木板",count:8},{name:"钉子",count:8}], type:"教堂装饰", deco:1},
+    {name:"彩色玻璃窗", materials:[{name:"玻璃",count:4},{name:"复杂的铁件",count:5},{name:"金饰",count:2}], type:"教堂装饰", deco:5}
+  ];
+  // 炼金蓝图 — 用户手动录入
+  const alchemyItems = [
+    {name:"手动搅拌器", materials:[{name:"木板",count:6},{name:"简单的铁件",count:4},{name:"钉子",count:8}]},
+    {name:"研究台", materials:[{name:"木板",count:6},{name:"简单的铁件",count:4},{name:"烧瓶",count:3}]},
+    {name:"炼金工作台", materials:[{name:"木板",count:6},{name:"复杂的铁件",count:3},{name:"高级烧瓶",count:2}]},
+    {name:"炼金工作台II", materials:[{name:"焊接木",count:6},{name:"钢件",count:2},{name:"高级烧瓶",count:3}]},
+    {name:"炼金轧机", materials:[{name:"一块磨光的石头",count:2},{name:"木板",count:6},{name:"简单的铁件",count:4}]},
+    {name:"蒸馏立方体", materials:[{name:"一块石头",count:20},{name:"复杂的铁件",count:8}]},
+    {name:"教堂工作台", materials:[{name:"粗板",count:9},{name:"钉子",count:10},{name:"复杂的铁件",count:4}]},
+    {name:"炼金架", materials:[{name:"粗板",count:12},{name:"钉子",count:10},{name:"木梁",count:4}]},
+    {name:"桌子", materials:[{name:"粗板",count:8},{name:"钉子",count:8}]},
+    {name:"卷轴架", materials:[{name:"粗板",count:8},{name:"简单的铁件",count:4},{name:"钉子",count:12}]}
+  ];
+  // ════ 物品配方数据（按区域分组） ════
+  const itemGroups = [
+    {zone:"炼金区", workbenches:[
+      {name:"教堂工作台", items:[
+        {name:"血桶",materials:[{name:"粗板",count:3},{name:"血液",count:10}],stamina:10},
+        {name:"墨水(5)",materials:[{name:"烧瓶",count:1},{name:"水",count:1},{name:"黑色颜料",count:1}],stamina:5},
+        {name:"钢水和墨笔(3)",materials:[{name:"羽毛",count:3},{name:"墨水",count:1}],stamina:5},
+        {name:"猪皮纸(4)",materials:[{name:"皮肤",count:1}],stamina:5},
+        {name:"猪皮纸(2)",materials:[{name:"蝙蝠翅膀",count:5}],stamina:5},
+        {name:"空白纸(4)",materials:[{name:"猪皮纸",count:1}],stamina:5},
+        {name:"麻绳(5)",materials:[{name:"大麻",count:4}],stamina:5},
+        {name:"蜡烛(2)",materials:[{name:"脂肪",count:2},{name:"蜂蜡",count:2},{name:"麻绳",count:1}],stamina:5},
+        {name:"蜡烛(2)",materials:[{name:"脂肪",count:2},{name:"蜂蜡",count:2},{name:"白色颜料",count:3}],stamina:5},
+        {name:"蜡烛(2)",materials:[{name:"蜂蜡",count:4},{name:"白色颜料",count:3},{name:"麻绳",count:1}],stamina:6},
+        {name:"碱性注射液(4)",materials:[{name:"碱液",count:1},{name:"水",count:6},{name:"烧瓶",count:2}],stamina:0,desc:"该防腐液可以涂抹在防腐台的尸体上，以改变其特征。"},
+        {name:"酸性注射液(4)",materials:[{name:"酸液",count:1},{name:"水",count:6},{name:"烧瓶",count:2}],stamina:0,desc:"该防腐液可以涂抹在防腐台的尸体上，以改变其特征。"}
+      ]},
+      {name:"桌子", items:[
+        {name:"空白纸(2)",materials:[{name:"被毁的书籍",count:1},{name:"河沙",count:1}],stamina:5},
+        {name:"笔记",materials:[{name:"故事",count:1},{name:"钢笔和墨水",count:1},{name:"空白纸",count:1}],stamina:20},
+        {name:"一沓纸",materials:[{name:"笔记",count:3}],stamina:20},
+        {name:"传单(2)",materials:[{name:"钢笔和墨水",count:2},{name:"空白纸",count:1}],stamina:20},
+        {name:"信仰祈祷词",materials:[{name:"一沓纸",count:1},{name:"信仰",count:5}],stamina:10},
+        {name:"组合祈祷词",materials:[{name:"书籍",count:1},{name:"信仰",count:7}],stamina:10},
+        {name:"捐赠祈祷词",materials:[{name:"一沓纸",count:1},{name:"信仰",count:5}],stamina:10},
+        {name:"丰收祈祷词",materials:[{name:"一沓纸",count:1},{name:"信仰",count:5}],stamina:10},
+        {name:"安息祈祷词",materials:[{name:"书籍",count:1},{name:"信仰",count:7}],stamina:10},
+        {name:"繁荣祈祷词",materials:[{name:"一沓纸",count:1},{name:"信仰",count:5}],stamina:10}
+      ]}
+      ]},
+      {zone:"房间", workbenches:[
+      {name:"烹饪台", items:[
+        {name:"陶制骨灰瓮",materials:[{name:"陶瓷水壶",count:1},{name:"灰烬",count:5}],stamina:3},
+        {name:"面粉(4)",materials:[{name:"小麦",count:8}],stamina:8},
+        {name:"面团(4)",materials:[{name:"面粉",count:2},{name:"水",count:3}],stamina:4},
+        {name:"油酥面团(4)",materials:[{name:"小麦",count:2},{name:"牛奶罐",count:1},{name:"鸡蛋",count:1}],stamina:6},
+        {name:"一碗德国泡菜(3)",materials:[{name:"卷心菜",count:3},{name:"胡萝卜",count:2},{name:"盐",count:1}],stamina:5,desc:"加25体力值，新陈代谢缓慢（能延长所有增益的时间）"},
+        {name:"三明治(3)",materials:[{name:"面包",count:2},{name:"肉馅饼",count:1},{name:"卷心菜",count:1}],stamina:5,desc:"加17体力值"},
+        {name:"白色鱼片",materials:[{name:"诱饵",count:1}],stamina:5},
+        {name:"生切肉",materials:[{name:"肉体",count:1}],stamina:5},
+        {name:"汉堡(4)",materials:[{name:"面包",count:2},{name:"肉馅饼",count:4},{name:"洋葱",count:1}],stamina:5,desc:"加30至40体力，手法稳定（能降低外科手术错误的几率）"},
+        {name:"浆果汁",materials:[{name:"红苹果",count:3},{name:"浆果",count:3}],stamina:5},
+        {name:"绿色果冻(3)",materials:[{name:"史莱姆粘液",count:4},{name:"蜂蜜",count:1}],stamina:5,desc:"加25点体力"},
+        {name:"红色果冻(3)",materials:[{name:"史莱姆粘液",count:4},{name:"浆果汁",count:1}],stamina:5,desc:"加30点体力"}
+      ]},
+      {name:"烤箱", items:[
+        {name:"面包(2)",materials:[{name:"面团",count:2}],fuel:5,desc:"加12点体力"},
+        {name:"烤苹果(3)",materials:[{name:"苹果",count:5}],fuel:5,desc:"加6点体力"},
+        {name:"烤蘑菇(3)",materials:[{name:"蘑菇",count:5}],fuel:5,desc:"加10点体力"},
+        {name:"煎蛋",materials:[{name:"鸡蛋",count:1}],fuel:1,desc:"加11点体力"},
+        {name:"鱼块",materials:[{name:"白色鱼片",count:1},{name:"种子",count:1}],fuel:5,desc:"加25点体力，快速反应（有更多时间钓鱼）"},
+        {name:"鱼汤(4)",materials:[{name:"白色鱼片",count:4},{name:"胡萝卜",count:2},{name:"水",count:5}],fuel:10,desc:"加20点体力，优秀的渔夫（不让上钩的鱼轻易脱钩）"},
+        {name:"烤鱼(2)",materials:[{name:"白色鱼片",count:2}],fuel:5,desc:"加15点体力，优秀的渔夫（不让上钩的鱼轻易脱钩）"},
+        {name:"肉馅饼(2)",materials:[{name:"生切肉",count:1}],fuel:10,desc:"加15点体力"},
+        {name:"甜菜丝",materials:[{name:"甜菜",count:2}],fuel:10,desc:"加15点体力"},
+        {name:"胡萝卜片(4)",materials:[{name:"胡萝卜",count:2}],fuel:10,desc:"加12点体力"},
+        {name:"煎蛋卷(3)",materials:[{name:"鸡蛋",count:3},{name:"牛奶罐",count:1}],fuel:5,desc:"加20点体力"},
+        {name:"蛋糕",materials:[{name:"油酥面团",count:1},{name:"蜂蜜",count:1},{name:"浆果",count:5}],fuel:10,desc:"加95点体力，细致入微（研究时找到额外细节）"}
+      ]}
+    ]}
+      ];
+  // ════ 子模块 tab 栏 ════
+  let tabs='<div class="sub-tab-bar"><button class="sub-tab-btn active" onclick="switchSubTab(\'crafting\',0)">📋 蓝图配方</button><button class="sub-tab-btn" onclick="switchSubTab(\'crafting\',1)">📦 物品配方</button></div>';
+  // ════ Panel 0：蓝图配方 ════
+  let p0 = `<div class="sub-tab-panel active" id="crafting-sub-0">
+    <h2>📋 蓝图配方</h2>
+    <p style="color:var(--dim);font-size:11px;">按蓝图分组 · 已解锁：障碍物、院子、花园、菜园、太平间、古老的墓地、地窖、教堂、炼金</p>
+    <div class="blueprint-section folded"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🚧 障碍物（${obstacleItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
+  obstacleItems.forEach(r=>{
+    const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
+    p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">清理</span></div><div class="recipe-body">${m}</div></div>`;
+  });
+  p0+=`</div></div><div class="blueprint-section folded" style="margin-top:12px;"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🏡 院子（${yardItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
+  yardItems.forEach(r=>{
+    const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
+    p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">建筑</span></div><div class="recipe-body">${m||'<div class="mat-row" style="color:var(--dim);">待补充</div>'}</div></div>`;
+  });
+  p0+=`</div></div><div class="blueprint-section folded" style="margin-top:12px;"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🌿 花园（${gardenItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
+  gardenItems.forEach(r=>{
+    const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
+    p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">种植区</span></div><div class="recipe-body">${m}</div></div>`;
+  });
+  p0+=`</div></div><div class="blueprint-section folded" style="margin-top:12px;"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🥬 菜园（${vegeItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
+  vegeItems.forEach(r=>{
+    const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
+    p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">种植区</span></div><div class="recipe-body">${m}</div></div>`;
+  });
+  p0+=`</div></div><div class="blueprint-section folded" style="margin-top:12px;"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🫀 太平间（${morgueItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
+  morgueItems.forEach(r=>{
+    const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
+    p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">尸体处理</span></div><div class="recipe-body">${m}</div></div>`;
+  });
+  p0+=`</div></div><div class="blueprint-section folded" style="margin-top:12px;"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🪦 古老的墓地（${ancientGraveItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
+  ancientGraveItems.forEach(r=>{
+    const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
+    p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">墓地装饰</span></div><div class="recipe-body">${m}</div></div>`;
+  });
+  p0+=`</div></div><div class="blueprint-section folded" style="margin-top:12px;"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🏚️ 地窖（${cellarItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
+  cellarItems.forEach(r=>{
+    const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
+    p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">存储</span></div><div class="recipe-body">${m||'<div class="mat-row" style="color:var(--dim);">待补充</div>'}</div></div>`;
+  });
+  p0+=`</div></div><div class="blueprint-section folded" style="margin-top:12px;"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">⛪ 教堂（${churchItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
+  churchItems.forEach(r=>{
+    const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
+    p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">${r.type||'建筑'}</span>${r.deco?`<span class="deco-badge">+${r.deco}</span>`:''}</div><div class="recipe-body">${m}</div></div>`;
+  });
+  p0+=`</div></div><div class="blueprint-section folded" style="margin-top:12px;"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🧪 炼金（${alchemyItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
+  alchemyItems.forEach(r=>{
+    const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
+    p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">炼金设备</span></div><div class="recipe-body">${m}</div></div>`;
+  });
+  p0+=`</div></div></div>`;
+  // ════ Panel 1：物品配方 ════
+  let p1 = `<div class="sub-tab-panel" id="crafting-sub-1">
+    <h2>📦 物品配方</h2>
+    <p style="color:var(--dim);font-size:11px;">按区域分组</p>`;
+  itemGroups.forEach(g=>{
+    p1+=`<div class="blueprint-section"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🏭 ${g.zone}<span class="fold-arrow">▶</span></div><div class="section-body">`;
+    g.workbenches.forEach(w=>{
+      p1+=`<div class="wb-section folded"><div class="wb-header" onclick="this.parentElement.classList.toggle('folded')">🔧 ${w.name}<span class="fold-arrow">▶</span></div><div class="section-body">`;
+      w.items.forEach(r=>{
+      const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
+      const st= r.stamina ? `<span class="stamina-badge">⚡${r.stamina}</span>` : '';
+      const fl= r.fuel ? `<span class="fuel-badge">🔥${r.fuel}</span>` : '';
+      const desc= r.desc ? `<div class="item-desc">${r.desc}</div>` : '';
+      p1+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span>${st}${fl}</div><div class="recipe-body">${m}${desc}</div></div>`;
+    });// end items
+      p1+=`</div></div>`;
+    });// end workbenches
+    p1+=`</div></div>`;
+  });// end zones
+  // ════ 组装 ════
+  const html = `<div class="content-panel active" id="content-crafting">${tabs}${p0}${p1}</div>`;
+  document.getElementById('content').innerHTML = html;
+}
+
+// ════ QUESTS ════
+function renderQuests(){
+  if(!DATA.quests) return;
+  const nks=Object.keys(DATA.quests).filter(k=>k.startsWith('npc_'));
+  let tabs='<div class="sub-tab-bar">', panels='';
+  nks.forEach((k,i)=>{
+    const n=DATA.quests[k];
+    const label=(n.icon||'👤')+' '+(n.name||k).replace(/任务线$/,'');
+    tabs+=`<button class="sub-tab-btn${i===0?' active':''}" onclick="switchSubTab('quests',${i})">${label}</button>`;
+    panels+=`<div class="sub-tab-panel${i===0?' active':''}" id="quests-sub-${i}"><div class="phase-badge">${n.icon||'👤'} ${n.name||''}</div>`;
+    (n.quests||[]).forEach((t,ti)=>{
+      // Build objective list: description + items
+      let objHTML = '';
+      (t.objectives||[]).forEach((o, oi) => {
+        objHTML += `<div style="margin:4px 0;font-size:11px;color:var(--green);">${oi+1}. ${o.description||''}</div>`;
+        (o.items||[]).forEach(item => {
+          objHTML += `<div class="mat-row"><span class="mat-icon">${getMatEmoji(item.name)}</span><span class="mat-name" style="padding-left:14px;">${item.name}</span><span class="mat-count">×${item.count}</span></div>`;
+        });
+      });
+      if (!objHTML) objHTML = '<div class="mat-row" style="color:var(--dim);">🗣️ 仅需对话</div>';
+      const pre=(t.prerequisites&&t.prerequisites.length)?`<div class="q-pre">前置：${t.prerequisites.join(' → ')}</div>`:'';
+      const ri=(t.rewards&&t.rewards.items&&t.rewards.items.length)?`，获得：${t.rewards.items.join('、')}`:'';
+      const rw=(t.rewards&&(t.rewards.faith||t.rewards.money||ri))?`<div class="q-reward">🎁 奖励：${t.rewards.faith?'🙏×'+t.rewards.faith+' ':''}${t.rewards.money?'💰×'+t.rewards.money+' ':''}${ri}</div>`:'';
+      panels+=`<div class="quest-card"><div class="quest-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="q-name">${t.name||'任务'}</span><span class="q-npc">${t.npc||''}</span><span class="r-phase">#${t.order||ti+1}</span></div><div class="quest-body">${objHTML}${pre}${rw}</div></div>`;
+    });
+    panels+='</div>';
+  });
+  tabs+='</div>';
+  const el=document.getElementById('content');
+  el.innerHTML+=`<div class="content-panel" id="content-quests"><h2>👥 NPC 任务线</h2><p>${nks.reduce((s,k)=>s+(DATA.quests[k].quests?.length||0),0)}个任务，按NPC分组。</p>${tabs}${panels}</div>`;
+  document.getElementById('content-quests').classList.add('active');
+  const at=document.querySelector('#sidebar-quests a');
+  if(at)at.classList.add('active-link');
+}
+
+function renderNPCs(){
+  if(!NPC.npc_shops) return;
+  const el = document.getElementById('content');
+  // ════ NPC shops ════
+  let shopsHTML = '';
+  if(NPC.npc_shops.length){
+    NPC.npc_shops.forEach((npc,i)=>{
+      const levelsHTML = (npc.levels||[]).map((lv,li)=>`
+        <div class="wb-section">
+          <div class="wb-header" onclick="this.parentElement.classList.toggle('folded')">📦 ${lv.label}<span class="fold-arrow">▶</span></div>
+          <div class="section-body">
+            ${(lv.items||[]).map(it=>`
+              <div class="mat-row">
+                <span class="mat-icon">${getMatEmoji(it.name)}</span>
+                <span class="mat-name">${it.name}${it.star?`<span class="star-badge star-${it.star}">⭐${({copper:'铜',silver:'银',gold:'金'})[it.star]||''}</span>`:''}</span>
+                <span class="mat-count">💰 ${it.price||'?'}${it.limit?` <span style="color:var(--accent);font-size:9px;font-weight:400;">·限购${it.limit}</span>`:''}</span>
+              </div>`).join('')||'<div class="mat-row" style="color:var(--dim);">暂无商品</div>'}
+          </div>
+        </div>`).join('') || '<p style="color:var(--dim);font-size:11px;padding:8px 10px;">暂无商品</p>';
+      shopsHTML+=`
+        <div class="npc-shop-card">
+          <div class="npc-shop-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+            <span class="arrow">▶</span>
+            <span class="npc-icon">${npc.icon||'👤'}</span>
+            <span class="npc-name">${npc.name}</span>
+            <span class="npc-area">${npc.area||''}</span>
+          </div>
+          <div class="recipe-body" style="border-top:1px solid var(--border);">
+            ${levelsHTML}
+          </div>
+        </div>`;
+    });
+  } else {
+    shopsHTML = '<p style="color:var(--dim);font-size:11px;">暂无商店数据，等你来添加 📝</p>';
+  }
+  el.innerHTML += `<div class="content-panel" id="content-npcs">
+    <h2>🗺️ NPC 位置与资源地图</h2>
+    <p>点击图片查看大图（右键→在新标签页中打开）</p>
+    <div class="map-container" style="margin-bottom:14px;">
+      <div style="font-size:11px;color:var(--gold);margin-bottom:6px;">📍 NPC 位置</div>
+      <a href="/static/map-npcs.jpg" target="_blank"><img src="/static/map-npcs.jpg" style="width:100%;border-radius:6px;display:block;"></a>
+    </div>
+    <div class="map-container">
+      <div style="font-size:11px;color:var(--green);margin-bottom:6px;">📦 资源分布</div>
+      <a href="/static/map-resources.jpg" target="_blank"><img src="/static/map-resources.jpg" style="width:100%;border-radius:6px;display:block;"></a>
+    </div>
+    <hr style="border-color:var(--border);margin:16px 0;">
+    <h2>🏪 NPC 商店 <span style="font-size:10px;color:var(--dim);font-weight:400;">（${NPC.npc_shops.length} 个NPC在售）</span></h2>
+    ${shopsHTML}
+  </div>`;
+  document.getElementById('content-npcs').classList.add('active');
+  const at=document.querySelector('#sidebar-npcs a');
+  if(at)at.classList.add('active-link');
+}
+
+loadData();
+</script>
+</body>
+</html>
