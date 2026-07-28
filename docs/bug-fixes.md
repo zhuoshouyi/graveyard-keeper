@@ -57,3 +57,12 @@
 - **根因**：当前运行时没有 image/vision 工具（vision_analyze 不可用）
 - **解决方案**：告知用户无法识别图片，请求文字描述地图内容
 - **预防**：需要向用户说明当前能力边界，或等 vision 工具可用时再处理
+
+|---
+
+### 7. 模板文件缓存导致修改不生效
+
+- **问题描述**：修改 `templates/graveyard-keeper.html` 后刷新页面无变化，新添加的障碍物配方未显示
+- **根因**：`app.py` 第19行 `GUIDE_PAGE = (BASE / "templates" / "graveyard-keeper.html").read_text(encoding="utf-8")` — HTML 模板在服务启动时一次性加载到内存变量中，后续对文件的修改不会自动反映到已运行的服务中
+- **解决**：重启 systemd 服务 `sudo systemctl restart graveyard-keeper.service`
+- **预防**：修改模板文件后必须重启服务；或考虑改为每次请求时读取文件（增加磁盘 I/O 但无需重启）

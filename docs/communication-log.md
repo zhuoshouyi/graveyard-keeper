@@ -162,3 +162,53 @@
 - 数据更新后重启服务验证
 
 **结果：** 格里两个任务均包含物品需求 ✅
+
+|---
+
+### 14. 2026-07-28 — 障碍物蓝图新增：清理道路(蜂场左侧)
+
+**用户：**
+> 在障碍物里面添加清理道路(蜂场左侧)，需要10个木楔，两个木板，四个简单的铁件，耗费50点体力。
+
+**AI：**
+- 在 `templates/graveyard-keeper.html` 的 `obstacleItems` 数组中新增第2项
+- 提交 Git commit `5df33c7`
+- 用户刷新页面未看到新内容
+
+**AI 发现：** 模板文件在启动时一次性读入内存（`app.py` 第19行 `read_text()`），修改后需重启服务
+
+**处理：** `sudo systemctl restart graveyard-keeper.service` → 页面内容更新
+
+**结果：** ✅ 清理道路(蜂场左侧)正常显示
+
+|---
+
+### 15. 2026-07-28 — GitHub 仓库推送
+
+**用户：**
+> 守墓人攻略：https://github.com/zhuoshouyi/graveyard-keeper
+
+**AI：**
+- 初始化 Git 仓库，commit `初始：守墓人攻略 v1.12`（15文件，5207行）
+- 配置 GitHub PAT 认证（同一 Token 复用）
+- 成功推送至 GitHub（1.8MB，含地图图和 JSON 数据）
+- 用户要求不排除数据库文件
+
+**结果：** 守墓人攻略成功推送至 GitHub ✅
+
+|---
+
+### 16. 2026-07-28 — 教师工具目录发现与推送
+
+**用户：**
+> 教师工具：https://github.com/zhuoshouyi/teachertools
+
+**AI 发现：** 教师工具不在 `~/` 下，而是在 `/opt/teachertools/`（systemd 服务：`teachertools.service`，端口 8001）
+
+**处理：**
+- 创建 `.gitignore` 排除 venv、`._*`（macOS衍生文件）、`.env`
+- 初始化 Git，commit `初始：教师工具 (backend + frontend dist)`（40文件，5632行）
+- 多次重试后成功推送（GitHub 自动重命名为 `TeacherTools` — 大写T）
+- 更新本地 remote 为 `https://github.com/zhuoshouyi/TeacherTools`
+
+**结果：** 教师工具成功推送至 GitHub ✅（注意仓库名大写 T）

@@ -146,3 +146,19 @@
 - 清空 6 个旧 NPC 任务数据（蛇、商人、审判官、女巫、占星师、铁匠）— 用户要求只保留亲手给的
 - 侧边栏索引从 13 个 NPC 精简到 7 个
 - 任务数据存储在 `graveyard-keeper-data.json` 的 quests 段，侧边栏在 HTML 中硬编码
+
+## 2026-07-28：障碍物蓝图新增第2项
+
+- 用户要求添加「清理道路(蜂场左侧)」
+- 材料：木楔×10 + 木板×2 + 简单的铁件×4，体力50
+- 数据存储在 `templates/graveyard-keeper.html` 的 `obstacleItems` 数组中
+- **关键发现**：`app.py` 第19行 `GUIDE_PAGE = (BASE / "templates" / "graveyard-keeper.html").read_text(encoding="utf-8")` — 模板在启动时一次性加载到内存，修改 HTML 后必须重启服务才能生效
+- 执行 `sudo systemctl restart graveyard-keeper.service` 后验证成功
+
+## 2026-07-28：初始化 Git 并推送 GitHub
+
+- 用户提供了三个仓库 URL，守墓人对应 `https://github.com/zhuoshouyi/graveyard-keeper`
+- 初始化 Git 仓库、配置 remote、首次 commit + push（15文件，5207行）
+- 仓库大小：1.8MB（含地图图片和 JSON 数据）
+- 用户要求不排除数据库文件
+- 用户明确：**每次代码修改都必须 git commit + push**

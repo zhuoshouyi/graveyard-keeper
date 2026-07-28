@@ -2404,6 +2404,31 @@
             "money": 0,
             "items": []
           }
+        },
+        {
+          "id": "merchant_03",
+          "name": "贸易许可证",
+          "order": 3,
+          "npc": "商人",
+          "prerequisites": [
+            "完成任务：止嗝草"
+          ],
+          "objectives": [
+            {
+              "description": "给商人带来开办企业的贸易许可证",
+              "items": [
+                {
+                  "name": "贸易许可证",
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "rewards": {
+            "faith": 0,
+            "money": 0,
+            "items": []
+          }
         }
       ]
     }
