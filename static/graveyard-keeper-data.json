@@ -2038,7 +2038,7 @@
      ],
      "objectives": [
       {
-       "description": "将1张建造许可拿给主教",
+       "description": "将1张建造许可拿给主教（需20银币）",
        "items": [
         {
          "name": "建造许可",
