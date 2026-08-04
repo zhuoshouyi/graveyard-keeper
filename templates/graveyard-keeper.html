@@ -624,7 +624,7 @@ function renderCrafting(){
   // ════ Panel 0：蓝图配方 ════
   let p0 = `<div class="sub-tab-panel active" id="crafting-sub-0">
     <h2>📋 蓝图配方</h2>
-    <p style="color:var(--dim);font-size:11px;">按蓝图分组 · 已解锁：障碍物、院子、花园、菜园、太平间、古老的墓地、地窖、教堂、炼金</p>
+    <p style="color:var(--dim);font-size:11px;">按蓝图分组 · 已解锁：障碍物、院子、花园、菜园、太平间、教堂、炼金、古老的墓地、地窖</p>
     <div class="blueprint-section folded"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🚧 障碍物（${obstacleItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
   obstacleItems.forEach(r=>{
     const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
@@ -651,16 +651,6 @@ function renderCrafting(){
     const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
     p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">尸体处理</span></div><div class="recipe-body">${m}</div></div>`;
   });
-  p0+=`</div></div><div class="blueprint-section folded" style="margin-top:12px;"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🪦 古老的墓地（${ancientGraveItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
-  ancientGraveItems.forEach(r=>{
-    const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
-    p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">墓地装饰</span></div><div class="recipe-body">${m}</div></div>`;
-  });
-  p0+=`</div></div><div class="blueprint-section folded" style="margin-top:12px;"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🏚️ 地窖（${cellarItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
-  cellarItems.forEach(r=>{
-    const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
-    p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">存储</span></div><div class="recipe-body">${m||'<div class="mat-row" style="color:var(--dim);">待补充</div>'}</div></div>`;
-  });
   p0+=`</div></div><div class="blueprint-section folded" style="margin-top:12px;"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">⛪ 教堂（${churchItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
   churchItems.forEach(r=>{
     const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
@@ -670,6 +660,16 @@ function renderCrafting(){
   alchemyItems.forEach(r=>{
     const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
     p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">炼金设备</span></div><div class="recipe-body">${m}</div></div>`;
+  });
+  p0+=`</div></div><div class="blueprint-section folded" style="margin-top:12px;"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🪦 古老的墓地（${ancientGraveItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
+  ancientGraveItems.forEach(r=>{
+    const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
+    p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">墓地装饰</span></div><div class="recipe-body">${m}</div></div>`;
+  });
+  p0+=`</div></div><div class="blueprint-section folded" style="margin-top:12px;"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🏚️ 地窖（${cellarItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
+  cellarItems.forEach(r=>{
+    const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
+    p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">存储</span></div><div class="recipe-body">${m||'<div class="mat-row" style="color:var(--dim);">待补充</div>'}</div></div>`;
   });
   p0+=`</div></div></div>`;
   // ════ Panel 1：物品配方 ════
