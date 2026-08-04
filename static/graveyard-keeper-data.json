@@ -2439,6 +2439,29 @@
       "money": 50,
       "items": []
      }
+    },
+    {
+     "id": "wagner_02",
+     "name": "以酒换故事",
+     "order": 2,
+     "npc": "瓦格纳",
+     "prerequisites": [],
+     "objectives": [
+      {
+       "description": "用1瓶葡萄酒换一个故事",
+       "items": [
+        {
+         "name": "葡萄酒",
+         "count": 1
+        }
+       ]
+      }
+     ],
+     "rewards": {
+      "faith": 0,
+      "money": 0,
+      "items": []
+     }
     }
    ]
   },
