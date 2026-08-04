@@ -66,6 +66,33 @@
    ],
    "tip": "可以卖木柴，7铜币一个",
    "initial_money": "30银1铜"
+  },
+  {
+   "name": "迪格",
+   "icon": "👴",
+   "levels": [
+    {
+     "label": "等级1",
+     "items": [
+      {
+       "name": "种子油",
+       "price": "30铜",
+       "limit": 15
+      },
+      {
+       "name": "麻绳",
+       "price": "10铜",
+       "limit": 20
+      },
+      {
+       "name": "大麻",
+       "price": "10铜",
+       "limit": 10
+      }
+     ]
+    }
+   ],
+   "initial_money": "4银29铜"
   }
  ]
 }
