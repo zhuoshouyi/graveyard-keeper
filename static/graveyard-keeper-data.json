@@ -2027,6 +2027,31 @@
       "money": 0,
       "items": []
      }
+    },
+    {
+     "id": "bishop_03",
+     "name": "我已经准备好升级教堂！",
+     "order": 3,
+     "npc": "主教",
+     "prerequisites": [
+      "bishop_02"
+     ],
+     "objectives": [
+      {
+       "description": "将1张建造许可拿给主教",
+       "items": [
+        {
+         "name": "建造许可",
+         "count": 1
+        }
+       ]
+      }
+     ],
+     "rewards": {
+      "faith": 0,
+      "money": 0,
+      "items": []
+     }
     }
    ]
   },
