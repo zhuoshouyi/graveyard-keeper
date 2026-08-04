@@ -2111,6 +2111,24 @@
       "money": 0,
       "items": []
      }
+    },
+    {
+     "id": "inquisitor_02",
+     "name": "为守卫酿制银星葡萄酒",
+     "order": 2,
+     "npc": "审判官",
+     "prerequisites": [],
+     "objectives": [
+      {
+       "description": "为守卫酿制银星葡萄酒",
+       "items": []
+      }
+     ],
+     "rewards": {
+      "faith": 0,
+      "money": 0,
+      "items": []
+     }
     }
    ]
   },
