@@ -1,6 +1,28 @@
 {
  "npc_shops": [
   {
+   "name": "主教",
+   "icon": "⛪",
+   "levels": [
+    {
+     "label": "等级1",
+     "items": [
+      {
+       "name": "蜡烛",
+       "price": "1银",
+       "limit": 20
+      },
+      {
+       "name": "圣餐饼",
+       "price": "5铜",
+       "limit": 50
+      }
+     ]
+    }
+   ],
+   "initial_money": "15银70铜"
+  },
+  {
    "name": "占星师",
    "icon": "🔭",
    "area": "塔楼",
