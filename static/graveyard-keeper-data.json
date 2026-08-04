@@ -2030,6 +2030,215 @@
     }
    ]
   },
+  "npc_astrologer": {
+   "name": "占星家（Astrologer）任务线",
+   "description": "他很睿智，但厌倦了一切，甚至是生活",
+   "icon": "🔭",
+   "quests": [
+    {
+     "id": "astrologer_01",
+     "name": "取骷髅头",
+     "order": 1,
+     "npc": "占星家",
+     "prerequisites": [],
+     "objectives": [
+      {
+       "description": "从死尸上取下骷髅头",
+       "items": [
+        {
+         "name": "骷髅头",
+         "count": 1
+        }
+       ]
+      }
+     ],
+     "rewards": {
+      "faith": 0,
+      "money": 0,
+      "items": []
+     }
+    },
+    {
+     "id": "astrologer_02",
+     "name": "收集老看守人的日记",
+     "order": 2,
+     "npc": "占星家",
+     "prerequisites": [
+      "astrologer_01"
+     ],
+     "objectives": [
+      {
+       "description": "从教堂地窖收集老看守人的日记",
+       "items": []
+      }
+     ],
+     "rewards": {
+      "faith": 0,
+      "money": 0,
+      "items": []
+     }
+    }
+   ]
+  },
+  "npc_inquisitor": {
+   "name": "审判官（Inquisitor）任务线",
+   "description": "你肯定不想与他为敌",
+   "icon": "⚔️",
+   "quests": [
+    {
+     "id": "inquisitor_01",
+     "name": "准备柴火和传单",
+     "order": 1,
+     "npc": "审判官",
+     "prerequisites": [],
+     "objectives": [
+      {
+       "description": "带上20根柴火和10张传单，供下次焚烧使用",
+       "items": [
+        {
+         "name": "柴火",
+         "count": 20
+        },
+        {
+         "name": "传单",
+         "count": 10
+        }
+       ]
+      }
+     ],
+     "rewards": {
+      "faith": 0,
+      "money": 0,
+      "items": []
+     }
+    }
+   ]
+  },
+  "npc_snake": {
+   "name": "老蛇（Snake）任务线",
+   "description": "神秘的角色",
+   "icon": "🐍",
+   "quests": []
+  },
+  "npc_merchant": {
+   "name": "商人（Merchant）任务线",
+   "description": "他总是对做生意乐此不疲，除了晚宴时间",
+   "icon": "💰",
+   "quests": [
+    {
+     "id": "merchant_01",
+     "name": "试验材料",
+     "order": 1,
+     "npc": "商人",
+     "prerequisites": [],
+     "objectives": [
+      {
+       "description": "给商人12根胡萝卜、12头卷心菜和12颗甜菜做试验",
+       "items": [
+        {
+         "name": "胡萝卜",
+         "count": 12
+        },
+        {
+         "name": "卷心菜",
+         "count": 12
+        },
+        {
+         "name": "甜菜",
+         "count": 12
+        }
+       ]
+      }
+     ],
+     "rewards": {
+      "faith": 0,
+      "money": 0,
+      "items": []
+     }
+    },
+    {
+     "id": "merchant_02",
+     "name": "止嗝草",
+     "order": 2,
+     "npc": "商人",
+     "prerequisites": [
+      "完成任务：试验材料"
+     ],
+     "objectives": [
+      {
+       "description": "拿点止嗝草给商人",
+       "items": [
+        {
+         "name": "止嗝草",
+         "count": 1
+        }
+       ]
+      }
+     ],
+     "rewards": {
+      "faith": 0,
+      "money": 0,
+      "items": []
+     }
+    },
+    {
+     "id": "merchant_03",
+     "name": "贸易许可证",
+     "order": 3,
+     "npc": "商人",
+     "prerequisites": [
+      "完成任务：止嗝草"
+     ],
+     "objectives": [
+      {
+       "description": "给商人带来开办企业的贸易许可证",
+       "items": [
+        {
+         "name": "贸易许可证",
+         "count": 1
+        }
+       ]
+      }
+     ],
+     "rewards": {
+      "faith": 0,
+      "money": 0,
+      "items": []
+     }
+    },
+    {
+     "type": "tip",
+     "text": "不要找商人借钱，借5银币，你需要还10银币。"
+    }
+   ]
+  },
+  "npc_lady_chame": {
+   "name": "查美女士（Lady Chame）任务线",
+   "description": "这个女人有些让人无法理解的地方",
+   "icon": "👩",
+   "quests": [
+    {
+     "id": "chame_01",
+     "name": "证明你的价值",
+     "order": 1,
+     "npc": "查美女士",
+     "prerequisites": [
+      "游戏中期"
+     ],
+     "objectives": [
+      {
+       "description": "证明你是值得交谈的对象",
+       "items": []
+      }
+     ],
+     "rewards": {
+      "faith": 0,
+      "money": 0,
+      "items": []
+     }
+    }
+   ]
+  },
   "npc_gerry": {
    "name": "格里（Gerry）任务线",
    "description": "一个会说话的骷髅头，有健忘症，在酒馆出没",
@@ -2188,33 +2397,6 @@
     }
    ]
   },
-  "npc_lady_chame": {
-   "name": "查美女士（Lady Chame）任务线",
-   "description": "这个女人有些让人无法理解的地方",
-   "icon": "👩",
-   "quests": [
-    {
-     "id": "chame_01",
-     "name": "证明你的价值",
-     "order": 1,
-     "npc": "查美女士",
-     "prerequisites": [
-      "游戏中期"
-     ],
-     "objectives": [
-      {
-       "description": "证明你是值得交谈的对象",
-       "items": []
-      }
-     ],
-     "rewards": {
-      "faith": 0,
-      "money": 0,
-      "items": []
-     }
-    }
-   ]
-  },
   "npc_wagner": {
    "name": "瓦格纳（Wagner）任务线",
    "description": "一个帅气的年轻人，自称为诗人",
@@ -2256,56 +2438,6 @@
      "objectives": [
       {
        "description": "把墓地右下角的那一个尸体挖出来丢到河里去",
-       "items": []
-      }
-     ],
-     "rewards": {
-      "faith": 0,
-      "money": 0,
-      "items": []
-     }
-    }
-   ]
-  },
-  "npc_astrologer": {
-   "name": "占星家（Astrologer）任务线",
-   "description": "他很睿智，但厌倦了一切，甚至是生活",
-   "icon": "🔭",
-   "quests": [
-    {
-     "id": "astrologer_01",
-     "name": "取骷髅头",
-     "order": 1,
-     "npc": "占星家",
-     "prerequisites": [],
-     "objectives": [
-      {
-       "description": "从死尸上取下骷髅头",
-       "items": [
-        {
-         "name": "骷髅头",
-         "count": 1
-        }
-       ]
-      }
-     ],
-     "rewards": {
-      "faith": 0,
-      "money": 0,
-      "items": []
-     }
-    },
-    {
-     "id": "astrologer_02",
-     "name": "收集老看守人的日记",
-     "order": 2,
-     "npc": "占星家",
-     "prerequisites": [
-      "astrologer_01"
-     ],
-     "objectives": [
-      {
-       "description": "从教堂地窖收集老看守人的日记",
        "items": []
       }
      ],
@@ -2365,132 +2497,6 @@
         {
          "name": "蜜罐",
          "count": 5
-        }
-       ]
-      }
-     ],
-     "rewards": {
-      "faith": 0,
-      "money": 0,
-      "items": []
-     }
-    }
-   ]
-  },
-  "npc_merchant": {
-   "name": "商人（Merchant）任务线",
-   "description": "他总是对做生意乐此不疲，除了晚宴时间",
-   "icon": "💰",
-   "quests": [
-    {
-     "id": "merchant_01",
-     "name": "试验材料",
-     "order": 1,
-     "npc": "商人",
-     "prerequisites": [],
-     "objectives": [
-      {
-       "description": "给商人12根胡萝卜、12头卷心菜和12颗甜菜做试验",
-       "items": [
-        {
-         "name": "胡萝卜",
-         "count": 12
-        },
-        {
-         "name": "卷心菜",
-         "count": 12
-        },
-        {
-         "name": "甜菜",
-         "count": 12
-        }
-       ]
-      }
-     ],
-     "rewards": {
-      "faith": 0,
-      "money": 0,
-      "items": []
-     }
-    },
-    {
-     "id": "merchant_02",
-     "name": "止嗝草",
-     "order": 2,
-     "npc": "商人",
-     "prerequisites": [
-      "完成任务：试验材料"
-     ],
-     "objectives": [
-      {
-       "description": "拿点止嗝草给商人",
-       "items": [
-        {
-         "name": "止嗝草",
-         "count": 1
-        }
-       ]
-      }
-     ],
-     "rewards": {
-      "faith": 0,
-      "money": 0,
-      "items": []
-     }
-    },
-    {
-     "id": "merchant_03",
-     "name": "贸易许可证",
-     "order": 3,
-     "npc": "商人",
-     "prerequisites": [
-      "完成任务：止嗝草"
-     ],
-     "objectives": [
-      {
-       "description": "给商人带来开办企业的贸易许可证",
-       "items": [
-        {
-         "name": "贸易许可证",
-         "count": 1
-        }
-       ]
-      }
-     ],
-     "rewards": {
-      "faith": 0,
-      "money": 0,
-      "items": []
-     }
-    },
-    {
-     "type": "tip",
-     "text": "不要找商人借钱，借5银币，你需要还10银币。"
-    }
-   ]
-  },
-  "npc_inquisitor": {
-   "name": "审判官（Inquisitor）任务线",
-   "description": "你肯定不想与他为敌",
-   "icon": "⚔️",
-   "quests": [
-    {
-     "id": "inquisitor_01",
-     "name": "准备柴火和传单",
-     "order": 1,
-     "npc": "审判官",
-     "prerequisites": [],
-     "objectives": [
-      {
-       "description": "带上20根柴火和10张传单，供下次焚烧使用",
-       "items": [
-        {
-         "name": "柴火",
-         "count": 20
-        },
-        {
-         "name": "传单",
-         "count": 10
         }
        ]
       }
