@@ -527,6 +527,11 @@ function renderCrafting(){
     {name:"箱子", materials:[{name:"粗板",count:4},{name:"钉子",count:4},{name:"简单的铁件",count:8}]},
     {name:"焚尸地", materials:[{name:"木墩",count:8}]}
   ];
+  // 葡萄园蓝图 — 用户手动录入
+  const vineyardItems = [
+    {name:"箱子", materials:[{name:"粗板",count:4},{name:"钉子",count:4},{name:"简单的铁件",count:6}]},
+    {name:"葡萄藤棚架", materials:[{name:"木棍",count:5}]}
+  ];
   // 教堂蓝图 — 用户手动录入
   const churchItems = [
     {name:"烛台I", materials:[{name:"简单的铁件",count:6}], type:"教堂装饰", deco:1},
@@ -684,7 +689,7 @@ function renderCrafting(){
   // ════ Panel 0：蓝图配方 ════
   let p0 = `<div class="sub-tab-panel active" id="crafting-sub-0">
     <h2>📋 蓝图配方</h2>
-    <p style="color:var(--dim);font-size:11px;">按蓝图分组 · 已解锁：障碍物、院子、花园、菜园、太平间、教堂、炼金、古老的墓地、地窖、火葬场</p>
+    <p style="color:var(--dim);font-size:11px;">按蓝图分组 · 已解锁：障碍物、院子、花园、菜园、太平间、教堂、炼金、古老的墓地、地窖、火葬场、葡萄园</p>
     <div class="blueprint-section folded"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🚧 障碍物（${obstacleItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
   obstacleItems.forEach(r=>{
     const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
@@ -735,6 +740,12 @@ function renderCrafting(){
   crematoryItems.forEach(r=>{
     const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
     const rt = r.name==="箱子" ? "存储" : "火化设施";
+    p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">${rt}</span></div><div class="recipe-body">${m}</div></div>`;
+  });
+  p0+=`</div></div><div class="blueprint-section folded" style="margin-top:12px;"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🍇 葡萄园（${vineyardItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
+  vineyardItems.forEach(r=>{
+    const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
+    const rt = r.name==="箱子" ? "存储" : "种植区";
     p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">${rt}</span></div><div class="recipe-body">${m}</div></div>`;
   });
   p0+=`</div></div></div>`;
