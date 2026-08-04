@@ -804,6 +804,7 @@ function renderNPCs(){
           </div>
           <div class="recipe-body" style="border-top:1px solid var(--border);">
             ${levelsHTML}
+            ${npc.tip?`<div class="quest-tip">💡 ${npc.tip}</div>`:''}
           </div>
         </div>`;
     });
