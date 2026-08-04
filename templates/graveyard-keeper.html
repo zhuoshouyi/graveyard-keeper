@@ -127,6 +127,7 @@
     .sub-tab-panel.active { display: block; }
 
     .recipe-card, .quest-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 5px; margin-bottom: 5px; overflow: hidden; }
+    .quest-tip { margin: 10px 0 4px; padding: 8px 10px; background: rgba(224,224,224,0.06); border: 1px dashed var(--border); border-radius: 6px; font-size: 11px; color: var(--dim); line-height: 1.5; }
     .blueprint-section { background: rgba(15,52,96,0.4); border: 1px solid var(--border); border-radius: 8px; padding: 10px; }
     .blueprint-section.folded .section-body { display: none; }
     .blueprint-section .phase-badge { cursor: pointer; user-select: none; }
@@ -334,7 +335,7 @@ async function loadData(){
     document.getElementById('recipeCount').textContent=phases.reduce((s,k)=>s+(cr[k].recipes?.length||0),0);
     const qd=DATA.quests||{};
     const nq=Object.keys(qd).filter(k=>k.startsWith('npc_'));
-    document.getElementById('questCount').textContent=nq.reduce((s,k)=>s+(qd[k].quests?.length||0),0);
+    document.getElementById('questCount').textContent=nq.reduce((s,k)=>s+(qd[k].quests?.filter(q=>q.type!=='tip').length||0),0);
     document.getElementById('npcCount').textContent=(NPC.npc_shops||[]).length;
     renderOverview();
   } catch(e) {
@@ -745,6 +746,7 @@ function renderQuests(){
     tabs+=`<button class="sub-tab-btn${i===0?' active':''}" onclick="switchSubTab('quests',${i})">${label}</button>`;
     panels+=`<div class="sub-tab-panel${i===0?' active':''}" id="quests-sub-${i}"><div class="phase-badge">${n.icon||'👤'} ${n.name||''}</div>`;
     (n.quests||[]).forEach((t,ti)=>{
+      if(t.type==='tip'){ panels+=`<div class="quest-tip">💡 ${t.text}</div>`; return; }
       // Build objective list: description + items
       let objHTML = '';
       (t.objectives||[]).forEach((o, oi) => {
@@ -763,7 +765,7 @@ function renderQuests(){
   });
   tabs+='</div>';
   const el=document.getElementById('content');
-  el.innerHTML+=`<div class="content-panel" id="content-quests"><h2>👥 NPC 任务线</h2><p>${nks.reduce((s,k)=>s+(DATA.quests[k].quests?.length||0),0)}个任务，按NPC分组。</p>${tabs}${panels}</div>`;
+  el.innerHTML+=`<div class="content-panel" id="content-quests"><h2>👥 NPC 任务线</h2><p>${nks.reduce((s,k)=>s+(DATA.quests[k].quests?.filter(q=>q.type!=='tip').length||0),0)}个任务，按NPC分组。</p>${tabs}${panels}</div>`;
   document.getElementById('content-quests').classList.add('active');
   const at=document.querySelector('#sidebar-quests a');
   if(at)at.classList.add('active-link');
