@@ -2502,6 +2502,35 @@
      }
     }
    ]
+  },
+  "npc_clotho": {
+   "name": "克洛索（Clotho）任务线",
+   "description": "一个双眼炯炯有神的老女巫",
+   "icon": "🧙‍♀️",
+   "quests": [
+    {
+     "id": "clotho_01",
+     "name": "帮助女巫恢复记忆",
+     "order": 1,
+     "npc": "克洛索",
+     "prerequisites": [],
+     "objectives": [
+      {
+       "description": "帮助女巫恢复记忆",
+       "items": []
+      },
+      {
+       "description": "为克洛索种植一个银星南瓜",
+       "items": []
+      }
+     ],
+     "rewards": {
+      "faith": 0,
+      "money": 0,
+      "items": []
+     }
+    }
+   ]
   }
  },
  "dlc_content": {
