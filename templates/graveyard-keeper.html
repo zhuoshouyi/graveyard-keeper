@@ -672,8 +672,9 @@ function renderCrafting(){
       const st= r.stamina ? `<span class="stamina-badge">⚡${r.stamina}</span>` : '';
       const fl= r.fuel ? `<span class="fuel-badge">🔥${r.fuel}</span>` : '';
       const dc= r.deco ? `<span class="deco-badge">+${r.deco}</span>` : '';
+      const badges= (st||fl||dc) ? `<span style="margin-left:auto;display:inline-flex;gap:2px;">${dc}${st}${fl}</span>` : '';
       const desc= r.desc ? `<div class="item-desc">${r.desc}</div>` : '';
-      p1+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span>${st}${fl}${dc}</div><div class="recipe-body">${m}${desc}</div></div>`;
+      p1+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span>${badges}</div><div class="recipe-body">${m}${desc}</div></div>`;
     });// end items
       p1+=`</div></div>`;
     });// end workbenches
