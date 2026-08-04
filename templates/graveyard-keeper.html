@@ -173,6 +173,7 @@
     .npc-shop-header .npc-icon { font-size: 18px; }
     .npc-shop-header .npc-name { font-weight: 600; font-size: 13px; }
     .npc-shop-header .npc-area { font-size: 10px; color: var(--dim); background: var(--card); padding: 1px 6px; border-radius: 3px; }
+    .npc-shop-header .npc-capital { font-size: 10px; color: var(--gold); background: rgba(240,192,64,0.12); padding: 1px 6px; border-radius: 3px; margin-left: auto; }
     .npc-shop-body { display: none; padding: 0 12px 12px; border-top: 1px solid var(--border); }
     .npc-shop-body.open { display: block; }
     .npc-shop-body .loc-row { display: flex; align-items: flex-start; gap: 6px; margin: 6px 0; font-size: 11px; }
@@ -799,6 +800,7 @@ function renderNPCs(){
             <span class="npc-icon">${npc.icon||'👤'}</span>
             <span class="npc-name">${npc.name}</span>
             <span class="npc-area">${npc.area||''}</span>
+            ${npc.initial_money?`<span class="npc-capital">💰 初始资金：${npc.initial_money}</span>`:''}
           </div>
           <div class="recipe-body" style="border-top:1px solid var(--border);">
             ${levelsHTML}
