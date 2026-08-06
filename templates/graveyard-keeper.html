@@ -311,7 +311,7 @@ const MAT_EMOJI = {
 '面粉':'🌾','大麦':'🌾','蛇':'🐍','羽毛':'🪶',
 '甘油':'🧴','防腐剂':'⚱️','药水':'🧪','骨头':'🦴','头骨':'💀',
 '纸':'📄','墨':'🖋️','墨水':'🖋️','空白纸':'📄','书':'📕','书籍':'📕','被毁的书籍':'📕','平装封面':'📔','故事':'📖','笔记':'📝','一沓纸':'📄','传单':'📄','祈祷词':'🙏','建造许可':'📜',
-'颜料':'🎨','黑色颜料':'🎨','白色颜料':'🎨','铜':'🪙','银':'🥈','金锭':'🪙','剑':'⚔️','盾':'🛡️',
+'颜料':'🎨','黑色颜料':'🎨','白色颜料':'🎨','铜':'🪙','银':'🥈','金锭':'🪙','剑':'⚔️','盾':'🛡️','十字镐I':'⛏️',
 '种子':'🌱','浆果树幼苗':'🌱','苹果树幼苗':'🌱','树苗':'🌱','幼苗':'🌱','肥料':'💩','腐叶土':'🌿','围栏':'🚧','雕像':'🗿','十字架':'✝️',
 '传送石':'🔮','传送门':'🌀','地图':'🗺️',
 '鱼':'🐟','白色鱼片':'🐟','优质鱼片':'🐟','钓鱼竿':'🎣','简易钓鱼竿':'🎣',
@@ -537,6 +537,16 @@ function renderCrafting(){
   const apiaryItems = [
     {name:"蜂巢", materials:[{name:"粗板",count:4},{name:"钉子",count:6},{name:"蜜蜂",count:10}]}
   ];
+  // 林中小屋蓝图 — 用户手动录入
+  const cabinItems = [
+    {name:"箱子", materials:[{name:"粗板",count:4},{name:"钉子",count:4},{name:"简单的铁件",count:5}]},
+    {name:"铁矿石储备", materials:[{name:"粗板",count:4}]},
+    {name:"石材储备", materials:[{name:"粗板",count:8},{name:"钉子",count:8}]},
+    {name:"石材切割机", materials:[{name:"粗板",count:4},{name:"钉子",count:4}]},
+    {name:"僵尸矿山：左", materials:[{name:"粗板",count:8},{name:"钉子",count:4},{name:"十字镐I",count:1}]},
+    {name:"僵尸矿山：右", materials:[{name:"粗板",count:8},{name:"钉子",count:4},{name:"十字镐I",count:1}]},
+    {name:"运站", materials:[{name:"粗板",count:8},{name:"钉子",count:4},{name:"空白纸",count:2}]}
+  ];
   // 教堂蓝图 — 用户手动录入
   const churchItems = [
     {name:"烛台I", materials:[{name:"简单的铁件",count:6}], type:"教堂装饰", deco:1},
@@ -694,7 +704,7 @@ function renderCrafting(){
   // ════ Panel 0：蓝图配方 ════
   let p0 = `<div class="sub-tab-panel active" id="crafting-sub-0">
     <h2>📋 蓝图配方</h2>
-    <p style="color:var(--dim);font-size:11px;">按蓝图分组 · 已解锁：障碍物、院子、花园、菜园、太平间、教堂、炼金、古老的墓地、地窖、火葬场、葡萄园、养蜂场</p>
+    <p style="color:var(--dim);font-size:11px;">按蓝图分组 · 已解锁：障碍物、院子、花园、菜园、太平间、教堂、炼金、古老的墓地、地窖、火葬场、葡萄园、养蜂场、林中小屋</p>
     <div class="blueprint-section folded"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🚧 障碍物（${obstacleItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
   obstacleItems.forEach(r=>{
     const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
@@ -757,6 +767,12 @@ function renderCrafting(){
   apiaryItems.forEach(r=>{
     const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
     p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">养殖</span></div><div class="recipe-body">${m}</div></div>`;
+  });
+  p0+=`</div></div><div class="blueprint-section folded" style="margin-top:12px;"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🌲 林中小屋（${cabinItems.length} 项）<span class="fold-arrow">▶</span></div><div class="section-body">`;
+  cabinItems.forEach(r=>{
+    const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
+    const rt = r.name==="箱子" ? "存储" : r.name.includes("储备") ? "储备" : r.name==="石材切割机" ? "设备" : r.name.startsWith("僵尸矿山") ? "矿山" : "运输";
+    p0+=`<div class="recipe-card"><div class="recipe-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">▶</span><span class="r-name">${r.name}</span><span class="r-type">${rt}</span></div><div class="recipe-body">${m}</div></div>`;
   });
   p0+=`</div></div></div>`;
   // ════ Panel 1：物品配方 ════
