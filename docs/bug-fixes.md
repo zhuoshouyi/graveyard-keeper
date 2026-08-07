@@ -111,3 +111,30 @@
 - **根因**：MAT_EMOJI 映射表未覆盖游戏新增内容的材料（十字镐系此前只有「十字镐II」等条目）
 - **解决**：提交前在 MAT_EMOJI 补充 `'十字镐I':'⛏️'`，并与 interactive-reference-pages 技能的 emoji-map.md 参考文件同步；重启服务后验证渲染正常
 - **预防**：沿用既定流程——每次新增配方先 search MAT_EMOJI 覆盖所有新材料，缺失立即补充后再改数据；本类问题已连续两次（钢锭 8-05、十字镐I 8-06）在开发期拦截，未进入用户可见状态
+
+---
+
+### 13. 问题：GitHub 认证缺失导致自动推送长期静默失败（三仓库积压 119 个 commit）
+
+- **现象**：按需 VPN 方案测试时，VPN 启动成功、GitHub 经代理 0.6s 可达，但 `git push` 仍失败，报 `could not read Username for 'https://github.com'`；检查发现三个仓库（media-library 3 + graveyard-keeper 68 + teachertools 48）共积压 **119 个 commit** 未推送
+- **根因**：`~/.git-credentials` 为 0 字节（约 7-29 被删除后一直未恢复），而 `credential.helper=store` 仍配置；此前每小时自动 push 的错误被脚本 `2>/dev/null` 吞掉，推送其实一直在静默失败
+- **解决**：已排除网络因素（VPN 通）→ 定位到认证层；需用户提供 GitHub PAT（repo 权限），写入 `~/.git-credentials`（`https://<user>:<TOKEN>@github.com`，chmod 600）后经 VPN 补推全部积压 commit，此后每日 23:30 自动推送生效
+- **预防**：① 推送脚本不得吞掉错误输出，失败要可见；② 定期检查 `git rev-list --count @{u}..HEAD`（本地与 origin 的差距）或 `git push --dry-run` 验证凭据有效性；③ 凭据文件写入后立即校验权限与内容非空
+
+---
+
+### 14. 问题：GitHub 大文件下载被掐断（mihomo 安装受阻）
+
+- **现象**：服务器需安装 mihomo（Clash 内核）连 VPN，但直连 GitHub release 与多个加速镜像（ghproxy/ghfast.top 等）下载大文件时流被中断，多次出现 `gzip: unexpected end of file`（1MB~3MB 不完整包）
+- **根因**：服务器所在网络对 GitHub 大流量传输有断流限制，单连接下载到一半被切断（与 GitHub 主站被掐同源）
+- **解决**：改用 `ghproxy.net` 镜像 + `aria2` 多线程分块下载（每块独立连接，单流被掐不影响整体），成功下载 13.6MB 完整包并安装 mihomo v1.19.0
+- **预防**：国内服务器下载 GitHub 大文件时优先组合「可用镜像 + aria2 多线程」；下载后必须校验（gzip -t / 文件大小）再解压安装
+
+---
+
+### 15. 问题：mihomo 启动报 `MMDB invalid`（geoip 数据库下载不完整）
+
+- **现象**：mihomo 配置完整 Clash 订阅后启动，进程无输出且不监听端口（7890/17890），前台运行报 `MMDB invalid`
+- **根因**：启动时自动下载的 geoip/geosite 数据库（GeoIP.dat 等）因国内访问 GitHub 慢而下载不完整
+- **解决**：改用轻量方案——`vpn-subscribe.py` 直接构造最小配置（只留节点 + 全部走代理规则，跳过规则库依赖），配置校验通过后 mihomo 正常就绪
+- **预防**：在无法稳定访问 GitHub 的环境下，mihomo 配置避免依赖在线规则库；用最小化配置 + 本地规则，或预先手动下载完整 MMDB 文件
