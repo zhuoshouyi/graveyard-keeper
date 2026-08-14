@@ -724,3 +724,12 @@
 - 测试时发现 GitHub 认证缺失（`~/.git-credentials` 0 字节）：VPN 正常但 push 报 `could not read Username`，三仓库积压 119 个 commit（media-library 3 + graveyard-keeper 68 + teachertools 48）→ 向用户索要 GitHub PAT（repo 权限），拿到后写入凭据并补推全部积压
 
 **验证：** VPN 启动/关闭测试通过，GitHub 经代理 0.6s 可达；推送待 PAT ✅
+
+### 63. 2026-08-14 — GitHub 认证恢复与补推
+
+**用户：**
+> 是需要我给你提供github的key吗？（随后提供 GitHub PAT）
+
+**AI 处理：** PAT 写入 `~/.git-credentials`（权限 600），`git ls-remote` 验证直连 GitHub 成功；三仓库全部补推——本仓库 **69 个 commit** 推送完成；每日 23:30 自动推送恢复正常
+
+**验证：** 本仓库与 origin 完全同步，bug-fixes #13 关闭 ✅

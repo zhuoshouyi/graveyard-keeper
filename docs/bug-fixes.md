@@ -138,3 +138,12 @@
 - **根因**：启动时自动下载的 geoip/geosite 数据库（GeoIP.dat 等）因国内访问 GitHub 慢而下载不完整
 - **解决**：改用轻量方案——`vpn-subscribe.py` 直接构造最小配置（只留节点 + 全部走代理规则，跳过规则库依赖），配置校验通过后 mihomo 正常就绪
 - **预防**：在无法稳定访问 GitHub 的环境下，mihomo 配置避免依赖在线规则库；用最小化配置 + 本地规则，或预先手动下载完整 MMDB 文件
+
+---
+
+### 16. 问题：GitHub 认证缺失问题解决（#13 闭环，2026-08-14）
+
+- **现象**：用户提供 GitHub PAT 后，三仓库积压 commit 全部补推成功（media-library 4 + graveyard-keeper 69 + teachertools 55），每日 23:30 自动推送恢复；且本机直连 GitHub 即可推送，无需 VPN
+- **根因**：（见 #13）`~/.git-credentials` 为 0 字节，`credential.helper=store` 无凭据可用
+- **解决**：PAT 写入 `~/.git-credentials`（`https://<user>:<TOKEN>@github.com`，chmod 600）→ `git ls-remote` 验证认证通过 → 逐仓库 `git push origin main` 补推
+- **预防**：沿用 #13 预防项——推送脚本不得吞错误；定期 `git rev-list --count @{u}..HEAD` 核对差距；凭据变更后立即 `git push --dry-run` 验证

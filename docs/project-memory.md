@@ -214,3 +214,13 @@
 - **关键发现：GitHub 认证缺失**：VPN 通了、代理 push 仍失败，定位到 `~/.git-credentials` 为 0 字节（7-29 被删后未恢复）而 `credential.helper=store` 仍配置——自动推送一直在静默失败，三仓库积压 119 个 commit（media-library 3 + graveyard-keeper 68 + teachertools 48）。已向用户索要 PAT（repo 权限），拿到后写入凭据（600）→ VPN 推送全部积压 → 每日 23:30 自动推送生效
 - **环境准备（00:21，跨零点）**：服务器需连 VPN 推送 GitHub，但 GitHub 主站与多数镜像被掐断大文件流 → 最终用 `ghproxy.net` 镜像 + `aria2` 多线程分块下载突破断流，安装 mihomo v1.19.0 到 `/usr/local/bin/mihomo`
 - 关键决策：① VPN 按需启动而非常驻，避免影响服务器其他服务、无变更时零资源占用；② 推送失败的错误不再被脚本吞掉，本次已将问题定位到认证层；③ 蓝图改动沿用「重启 → 浏览器验证 → JS 零报错 → git commit」标准流程
+
+---
+
+## 2026-08-14：GitHub 认证恢复，积压 69 commit 全部补推
+
+- 用户提供 GitHub PAT（repo 权限）→ 写入 `~/.git-credentials`（`https://<user>:<TOKEN>@github.com`，chmod 600）
+- `git ls-remote` 验证直连 GitHub 成功（本机无需 VPN 即可推送）
+- 三仓库全部补推：media-library 4 + graveyard-keeper **69** + teachertools 55；本仓库最新 commit `566dad5`（8-07 文档更新）
+- 自 7-29 起的 GitHub 认证缺失问题（bug-fixes #13）就此关闭；每日 23:30 自动推送恢复
+- 无蓝图/配方开发需求，页面无改动
