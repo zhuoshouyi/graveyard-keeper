@@ -147,3 +147,26 @@
 - **根因**：（见 #13）`~/.git-credentials` 为 0 字节，`credential.helper=store` 无凭据可用
 - **解决**：PAT 写入 `~/.git-credentials`（`https://<user>:<TOKEN>@github.com`，chmod 600）→ `git ls-remote` 验证认证通过 → 逐仓库 `git push origin main` 补推
 - **预防**：沿用 #13 预防项——推送脚本不得吞错误；定期 `git rev-list --count @{u}..HEAD` 核对差距；凭据变更后立即 `git push --dry-run` 验证
+
+---
+
+### 17. 问题：curl 验证用错路由（`/` vs `/game/graveyard-keeper`）导致误判「新内容不存在」
+
+- **现象**：新增僵尸建筑分组后，`curl -s http://127.0.0.1:8898/ | grep -c "僵尸建筑|大树锯木厂"` 返回 0，一度以为改动未生效
+- **根因**：守墓人攻略页面挂在 `/game/graveyard-keeper` 路由，根路径 `/` 是另一个页面；改动本身已生效（模板启动时一次性读入内存），是验证目标选错了
+- **解决**：`grep -nE "route|@app" app.py` 确认路由后，改用 `curl -s http://127.0.0.1:8898/game/graveyard-keeper | grep -c ...` 命中 4 次；再浏览器 DOM 验证渲染
+- **预防**：守墓人项目验证一律用 `/game/graveyard-keeper`，不要验证 `/`（graveyard-keeper-guide 技能已写入此约定）
+
+### 18. 问题：浏览器折叠分组 `innerText` 不含隐藏内容，误以为条目缺失
+
+- **现象**：浏览器验证时 `innerText` 中找不到「大树锯木厂」，一度怀疑数据没渲染
+- **根因**：`.blueprint-section` 分组默认折叠（folded），折叠内容不在 `innerText` 中，但存在于 DOM
+- **解决**：改用 `querySelectorAll('.recipe-card')` + `textContent` 检查，确认卡片与材料明细（粗板×18 / 钉子×6 / 斧头I×1）渲染正确
+- **预防**：折叠分组验证必须用 textContent（或先展开分组再取 innerText）；技能中已有该陷阱说明，本次实战再次验证
+
+### 19. 问题：GitHub 直连瞬时被干扰，推送挂起
+
+- **现象**：地窖改动推送时 git push 连接超时（此前两次推送直连均正常，属瞬时网络干扰）
+- **根因**：国内服务器到 github.com 主站的干扰是瞬时的、非永久的（8-14 曾记录直连恢复；本次又遇直连可用一段时间后再次被干扰）
+- **解决**：走按需 VPN 流程——`source ~/.config/vpn-on-demand/vpn-helper.sh && vpn_start`（出口 IP 141.11.146.55 HK）→ `HTTPS_PROXY=http://127.0.0.1:17890 timeout 60 git push origin main` → `vpn_stop` 并 `pgrep -x mihomo` 确认 0（按需原则）
+- **预防**：手动推送前先 `timeout 10 git ls-remote origin HEAD` 探测直连是否可用；失败/超时再走 VPN；推送后无论成败都要停 VPN
