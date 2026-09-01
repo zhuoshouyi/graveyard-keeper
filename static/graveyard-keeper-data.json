@@ -2304,6 +2304,26 @@
       "money": 0,
       "items": []
      }
+     },
+     {
+     "id": "chame_03",
+     "name": "从老蛇手上拿回项链",
+     "order": 3,
+     "npc": "查美女士",
+     "prerequisites": [
+      "完成任务：将假币交给老蛇"
+     ],
+     "objectives": [
+      {
+       "description": "从老蛇手上拿回项链",
+       "items": []
+      }
+     ],
+     "rewards": {
+      "faith": 0,
+      "money": 0,
+      "items": []
+     }
      }
      ]
      },
