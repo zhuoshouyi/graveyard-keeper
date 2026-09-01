@@ -239,3 +239,36 @@
 - **验证小插曲 ②**：浏览器 DOM 验证时 `innerText` 不含折叠分组内容（`.blueprint-section` 默认 folded），改用 `querySelectorAll` + `textContent` 确认大树锯木厂卡片与材料明细（粗板×18 / 钉子×6 / 斧头I×1）渲染正确
 - **GitHub 推送**：任务 1/2 直连推送成功；任务 3 时 GitHub 直连超时（瞬时干扰，此前两次直连正常）→ 走既定按需 VPN 流程：`vpn_start` → `HTTPS_PROXY=http://127.0.0.1:17890 timeout 60 git push`（出口 IP 141.11.146.55，HK Kwai Chung）→ `vpn_stop` 并 `pgrep -x mihomo` 确认 0（按需原则，推完即关）；commit `5444bf7`
 - 经验：直连 GitHub 是常态但会被瞬时干扰，手动推送前先 `timeout 10 git ls-remote origin HEAD` 探测，失败再走 VPN（github-push-workflow 技能约定，本次再次实战验证）
+
+---
+
+## 2026-09-01：查美女士任务线扩充 + 古老的墓地蓝图完善
+
+> 会话 20260901_080735（微信，08:07–13:45），3 个 NPC 任务 + 4 个蓝图改动 + 1 次 VPN 体检。
+
+### 08:07 查美任务 1「证明你的价值」：补所需物品 信仰×5（JSON 免重启）
+- 用户原话：「查美女士的第一个任务，证明你的价值，增加所需物品，5个信仰点」
+- 调研过程（多路失败后成功）：Fandom wiki 直连超时 → Bing 中文搜索全是无关结果 → 走 VPN 直连 fandom 仍 403（Cloudflare 拦 curl）→ 浏览器 CDP 也超时 → 最终 **r.jina.ai 文本代理走 VPN 抓取成功**，确认「Prove Your Worth」= Be Confident 消耗 **5 信仰**（是需求成本，不是奖励），奖励是 10 幸福值但用户没提就不写
+- 做法：`static/graveyard-keeper-data.json` 的 chame_01 objectives.items 填入 `{name:"信仰", count:5}`；JSON 修改**无需重启服务**，python 校验 + curl 服务端实测通过；commit `41a39e5` 直连推送成功
+
+### 08:15 / 08:25 查美任务 2/3（JSON 追加）
+- chame_02「将假币交给老蛇」：前置「完成任务：证明你的价值」；chame_03「从老蛇手上拿回项链」：前置「完成任务：将假币交给老蛇」；物品/奖励均留空（用户没给）
+- **patch 工具缩进坑（两次）**：在 quests 数组中间插入对象时，模糊匹配把边界行缩进改乱（`{`/`}` 4 空格而非 3、数组收尾 4 空格而非 2）——JSON 合法但手维护文件难看；每次插入后读取实际状态、按文件缩进约定手工修正。该坑已补记进 graveyard-keeper-guide 技能（用裸技能名 patch 成功；带 category 前缀 `software-development/graveyard-keeper-guide` 会报 not found）
+- commit `ca8e55e`（直连成功）、`dc7260d`（直连 timeout 124 → 按需 VPN 推送，VPN 已停）
+
+### 09:54 VPN 体检（用户主动问）
+- 结论：**VPN 完全健康**——订阅源 200（494KB/47 节点/0.7s）、mihomo v1.19.0、generate_204 → 204、出口香港 103.151.172.36（Ikuuu）、GitHub/Google 走代理 200（0.26~0.38s）、连接链确认无 DIRECT 回退（🇭🇰 香港S04 → 🔰 自动选择）
+- 三个"假故障"真相：①「vpn already running」= 查 wiki 后忘了及时停，属操作疏漏非脚本 bug；② GitHub 直连被干扰是间歇性的（当天 chame_01/02 直连还成功过）；③ ipinfo.io 超时 = 目标站限流，`generate_204`/`api.ip.sb` 才是权威判据
+- 收尾验证：端口释放、mihomo 进程 0、pid 文件已清
+
+### 13:39 木质祈祷台 + 13:40 草坪1/2/3 + 花坛补效果（模板内 inline JS，需重启）
+- 古老的墓地分组新增 4 项：木质祈祷台（粗板×7+钉子×4+书籍×1，deco:2）、草坪1/2/3（deco:2/3/4）；花坛补 deco:2
+- **决策：古老的墓地渲染块补 deco 金色徽标支持**——该组此前没有装饰徽章渲染，照抄教堂分组 `r.deco?<span class="deco-badge">+N</span>:''` 一行搞定；材料 emoji 全部已存在（粗板🪵 钉子🔩 书籍📕 一块石头🪨 腐叶土🌿）
+- 模板改动 → `sudo systemctl restart graveyard-keeper.service` → 浏览器实测（折叠分组用 textContent 验证）：7 项、顺序正确、徽标正确
+- commit `bf4d035`、`f9dddfc` 均直连推送成功
+
+### 13:45 骨灰瓮 → 骨灰龛 全面改名（含 +12 装饰度）
+- 用户：「石制骨灰瓮改为石制骨灰龛，效果是加12装饰度，骨灰瓮改为骨灰龛」
+- **先全局搜引用再改，共 3 处**：① 蓝图名（改名 + 补 deco:12）；② MAT_EMOJI 映射（新增 骨灰龛🏺/陶制骨灰龛🏺，旧词条保留作别名，避免已录入数据显示 📦）；③ 烹饪台物品配方（陶制骨灰瓮 → 陶制骨灰龛）
+- 浏览器实测：石制骨灰龛显示「墓地装饰+12」，材料 陶制骨灰龛×12 🏺 正常；commit `ed2330d`
+- **推送插曲**：第一次直连 ahead 1 失败；走 VPN 第一次仍 ahead 1（代理刚启动未就绪）；第二次 VPN 推送成功（`f9dddfc..ed2330d`）；VPN 已停——教训：VPN 刚 start 后立即 push 可能撞上节点未就绪，重试一次即可

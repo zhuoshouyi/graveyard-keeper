@@ -170,3 +170,33 @@
 - **根因**：国内服务器到 github.com 主站的干扰是瞬时的、非永久的（8-14 曾记录直连恢复；本次又遇直连可用一段时间后再次被干扰）
 - **解决**：走按需 VPN 流程——`source ~/.config/vpn-on-demand/vpn-helper.sh && vpn_start`（出口 IP 141.11.146.55 HK）→ `HTTPS_PROXY=http://127.0.0.1:17890 timeout 60 git push origin main` → `vpn_stop` 并 `pgrep -x mihomo` 确认 0（按需原则）
 - **预防**：手动推送前先 `timeout 10 git ls-remote origin HEAD` 探测直连是否可用；失败/超时再走 VPN；推送后无论成败都要停 VPN
+
+---
+
+### 20. 问题：patch 工具插入 quest 对象导致 JSON 缩进错乱（两次）
+
+- **现象**：用 patch 工具在 `graveyard-keeper-data.json` 的 quests 数组中间插入 chame_02/chame_03 对象后，JSON 仍合法（lint 通过、python 可解析），但边界行缩进错乱——quest 对象 `{`/`}` 变 4 空格（应为 3）、数组收尾 `]` 和 NPC 对象收尾 `},` 变 4 空格（应为 2/1），手维护文件变难看
+- **根因**：patch 工具的模糊匹配在替换边界处沿用匹配到的上下文缩进，插入多行对象时没有按文件原缩进约定补齐
+- **解决**：插入后立即 `read_file` 读取实际状态，按文件约定（quest `{` 3 空格、键 4 空格、objectives.items 6 空格、数组收尾 2 空格、NPC 收尾 1 空格）手工 patch 修正缩进，再 python + curl 双验证
+- **预防**：已写入 graveyard-keeper-guide 技能（patch 工具对 data.json 的缩进坑说明）；以后在 quests 数组中间插入对象后，先读后修再验证。另注意：`skill_manage` patch 技能要用裸技能名（`graveyard-keeper-guide`），带 category 前缀会报 not found
+
+### 21. 问题：Fandom wiki 多路抓取失败（直连超时 / curl 403 / Bing 无关结果）
+
+- **现象**：查证查美女士任务时，Fandom wiki 直连 curl 超时（exit 28）；走 VPN 代理 curl 返回 403（5480B，Cloudflare 拦截无 UA 请求）；带浏览器 UA 仍 403；Bing 中文搜索全是无关结果；浏览器 CDP 导航也超时
+- **根因**：国内服务器直连 fandom 被墙超时；fandom 有 Cloudflare 反爬（拦 curl 默认 UA）；Bing 国内版对中文长查询返回劣质结果
+- **解决**：走 VPN 用 **Jina Reader 文本代理** `https://r.jina.ai/https://graveyardkeeper.fandom.com/wiki/Ms._Charm`（经 `-x http://127.0.0.1:17890`），成功拿到纯文本，grep 定位「Prove Your Worth」段落确认需求
+- **预防**：国内服务器抓被墙站点优先「按需 VPN + r.jina.ai 文本代理」组合；curl 直接抓 fandom 类 Cloudflare 站点前先带浏览器 UA；ipinfo.io 限流时换 api.ip.sb / generate_204 判据（详见 vpn-subscription-testing 技能）
+
+### 22. 问题：VPN 出口验证 ipinfo.io 超时被误判为「VPN 故障」
+
+- **现象**：VPN 体检时 `curl -x http://127.0.0.1:17890 https://ipinfo.io/json` 超时（15s），一度疑似代理异常；连接链却显示流量走香港节点（🇭🇰 香港S04 → 🔰 自动选择），无 DIRECT 回退
+- **根因**：ipinfo.io 免费接口对频繁查询限流/慢（8-31 已记录 429 现象），出口节点到该站连接被拖死——目标站限流，非代理故障
+- **解决**：换 `api.ip.sb/geoip` 秒回（出口 103.151.172.36 香港 Ikuuu）；`generate_204` → 204；GitHub/Google 走代理 200（0.26~0.38s），三重证据确认 VPN 健康
+- **预防**：出口验证以 `generate_204` 为权威判据，IP 佐证用 api.ip.sb 或 ipinfo 多试一次；单点超时不要直接下「VPN 故障」结论（技能已更新此条）
+
+### 23. 问题：VPN 刚启动立即 git push 仍失败（代理未就绪）
+
+- **现象**：ed2330d 推送时，`vpn_start` 输出 ready 后立即 `git push`，仍报 ahead 1 未推上；再走一次 VPN 才成功
+- **根因**：vpn_start 的 ready 检查只探测了控制器端口（19090/version），此时代理端口（17890）的规则/节点尚未完全就绪，首个连接被吞
+- **解决**：重试一次 VPN push（第二次 `f9dddfc..ed2330d` 成功）；或 start 后 sleep 1~2s 再 push
+- **预防**：VPN 推送失败后先看输出而不是直接改代码——「ahead 1 未变」多半是代理未就绪或直连被干扰，重试一次即可；push 后必须 `vpn_stop` 并确认 mihomo 进程为 0
