@@ -2284,10 +2284,30 @@
       "money": 0,
       "items": []
      }
-    }
-   ]
-  },
-  "npc_gerry": {
+     },
+     {
+     "id": "chame_02",
+     "name": "将假币交给老蛇",
+     "order": 2,
+     "npc": "查美女士",
+     "prerequisites": [
+      "完成任务：证明你的价值"
+     ],
+     "objectives": [
+      {
+       "description": "将假币交给老蛇，然后回来",
+       "items": []
+      }
+     ],
+     "rewards": {
+      "faith": 0,
+      "money": 0,
+      "items": []
+     }
+     }
+     ]
+     },
+     "npc_gerry": {
    "name": "格里（Gerry）任务线",
    "description": "一个会说话的骷髅头，有健忘症，在酒馆出没",
    "icon": "💀",
