@@ -318,7 +318,7 @@ const MAT_EMOJI = {
 '工作台':'🔧','熔炉':'🔥','发酵桶':'🛢️','蒸馏器':'⚗️','僵尸':'🧟',
 '尸体':'⚰️','裹尸布':'⚰️','石膏':'🏥','研究台':'📚','讲台':'🎤','长椅':'🪑',
 '信仰':'🙏','金钱':'💰','科技点':'🔬',
-'骨灰瓮':'🏺','陶制骨灰瓮':'🏺','一块磨光的石头':'🪨',
+'骨灰瓮':'🏺','骨灰龛':'🏺','陶制骨灰瓮':'🏺','陶制骨灰龛':'🏺','一块磨光的石头':'🪨',
 '血液':'🩸','皮肤':'🥩','蝙蝠翅膀':'🦇','大麻':'🌿','蜂蜡':'🍯','酸液':'🧪','碱性注射液':'💉','酸性注射液':'💉',
   '陶瓷水壶':'🏺','水':'💧','牛奶罐':'🥛','鸡蛋':'🥚','卷心菜':'🥬','盐':'🧂','肉馅饼':'🥟','诱饵':'🪱','肉体':'🥩','洋葱':'🧅','红苹果':'🍎','苹果':'🍎','浆果':'🫐','史莱姆粘液':'💚','浆果汁':'🧃','蘑菇':'🍄','种子':'🌱','甜菜':'🍠','骷髅头':'💀','飞蛾':'🦋','蜜罐':'🍯','止嗝草':'🌿',
 };
@@ -519,7 +519,7 @@ function renderCrafting(){
   const ancientGraveItems = [
     {name:"箱子", materials:[{name:"粗板",count:4},{name:"钉子",count:4},{name:"简单的铁件",count:7}]},
     {name:"木质祈祷台", materials:[{name:"粗板",count:7},{name:"钉子",count:4},{name:"书籍",count:1}], deco:2},
-    {name:"石制骨灰瓮", materials:[{name:"木梁",count:4},{name:"一块磨光的石头",count:4},{name:"陶制骨灰瓮",count:12}]},
+    {name:"石制骨灰龛", materials:[{name:"木梁",count:4},{name:"一块磨光的石头",count:4},{name:"陶制骨灰龛",count:12}], deco:12},
     {name:"花坛", materials:[{name:"一块石头",count:2},{name:"腐叶土",count:1},{name:"红花",count:2}], deco:2},
     {name:"草坪1", materials:[{name:"一块石头",count:3},{name:"腐叶土",count:1}], deco:2},
     {name:"草坪2", materials:[{name:"一块石头",count:4},{name:"腐叶土",count:1}], deco:3},
@@ -686,7 +686,7 @@ function renderCrafting(){
       ]},
       {zone:"房间", workbenches:[
       {name:"烹饪台", items:[
-        {name:"陶制骨灰瓮",materials:[{name:"陶瓷水壶",count:1},{name:"灰烬",count:5}],stamina:3},
+        {name:"陶制骨灰龛",materials:[{name:"陶瓷水壶",count:1},{name:"灰烬",count:5}],stamina:3},
         {name:"面粉(4)",materials:[{name:"小麦",count:8}],stamina:8},
         {name:"面团(4)",materials:[{name:"面粉",count:2},{name:"水",count:3}],stamina:4},
         {name:"油酥面团(4)",materials:[{name:"小麦",count:2},{name:"牛奶罐",count:1},{name:"鸡蛋",count:1}],stamina:6},
