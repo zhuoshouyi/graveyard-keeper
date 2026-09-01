@@ -2146,7 +2146,12 @@
      "objectives": [
       {
        "description": "为守卫酿制银星葡萄酒",
-       "items": []
+       "items": [
+        {
+         "name": "银星葡萄酒",
+         "count": 10
+        }
+       ]
       }
      ],
      "rewards": {
