@@ -2271,7 +2271,12 @@
      "objectives": [
       {
        "description": "证明你是值得交谈的对象",
-       "items": []
+       "items": [
+        {
+         "name": "信仰",
+         "count": 5
+        }
+       ]
       }
      ],
      "rewards": {
