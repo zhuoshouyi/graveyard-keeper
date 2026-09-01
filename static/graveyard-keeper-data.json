@@ -2038,13 +2038,41 @@
      ],
      "objectives": [
       {
-       "description": "将1张建造许可拿给主教（需20银币）",
+       "description": "将1张建造许可和合法公民身份拿给主教（建造许可需20银币）",
        "items": [
         {
          "name": "建造许可",
          "count": 1
+        },
+        {
+         "name": "合法公民身份",
+         "count": 1
         }
        ]
+      }
+     ],
+     "rewards": {
+      "faith": 0,
+      "money": 0,
+      "items": []
+     }
+    },
+    {
+     "id": "bishop_04",
+     "name": "教堂达到50点装饰度",
+     "order": 4,
+     "npc": "主教",
+     "prerequisites": [
+      "完成任务：我已经准备好升级教堂！"
+     ],
+     "objectives": [
+      {
+       "description": "教堂达到50点装饰度",
+       "items": []
+      },
+      {
+       "description": "墓地达到200装饰度",
+       "items": []
       }
      ],
      "rewards": {
