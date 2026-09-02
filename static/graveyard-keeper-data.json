@@ -2187,6 +2187,37 @@
       "money": 0,
       "items": []
      }
+    },
+    {
+     "id": "inquisitor_03",
+     "name": "在女巫岭搭建一座小吃帐篷",
+     "order": 3,
+     "npc": "审判官",
+     "prerequisites": ["完成任务：为守卫酿制银星葡萄酒"],
+     "objectives": [
+      {
+       "description": "在女巫岭搭建一座小吃帐篷（耗费30点体力）",
+       "items": [
+        {
+         "name": "麻绳",
+         "count": 5
+        },
+        {
+         "name": "木板",
+         "count": 15
+        },
+        {
+         "name": "钉子",
+         "count": 20
+        }
+       ]
+      }
+     ],
+     "rewards": {
+      "faith": 0,
+      "money": 0,
+      "items": []
+     }
     }
    ]
   },
