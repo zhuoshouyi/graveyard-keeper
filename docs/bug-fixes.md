@@ -200,3 +200,28 @@
 - **根因**：vpn_start 的 ready 检查只探测了控制器端口（19090/version），此时代理端口（17890）的规则/节点尚未完全就绪，首个连接被吞
 - **解决**：重试一次 VPN push（第二次 `f9dddfc..ed2330d` 成功）；或 start 后 sleep 1~2s 再 push
 - **预防**：VPN 推送失败后先看输出而不是直接改代码——「ahead 1 未变」多半是代理未就绪或直连被干扰，重试一次即可；push 后必须 `vpn_stop` 并确认 mihomo 进程为 0
+
+### 24. 问题：patch 插入 quest 对象致 JSON 缩进错乱（第三次复发，inquisitor_03）
+
+- **现象**：09-11 插入审判官 #3 任务后 JSON 有效但缩进被打乱（5 处边界行）；用 Python 修复第一轮后仍有 2 行未恢复（npc_inquisitor close、npc_snake open）
+- **根因**：与 #20 同源——patch 工具对深层嵌套 JSON 对象（quest `{`=4空格、keys=5空格、items 9空格嵌套）的边界行缩进重排不可靠；9-01 修好后又复发，说明该场景下 patch 缩进错乱是常态而非偶发
+- **解决**：放弃手工修缩进，直接用 Python 按文件惯例重写整个块（quest `{`=4空格、keys=5空格、items 嵌套 9 空格、close 3/4 空格）；JSON 解析验证有效后浏览器实测；共 2 轮（首轮漏 npc_inquisitor close 与 npc_snake open，第二轮补完）
+- **预防**：data.json 插入/修改 quest 对象后，先 `python3 -m json.tool` 验证 + 目视检查边界行缩进；复杂嵌套对象直接用 Python 脚本按文件惯例写入，别指望 patch 保持缩进
+
+---
+
+### 25. 问题：大 JSON 数组用绝对行号插入误插到别的 NPC，回滚时又误删 rewards 块
+
+- **现象**：09:20 给 inquisitor_03 加第二阶段时按绝对行号（1992 行）插入，实际插进了 bishop_01；移除误插块时删除逻辑未识别 `},`，又误删了 bishop_01 的 rewards 块
+- **根因**：quests 大对象中多个 NPC 任务块结构相似，靠行号定位不可靠（当日早些时候的编辑已使行号偏移）；按启发式（找下一个 `{`/`}`）删除无法正确处理嵌套边界
+- **解决**：读取误插块完整边界（1993–2005）精确移除；发现 rewards 被误删后补回 objectives 数组关闭 + rewards 块恢复 bishop_01；最终改用唯一文本锚点（「钉子×20」所在块之后）插入 inquisitor_03，一次成功
+- **预防**：JSON 结构编辑禁用绝对行号；用唯一字符串锚点（材料名/任务 id 等）定位；删除前先读完整边界；每步破坏性操作后立即 JSON 解析 + 读回确认结构未损
+
+---
+
+### 26. 问题：会话声称「已推送 GitHub」但实际 origin 落后 1 commit
+
+- **现象**：13:23 宝箱厂 commit `dc7c0ab` 的完成消息称「已推送 GitHub」，但当日 23:00 cron 复核时 `git rev-list --count @{u}..HEAD` = 1，origin/main 仍停在 `aebfb4e`
+- **根因**：最后一条 push 实际未成功（或未执行），完成消息按预期写法输出而未以 git 实际状态复核——「声称成功」与「实际成功」脱节
+- **解决**：cron 复核发现后，将 dc7c0ab 与本次 docs 提交一并补推，`@{u}..HEAD` 归零
+- **预防**：凡声称「已推送」，先跑 `git rev-list --count @{u}..HEAD`（应为 0）或 `git log origin/main -1` 核对再下结论；cron/复核流程保留该检查
