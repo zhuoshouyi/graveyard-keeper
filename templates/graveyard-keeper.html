@@ -223,6 +223,7 @@
 <div class="main-tabs" id="mainTabs">
   <button class="main-tab active" data-tab="overview" onclick="switchMainTab('overview')">📖 攻略总览</button>
   <button class="main-tab" data-tab="crafting" onclick="switchMainTab('crafting')">🔨 制造配方 <span class="badge" id="recipeCount">-</span></button>
+  <button class="main-tab" data-tab="alchemy" onclick="switchMainTab('alchemy')">🧪 炼金 <span class="badge" id="alchemyCount">-</span></button>
   <button class="main-tab" data-tab="quests" onclick="switchMainTab('quests')">👥 NPC 任务 <span class="badge" id="questCount">-</span></button>
   <button class="main-tab" data-tab="npcs" onclick="switchMainTab('npcs')">🗺️ NPC 位置与商店 <span class="badge" id="npcCount">-</span></button>
 </div>
@@ -253,6 +254,13 @@
     <div class="sec-title">🔨 制造配方</div>
     <a onclick="switchSubTab('crafting',0)">📋 蓝图配方</a>
     <a onclick="switchSubTab('crafting',1)">📦 物品配方</a>
+  </nav>
+  <!-- Sidebar: Alchemy -->
+  <nav class="sidebar" id="sidebar-alchemy">
+    <div class="sec-title">🧪 炼金</div>
+    <a onclick="switchSubTab('alchemy',0)">① 基础材料 8×3</a>
+    <a onclick="switchSubTab('alchemy',1)" class="sub">② 组合配方</a>
+    <a onclick="switchSubTab('alchemy',2)" class="sub">③ 最终产品与功能</a>
   </nav>
   <!-- Sidebar: Quests -->
   <nav class="sidebar" id="sidebar-quests">
@@ -322,18 +330,30 @@ const MAT_EMOJI = {
 '骨灰瓮':'🏺','骨灰龛':'🏺','陶制骨灰瓮':'🏺','陶制骨灰龛':'🏺','一块磨光的石头':'🪨',
 '血液':'🩸','皮肤':'🥩','蝙蝠翅膀':'🦇','大麻':'🌿','蜂蜡':'🍯','酸液':'🧪','碱性注射液':'💉','酸性注射液':'💉',
   '陶瓷水壶':'🏺','水':'💧','牛奶罐':'🥛','鸡蛋':'🥚','卷心菜':'🥬','盐':'🧂','肉馅饼':'🥟','诱饵':'🪱','肉体':'🥩','洋葱':'🧅','红苹果':'🍎','苹果':'🍎','浆果':'🫐','史莱姆粘液':'💚','浆果汁':'🧃','蘑菇':'🍄','种子':'🌱','甜菜':'🍠','骷髅头':'💀','飞蛾':'🦋','蜜罐':'🍯','止嗝草':'🌿',
+// ---- 炼金模块（2026-09-03 新增）----
+'炼金轧机':'⚙️','手动搅拌器':'🥣','蒸馏立方体':'⚗️','炼金工作台':'🧪','炼金工作台II':'🧪','研究台':'📚',
+'健康粉末':'❤️','健康溶液':'❤️','健康精华':'❤️','毒性粉末':'☠️','毒性溶液':'☠️','毒性精华':'☠️',
+'秩序粉末':'🛡️','秩序溶液':'🛡️','秩序精华':'🛡️','混沌粉末':'🌪️','混沌溶液':'🌪️','混沌精华':'🌪️',
+'加速粉末':'⚡','加速溶液':'⚡','加速精华':'⚡','减速粉末':'🐢','减速溶液':'🐢','减速精华':'🐢',
+'生命粉末':'🌿','生命溶液':'🌿','生命精华':'🌿','死亡粉末':'💀','死亡溶液':'💀','死亡精华':'💀',
+'作物残渣':'🌾','扁豆':'🫘','心脏':'🫀','黑暗心脏':'💔','脑':'🧠','黑暗脑':'🖤','肠':'🧬','黑暗肠':'🖤','蛆':'🪱','黄花':'🌼','白花':'🤍','蝴蝶':'🦋','蜘蛛网':'🕸️',
+'蓝色果冻':'🔵','绿色果冻':'🟢','橙色果冻':'🟠','黑色果冻':'⚫',
+'油':'🛢️','酒精':'🍶','白色粉末':'⚪','银粉末':'🥈','金粉末':'🪙','银矿石':'🥈','金矿石':'🪙','石墨粉':'⚫','电粉末':'🔋','香料':'🌶️','鳗鱼':'🐟',
+'治疗药水':'💊','能量药水':'🔋','速度药水':'👟','消化药水':'🍴','恢复药水':'🩹','保护药水':'🛡️','狂怒药水':'🔥','狂暴药水':'💢','僵尸果汁':'🧃','黑暗灵药':'🖤','银灵药':'🥈','金灵药':'🪙','胶水':'🧴','香脂溶液':'🫗','清新剂':'🌬️','生长促进剂':'🌱','能量灵药':'🧪','风味增强剂':'🧪','芳香剂':'🌸','鞣制剂':'🧪',
+'棕色颜料':'🎨','蓝色颜料':'🎨','深绿色颜料':'🎨','绿色颜料':'🎨','深紫色颜料':'🎨','紫色颜料':'🎨','红色颜料':'🎨','黄色颜料':'🎨',
 };
 function getMatEmoji(n){return MAT_EMOJI[n]||'📦'}
 
-let DATA = {}, NPC = {}, CURRENT = 'overview';
+let DATA = {}, NPC = {}, ALCH = {}, CURRENT = 'overview';
 
 async function loadData(){
   try {
-    let [r1,r2]=await Promise.all([
+    let [r1,r2,r3]=await Promise.all([
       fetch('/game/graveyard-keeper/data.json').then(r=>r.json()),
-      fetch('/static/graveyard-keeper-npc.json?_t='+Date.now()).then(r=>r.json())
+      fetch('/static/graveyard-keeper-npc.json?_t='+Date.now()).then(r=>r.json()),
+      fetch('/static/graveyard-keeper-alchemy.json?_t='+Date.now()).then(r=>r.json())
     ]);
-    DATA=r1; NPC=r2;
+    DATA=r1; NPC=r2; ALCH=r3||{};
     const cr=DATA.crafting_recipes||{};
     const phases=Object.keys(cr).filter(k=>k.startsWith('section_'));
     document.getElementById('recipeCount').textContent=phases.reduce((s,k)=>s+(cr[k].recipes?.length||0),0);
@@ -341,6 +361,7 @@ async function loadData(){
     const nq=Object.keys(qd).filter(k=>k.startsWith('npc_'));
     document.getElementById('questCount').textContent=nq.reduce((s,k)=>s+(qd[k].quests?.filter(q=>q.type!=='tip').length||0),0);
     document.getElementById('npcCount').textContent=(NPC.npc_shops||[]).length;
+    document.getElementById('alchemyCount').textContent=((ALCH.bench1||[]).length+(ALCH.bench2||[]).length);
     renderOverview();
   } catch(e) {
     document.getElementById('content').innerHTML=`<div class="warning"><span class="w-icon">⚠️</span><div class="w-text">加载失败：${e.message}</div></div>`;
@@ -359,6 +380,7 @@ function switchMainTab(tab){
   if(p) p.classList.add('active');
   else if(tab==='overview') renderOverview();
   else if(tab==='crafting') renderCrafting();
+  else if(tab==='alchemy') renderAlchemy();
   else if(tab==='quests') renderQuests();
   else if(tab==='npcs') renderNPCs();
 }
@@ -424,16 +446,17 @@ function renderOverview(){
 <tr><td><span class="stat-point stat-green">🟢 绿</span></td><td>农业·自然·采集</td><td>割草、收集木材、种地收获；研究台研究有机材料</td></tr>
 <tr><td><span class="stat-point stat-blue">🔵 蓝</span></td><td>解剖·炼金·神学·写作（高级科技）</td><td>研究台研究器官/墓碑/围栏/炼金物（需科学点+信仰点）；制作麻绳、抛光石砖、钢零件、锥形烧瓶各+1；科技书+25/巨著+50</td></tr></table></div>
 <div class="tip"><span class="tip-icon">🔵</span><div class="tip-text">蓝点前期最难：优先解锁研究台（教堂地下室），吃蛋糕/葡萄派可临时+1蓝点；占星师出售科技书可速刷蓝点。</div></div></section>
-<section id="alchemy" class="section-highlight"><h3>🧪 炼金</h3><p>炼金体系：先在研究台分解物品获得粉末/溶液/提取物（8元素×3形态），再到炼金台组合成成品。</p>
+<section id="alchemy" class="section-highlight"><h3>🧪 炼金</h3><p>炼金体系：先在 🔬研究台 花信仰+科技点研究物品（解锁分解产物），再到 ⚙️炼金轧机 / 🥣手动搅拌器 / ⚗️蒸馏立方体 分解出 粉末 / 溶液 / 精华（8元素×3形态），最后在 🧪炼金工作台 组合成成品。</p>
+<div style="margin:6px 0;"><a onclick="switchMainTab('alchemy')" style="cursor:pointer;color:var(--gold);border:1px solid var(--border);padding:3px 10px;border-radius:4px;display:inline-block;font-size:11px;">🔗 打开完整炼金模块（三层全表）</a></div>
 <div class="table-wrap"><table><tr><th>产物</th><th>材料</th><th>用途</th></tr>
 <tr><td>💊治疗药水</td><td>健康粉末+混沌溶液（或生命粉末+健康溶液）</td><td>恢复50生命</td></tr>
 <tr><td>⚡能量药水</td><td>加速粉末+加速溶液</td><td>恢复50体力</td></tr>
 <tr><td>🧪碱液</td><td>生命粉末+死亡溶液+血液</td><td>碱液注射：+1白骷髅+1红骷髅</td></tr>
-<tr><td>🩸胶水</td><td>健康粉末+生命溶液+混沌提取物</td><td>胶水注射：+1白骷髅</td></tr>
-<tr><td>🥈银灵药</td><td>银粉末+秩序溶液+生命提取物</td><td>银注射：+1白骷髅-1红骷髅</td></tr>
-<tr><td>🥇金灵药</td><td>金粉末+毒性溶液+混沌提取物</td><td>金注射：+2白骷髅-2红骷髅</td></tr>
-<tr><td>🧴防腐剂</td><td>减速粉末+生命溶液+减速提取物</td><td>防腐注射（保鲜）</td></tr></table></div>
-<div class="tip"><span class="tip-icon">🧪</span><div class="tip-text">8元素配对：健康/毒性、秩序/混沌、加速/减速、生命/死亡。粉末用炼金磨机、溶液用手动搅拌器、提取物研究台分解获得；金银粉末=金银矿研磨。最大化尸体评分：胶水→银→金注射。</div></div></section>
+<tr><td>🩸胶水</td><td>健康粉末+生命溶液+混沌精华</td><td>胶水注射：+1白骷髅</td></tr>
+<tr><td>🥈银灵药</td><td>银粉末+秩序溶液+生命精华</td><td>银注射：+1白骷髅-1红骷髅</td></tr>
+<tr><td>🥇金灵药</td><td>金粉末+毒性溶液+混沌精华</td><td>金注射：+2白骷髅-2红骷髅</td></tr>
+<tr><td>🧴防腐剂</td><td>减速粉末+生命溶液+减速精华</td><td>防腐注射（保鲜）</td></tr></table></div>
+<div class="tip"><span class="tip-icon">🧪</span><div class="tip-text">8元素配对：健康/毒性、秩序/混沌、加速/减速、生命/死亡。粉末用炼金轧机研磨、溶液用手动搅拌器搅拌、精华用蒸馏立方体蒸馏；金银粉末=金银矿石研磨（研究台只负责研究解锁）。最大化尸体评分：胶水→银→金注射。</div></div></section>
 <section id="brew" class="section-highlight"><h3>🍺 酿酒</h3><div class="table-wrap"><table><tr><th>酒</th><th>材料</th><th>售价</th></tr>
 <tr><td>🍺啤酒</td><td>小麦×3+啤酒花×2+水</td><td>中</td></tr><tr><td>🍷葡萄酒</td><td>葡萄×4+水</td><td>高</td></tr>
 <tr><td>🍯蜂蜜酒</td><td>蜂蜜×3+水</td><td>高</td></tr><tr><td>🥃烈酒</td><td>小麦→蒸馏</td><td>极高</td></tr></table></div>
@@ -939,6 +962,84 @@ function renderNPCs(){
   document.getElementById('content-npcs').classList.add('active');
   const at=document.querySelector('#sidebar-npcs a');
   if(at)at.classList.add('active-link');
+}
+
+// ════ ALCHEMY 炼金模块 ════
+function renderAlchemy(){
+  if(!ALCH || !ALCH.elements) return;
+  const el=document.getElementById('content');
+  const M=ALCH.machines||{};
+  const FK=['powder','solution','extract'];
+  const FNAME={powder:M.powder?M.powder.form:'粉末',solution:M.solution?M.solution.form:'溶液',extract:M.extract?M.extract.form:'精华'};
+  const FI={powder:'⚙️',solution:'🥣',extract:'⚗️'};
+  const esc=v=>String(v==null?'':v);
+  let p0='',p1='',p2='';
+
+  // ── Panel 0 · 第一层 基础材料 8×3 ──
+  p0+='<h2>① 第一层 · 基础材料：8 元素 × 3 形态</h2>';
+  p0+='<div class="tip" style="margin-bottom:6px;"><span class="tip-icon">💡</span><div class="tip-text"><strong>获取流程</strong>：先在 🔬研究台 花 信仰+科技点 <b>研究物品</b>（解锁它的分解产物），再到对应机器分解。去沼泽找 <b>克洛索</b> 对话可解锁炼金，炼金配方也可向她购买。</div></div>';
+  p0+='<div class="tip" style="margin-bottom:10px;"><span class="tip-icon">⚗️</span><div class="tip-text"><strong>三种机器对应三种形态</strong>：⚙️炼金轧机 → 粉末 · 🥣手动搅拌器 → 溶液 · ⚗️蒸馏立方体 → 精华（研究台只研究解锁，不直接产出）。<b>科学家</b>天赋让每台机器每次多产 1 个；后期 🧟僵尸炼金分解器 一次能产出三种形态。</div></div>';
+  p0+='<div class="table-wrap"><table><tr><th>元素</th><th>形态</th><th>用什么工具</th><th>放入什么材料（任选其一即可）</th><th>产出什么</th></tr>';
+  (ALCH.elements||[]).forEach(e=>{
+    FK.forEach((f,fi)=>{
+      const srcs=((e.src||{})[f])||[];
+      const tdEl=(fi===0)?'<td rowspan="3" style="text-align:center;vertical-align:middle;font-weight:600;background:rgba(255,255,255,0.04);white-space:nowrap;">'+getMatEmoji(e.el+FNAME.powder)+' '+esc(e.el)+'<div style="font-size:10px;color:var(--dim);font-weight:400;margin-top:2px;">对立：'+esc(e.opposite||'')+'</div></td>':'';
+      p0+='<tr>'+tdEl
+        +'<td style="text-align:center;white-space:nowrap;">'+esc(FNAME[f])+'</td>'
+        +'<td style="text-align:center;white-space:nowrap;">'+FI[f]+' '+esc(M[f]?M[f].tool:'')+'</td>'
+        +'<td>'+(srcs.map(s=>getMatEmoji(s)+' '+s).join('<span style="color:var(--dim);margin:0 5px;">/</span>')||'—')+'</td>'
+        +'<td style="white-space:nowrap;">'+getMatEmoji(e.el+FNAME[f])+' '+esc(e.el+FNAME[f])+'</td></tr>';
+    });
+  });
+  p0+='</table></div>';
+  p0+='<div class="phase-badge" style="margin-top:18px;">🧂 其他炼金材料（合成时会用到，不属于 8 元素）</div>';
+  p0+='<div class="table-wrap"><table><tr><th>材料</th><th>获取方式</th><th>主要用于</th></tr>';
+  (ALCH.specials||[]).forEach(s=>{ p0+='<tr><td style="white-space:nowrap;">'+getMatEmoji(s.name)+' '+esc(s.name)+'</td><td>'+esc(s.how)+'</td><td>'+esc(s.usedfor)+'</td></tr>'; });
+  p0+='</table></div>';
+
+  // ── Panel 1 · 第二层 组合配方 ──
+  p1+='<h2>② 第二层 · 组合配方（基础材料 → 中间品 / 成品）</h2>';
+  p1+='<div class="tip" style="margin-bottom:10px;"><span class="tip-icon">⚠️</span><div class="tip-text">🧪炼金工作台(I)：2 格组合（多为 粉末+溶液）；⚗️炼金工作台II：3 格组合（粉末+溶液+精华，溶液/精华格可用 酒精、油、水、血液 等替代）。<b>II 合成不了 I 的配方</b> —— II 不是 I 的升级版，炼金工作台 I 千万别拆！组合失败会得到 💚史莱姆粘液，粘液颜色提示该保留哪一味、替换哪一味。</div></div>';
+  const recTable=(title,rows)=>{
+    p1+='<div class="phase-badge" style="margin-top:14px;">'+title+'</div>';
+    p1+='<div class="table-wrap"><table><tr><th>产物</th><th>材料组合（每一行都是一条可行配方）</th><th>⚡体力</th><th>功能 / 用途</th></tr>';
+    (rows||[]).forEach(r=>{
+      const vs=(r.mats||[]).map(v=>(v||[]).map(mn=>getMatEmoji(mn)+' '+esc(mn)).join(' + '));
+      p1+='<tr><td style="white-space:nowrap;">'+getMatEmoji(r.out)+' '+esc(r.out)+'</td><td>'+vs.join('<div style="color:var(--gold);font-size:10px;margin:2px 0;">或</div>')+'</td><td style="text-align:center;">⚡'+(r.energy||'')+'</td><td>'+esc(r.use)+'</td></tr>';
+    });
+    p1+='</table></div>';
+  };
+  recTable('🧪 炼金工作台 (I) · 2 格组合 · '+(ALCH.bench1||[]).length+' 条配方',ALCH.bench1);
+  recTable('⚗️ 炼金工作台 II · 3 格组合 · '+(ALCH.bench2||[]).length+' 条配方',ALCH.bench2);
+
+  // ── Panel 2 · 第三层 最终产品与功能 ──
+  p2+='<h2>③ 第三层 · 最终产品与功能</h2>';
+  p2+='<div class="tip" style="margin-bottom:10px;"><span class="tip-icon">💡</span><div class="tip-text">注射剂本体（碱性注射液、酸性注射液等）在「制造配方 → 物品配方 → 炼金区·教堂工作台」制作；注射在 <b>防腐台</b> 对尸体使用。想冲最高墓地评分（白骷髅）：按 <b>胶水 → 银 → 金</b> 的顺序注射。</div></div>';
+  const catDefs=[['药水','💊 药水类 · 饮用（效果按持续时间生效）'],['注射','💉 尸体防腐注射类 · 产物用于防腐台注射'],['原料','🧰 原料 / 其他用途']];
+  catDefs.forEach(cd=>{
+    const rows=(ALCH.products||[]).filter(p=>p.cat===cd[0]);
+    if(!rows.length) return;
+    p2+='<div class="phase-badge" style="margin-top:14px;">'+cd[1]+' · '+rows.length+' 种</div>';
+    p2+='<div class="table-wrap"><table><tr><th>产物</th><th>功能与作用</th><th>制作处</th></tr>';
+    rows.forEach(p=>{
+      const bn=(p.bench==='炼金工作台II')?'工作台 II':'工作台 I';
+      p2+='<tr><td style="white-space:nowrap;">'+getMatEmoji(p.name)+' '+esc(p.name)+'</td><td>'+esc(p.use)+'</td><td style="white-space:nowrap;">'+getMatEmoji(p.bench)+' '+esc(bn)+'</td></tr>';
+    });
+    p2+='</table></div>';
+  });
+
+  const tabs='<div class="sub-tab-bar"><button class="sub-tab-btn active" onclick="switchSubTab(\'alchemy\',0)">① 基础材料</button><button class="sub-tab-btn" onclick="switchSubTab(\'alchemy\',1)">② 组合配方</button><button class="sub-tab-btn" onclick="switchSubTab(\'alchemy\',2)">③ 最终产品</button></div>';
+  const html=`<div class="content-panel active" id="content-alchemy">
+    <h2>🧪 炼金大全</h2>
+    <p style="color:var(--dim);font-size:11px;">从基础材料到最终产品，按三层查阅：① 怎么做出 24 种基础材料 → ② 在炼金工作台怎么组合 → ③ 产物有什么用。数据版本：fandom wiki + Steam 中文攻略交叉核对（2026-09-03）。</p>
+    ${tabs}
+    <div class="sub-tab-panel active" id="alchemy-sub-0">${p0}</div>
+    <div class="sub-tab-panel" id="alchemy-sub-1">${p1}</div>
+    <div class="sub-tab-panel" id="alchemy-sub-2">${p2}</div>
+  </div>`;
+  el.innerHTML=html;
+  const al=document.querySelector('#sidebar-alchemy a');
+  if(al) al.classList.add('active-link');
 }
 
 loadData();
