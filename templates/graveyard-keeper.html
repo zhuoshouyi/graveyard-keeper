@@ -764,7 +764,13 @@ function renderCrafting(){
         {name:"煎蛋卷(3)",materials:[{name:"鸡蛋",count:3},{name:"牛奶罐",count:1}],fuel:5,desc:"加20点体力"},
         {name:"蛋糕",materials:[{name:"油酥面团",count:1},{name:"蜂蜜",count:1},{name:"浆果",count:5}],fuel:10,desc:"加95点体力，细致入微（研究时找到额外细节）"}
       ]}
-    ]}
+    ]},
+      {zone:"地窖", workbenches:[
+        {name:"葡萄压榨机", items:[]},
+        {name:"发酵机器", items:[]},
+        {name:"酿造台", items:[]},
+        {name:"酿酒桶", items:[]}
+      ]}
       ];
   // ════ 子模块 tab 栏 ════
   let tabs='<div class="sub-tab-bar"><button class="sub-tab-btn active" onclick="switchSubTab(\'crafting\',0)">📋 蓝图配方</button><button class="sub-tab-btn" onclick="switchSubTab(\'crafting\',1)">📦 物品配方</button></div>';
@@ -858,6 +864,7 @@ function renderCrafting(){
     p1+=`<div class="blueprint-section"><div class="phase-badge" onclick="this.parentElement.classList.toggle('folded')">🏭 ${g.zone}<span class="fold-arrow">▶</span></div><div class="section-body">`;
     g.workbenches.forEach(w=>{
       p1+=`<div class="wb-section folded"><div class="wb-header" onclick="this.parentElement.classList.toggle('folded')">🔧 ${w.name}<span class="fold-arrow">▶</span></div><div class="section-body">`;
+      if(!w.items || !w.items.length){ p1+=`<div class="mat-row" style="color:var(--dim);">（配方待补充）</div>`; }
       w.items.forEach(r=>{
       const m=(r.materials||[]).map(m=>`<div class="mat-row"><span class="mat-icon">${getMatEmoji(m.name)}</span><span class="mat-name">${m.name}</span><span class="mat-count">×${m.count}</span></div>`).join('');
       const st= r.stamina ? `<span class="stamina-badge">⚡${r.stamina}</span>` : '';
