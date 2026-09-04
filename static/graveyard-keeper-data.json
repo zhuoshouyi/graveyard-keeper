@@ -2080,6 +2080,29 @@
       "money": 0,
       "items": []
      }
+    },
+    {
+     "id": "bishop_05",
+     "name": "制作三尊金星品质的大理石雕像",
+     "order": 5,
+     "npc": "主教",
+     "prerequisites": [],
+     "objectives": [
+      {
+       "description": "制作三尊金星品质的大理石雕像",
+       "items": [
+        {
+         "name": "大理石雕像(金)",
+         "count": 3
+        }
+       ]
+      }
+     ],
+     "rewards": {
+      "faith": 0,
+      "money": 0,
+      "items": []
+     }
     }
    ]
   },
