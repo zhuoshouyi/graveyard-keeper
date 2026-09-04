@@ -261,3 +261,12 @@
 - **根因**：github.com 直连偶发超时，命令经管道处理时退出码/超时信号被吞，未正确捕获失败状态（与 #19/#26 同类直连不稳定问题的新表现）
 - **解决**：重新推送时正确捕获失败再走按需 VPN，`4d78a7f` 推送成功（直连超时改走 VPN）
 - **预防**：push 后立即 `git rev-list --count @{u}..HEAD` 复核（应 0）；shell 里给 git push 加 `timeout` 并检查退出码，别把管道输出当成功依据；直连超时是常态，探测失败直接走 VPN
+
+---
+
+### 31. 问题：check-template-js.sh 在 node v22 下报 `ERR_UNKNOWN_FILE_EXTENSION`（临时文件无扩展名）
+
+- **现象**：19:19 录入 bishop_05 后按流程跑 `check-template-js.sh`，node v22.22.3 报 `TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".0vL2ZglTJq" for /tmp/tmp.0vL2ZglTJq`，输出「JS SYNTAX ERROR」，流程卡在重启前
+- **根因**：脚本内 `tmp="$(mktemp)"` 生成**无扩展名**临时文件；node v22 的 `--check` 需按扩展名判定模块格式（ESM），无扩展名直接抛 ERR_UNKNOWN_FILE_EXTENSION——不是 JS 真的有语法错误，是检查工具自身的问题（旧版 node 无此限制，此前一直正常）
+- **解决**：脚本改为 `tmp="$(mktemp --suffix=.js)"`（文件位于 `~/.hermes/skills/software-development/interactive-reference-pages/scripts/check-template-js.sh`）；重跑输出「JS syntax OK」，服务正常重启
+- **预防**：node --check 校验临时文件必须带 `.js` 后缀（`mktemp --suffix=.js`）；见到 ERR_UNKNOWN_FILE_EXTENSION 先怀疑临时文件扩展名而非模板语法；node 升大版本后旧脚本的这类隐性假设要回归测试

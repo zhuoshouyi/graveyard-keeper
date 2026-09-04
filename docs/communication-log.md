@@ -1106,3 +1106,13 @@
 **AI 处理：** 填入红葡萄酒(20)（葡萄汁桶×2，耗时6分钟），葡萄汁桶补 🧃 图标；地窖 4 台全有内容（5+2+1+1=9 条），形成 果汁→发酵瓶/啤酒/葡萄酒 完整链路
 
 **验证：** commit `443c7e9`；实测卡片正确 ✅
+
+### 98. 2026-09-04 19:19 — 主教任务线新增 bishop_05（大理石雕像，无前置）
+
+**用户：**
+> 主教的下一个任务是，制作三尊金星品质的大理石雕像。
+> 这个任务没有前置任务
+
+**AI 处理：** 核查主教线现状（bishop_04 教堂 50 装饰度）后，在 `static/graveyard-keeper-data.json` 的 quests.npc_bishop.quests 末尾插入 bishop_05（🗿 大理石雕像(金)×3；prerequisites=[] → 页面不渲染「前置」行；奖励留空按惯例）；模板 MAT_EMOJI 补 `'大理石雕像':'🗿'` 与 `'大理石雕像(金)':'🗿'`；途中修复 check-template-js.sh 在 node v22 下因 `mktemp` 无扩展名报 `ERR_UNKNOWN_FILE_EXTENSION` 的问题（改 `mktemp --suffix=.js`）；重启服务并浏览器实测渲染
+
+**验证：** commit `3fce0d4`；NPC 任务徽标 27→28，bishop_05 卡片 🗿×3、无「前置」行、emoji 正常 ✅（注：该 commit 会话称 auto-push 会推 GitHub，实际由 9-04 docs 提交一并补推）
