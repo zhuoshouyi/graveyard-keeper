@@ -1125,3 +1125,12 @@
 **AI 处理：** 在 `templates/graveyard-keeper.html` 的 itemGroups·院子·熔炉II items **首位**（石墨前）插入 `{name:"升级至熔炉III",materials:[{name:"一块石头",count:2},{name:"复杂的铁件",count:4}],stamina:50}`，格式与同组「升级至熔炉II」一致（无燃料）；随后重启 graveyard-keeper 服务
 
 **验证：** 服务 active；curl 页面确认条目紧跟 `{name:"熔炉II", items:[` 后（served L658）、石墨（L659）前；commit `7b27c93`，随后 docs 一并推送 ✅
+
+### 100. 2026-09-07 08:31 — 炼金攻略：胶水改名粘液
+
+**用户：**
+> 炼金攻略，把胶水改为粘液
+
+**AI 处理：** 全项目定位「胶水」（仅炼金模块内，物品配方无此材料，范围干净）后改名：`static/graveyard-keeper-alchemy.json` bench2 配方 out 与 products name 均 胶水→**粘液**，用途「胶水注射：+1 白骷髅」→「粘液注射：+1 白骷髅」，**保留 `aka:"胶水"`**（沿用能量万能药/能量灵药别名惯例，页面显示「（别名 胶水）」，旧名仍可搜）；模板同步：MAT_EMOJI `'胶水':'🧴'`→`'粘液':'🧴'`、总览硬编码行 🩸胶水→🧴粘液、两处「胶水→银→金」提示→「粘液→银→金」；meta.updated 与页面数据版本日期 2026-09-03→2026-09-07；「史莱姆粘液」为另一独立条目，未受影响
+
+**验证：** JSON parse OK；服务重启 active；served JSON 实测 bench2/products 均 out/name=粘液 + aka 胶水；模板 0 残留「胶水」；commit `f3c25fa`，随后 docs 一并推送 ✅
