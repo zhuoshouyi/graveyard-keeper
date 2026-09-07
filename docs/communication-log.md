@@ -1116,3 +1116,12 @@
 **AI 处理：** 核查主教线现状（bishop_04 教堂 50 装饰度）后，在 `static/graveyard-keeper-data.json` 的 quests.npc_bishop.quests 末尾插入 bishop_05（🗿 大理石雕像(金)×3；prerequisites=[] → 页面不渲染「前置」行；奖励留空按惯例）；模板 MAT_EMOJI 补 `'大理石雕像':'🗿'` 与 `'大理石雕像(金)':'🗿'`；途中修复 check-template-js.sh 在 node v22 下因 `mktemp` 无扩展名报 `ERR_UNKNOWN_FILE_EXTENSION` 的问题（改 `mktemp --suffix=.js`）；重启服务并浏览器实测渲染
 
 **验证：** commit `3fce0d4`；NPC 任务徽标 27→28，bishop_05 卡片 🗿×3、无「前置」行、emoji 正常 ✅（注：该 commit 会话称 auto-push 会推 GitHub，实际由 9-04 docs 提交一并补推）
+
+### 99. 2026-09-07 08:23 — 物品配方·院子·熔炉II 首位新增「升级至熔炉III」
+
+**用户：**
+> 先在物品配方，熔炉II，中增加配方，放在第一条，升级至熔炉III，需要2个一块石头，4个复杂的铁件。耗费50体力。
+
+**AI 处理：** 在 `templates/graveyard-keeper.html` 的 itemGroups·院子·熔炉II items **首位**（石墨前）插入 `{name:"升级至熔炉III",materials:[{name:"一块石头",count:2},{name:"复杂的铁件",count:4}],stamina:50}`，格式与同组「升级至熔炉II」一致（无燃料）；随后重启 graveyard-keeper 服务
+
+**验证：** 服务 active；curl 页面确认条目紧跟 `{name:"熔炉II", items:[` 后（served L658）、石墨（L659）前；commit `7b27c93`，随后 docs 一并推送 ✅
