@@ -1134,3 +1134,12 @@
 **AI 处理：** 全项目定位「胶水」（仅炼金模块内，物品配方无此材料，范围干净）后改名：`static/graveyard-keeper-alchemy.json` bench2 配方 out 与 products name 均 胶水→**粘液**，用途「胶水注射：+1 白骷髅」→「粘液注射：+1 白骷髅」，**保留 `aka:"胶水"`**（沿用能量万能药/能量灵药别名惯例，页面显示「（别名 胶水）」，旧名仍可搜）；模板同步：MAT_EMOJI `'胶水':'🧴'`→`'粘液':'🧴'`、总览硬编码行 🩸胶水→🧴粘液、两处「胶水→银→金」提示→「粘液→银→金」；meta.updated 与页面数据版本日期 2026-09-03→2026-09-07；「史莱姆粘液」为另一独立条目，未受影响
 
 **验证：** JSON parse OK；服务重启 active；served JSON 实测 bench2/products 均 out/name=粘液 + aka 胶水；模板 0 残留「胶水」；commit `f3c25fa`，随后 docs 一并推送 ✅
+
+### 101. 2026-09-07 08:42 — 老蛇任务线新增 snake_01「获得死灵之书」
+
+**用户：**
+> 老蛇的下一个任务，是，获得死灵之书
+
+**AI 处理：** 老蛇线（npc_snake）自 8-04 建占位后一直空 quests，此为第一条：在 `static/graveyard-keeper-data.json` quests.npc_snake.quests 插入 snake_01（📕 死灵之书×1，order 1，npc 老蛇；前置/奖励均留空按惯例——用户没说前置、没说奖励）；模板 MAT_EMOJI 补 `'死灵之书':'📕'`（对齐 书/书籍 📕 系）；字节级字符串替换插入避免 patch 缩进坑
+
+**验证：** JSON parse OK；重启 active；served data.json 实测 npc_snake quests 1 条（snake_01 目标+物品正常）；commit `8d67aab`，随后 docs 一并推送 ✅
