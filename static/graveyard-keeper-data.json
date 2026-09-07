@@ -2261,7 +2261,31 @@
    "name": "老蛇（Snake）任务线",
    "description": "神秘的角色",
    "icon": "🐍",
-   "quests": []
+   "quests": [
+    {
+     "id": "snake_01",
+     "name": "获得死灵之书",
+     "order": 1,
+     "npc": "老蛇",
+     "prerequisites": [],
+     "objectives": [
+      {
+       "description": "获得死灵之书",
+       "items": [
+        {
+         "name": "死灵之书",
+         "count": 1
+        }
+       ]
+      }
+     ],
+     "rewards": {
+      "faith": 0,
+      "money": 0,
+      "items": []
+     }
+    }
+   ]
   },
   "npc_merchant": {
    "name": "商人（Merchant）任务线",
